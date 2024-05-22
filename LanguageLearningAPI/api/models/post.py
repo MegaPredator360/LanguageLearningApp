@@ -1,9 +1,9 @@
 from django.db import models
 
 class Post(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length = 255)
     body_post = models.TextField()
-    post_date = models.DateField()
+    post_date = models.DateField(auto_now_add = True)
     id_user = models.IntegerField()
     id_language = models.IntegerField()
 
