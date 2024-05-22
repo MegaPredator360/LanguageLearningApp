@@ -11,10 +11,10 @@ Usuarios:
 - País
 ------------------------------------------------------------
 Publicaciones:
-¬- Id
+- Id
 - Titulo de publicación
 - Descripción de publicación
-- Idioma de publicacion
+- Id de idioma de publicacion
 - Id de usuario publicador
 - Fecha de publicación
 -----------------------------------------------------------
