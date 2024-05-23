@@ -4,7 +4,7 @@ from api.models.post_history import PostHistory
 from api.serializers.postHistorySerializer import PostHistorySerializer
 
 # Obtain the list of edits / updates made to a post
-class SalesHistoryList(generics.ListAPIView):
+class PostHistoryList(generics.ListAPIView):
 
     # SQL Query
     queryset = PostHistory.objects.all()

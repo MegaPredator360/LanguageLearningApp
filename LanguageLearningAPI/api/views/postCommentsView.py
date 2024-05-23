@@ -31,7 +31,7 @@ class PostCommentsUpdate(generics.UpdateAPIView):
     lookup_field = 'pk'
 
 # Delete comment from a post
-class PostCommentDelete(generics.DestroyAPIView):
+class PostCommentsDelete(generics.DestroyAPIView):
 
     # SQL Query
     queryset = PostComments.objects.all()
