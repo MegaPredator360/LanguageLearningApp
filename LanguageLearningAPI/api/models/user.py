@@ -1,4 +1,5 @@
 from django.db import models
+from api.models.role import Role
 
 class User(models.Model):
     full_name = models.CharField(max_length = 255)
@@ -7,7 +8,7 @@ class User(models.Model):
     password = models.CharField(max_length = 255)
     birth_date = models.DateField()
     country = models.CharField(max_length = 20)
-    id_role = models.IntegerField()
+    id_role = models.ForeignKey(Role, on_delete = models.CASCADE, related_name = 'users')
     #profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
 
     def __str__(self):
