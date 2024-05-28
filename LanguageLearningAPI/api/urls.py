@@ -12,11 +12,11 @@ from api.views import salesHistoryView
 # Url is created
 urlpatterns = [
     # ---------- User Routes
-    # Route,           View,                        Name of View
-    path('user/list/', userView.UserList.as_view(), name='user_list_view'),
-    path('user/create/', userView.UserCreate.as_view(), name='user_create_view'),
-    path('user/update/<int:pk>/', userView.UserUpdate.as_view(), name='user_update_view'),
-    path('user/delete/<int:pk>/', userView.UserDelete.as_view(), name='user_delete_view'),
+    # Route,           View,              Name of View
+    path('user/list/', userView.userList, name ='user_list_view'),
+    path('user/create/', userView.userCreate, name ='user_create_view'),
+    path('user/update/', userView.userUpdate, name='user_update_view'),
+    path('user/delete/<int:id>/', userView.userDelete, name='user_delete_view'),
 
     # ---------- Role Routes
     path('role/list/', roleView.RoleList.as_view(), name='role_list_view'),
