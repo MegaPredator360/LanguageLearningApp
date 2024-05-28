@@ -4,7 +4,7 @@ from api.views.roleView import RoleView
 from api.views import postView
 from api.views import postHistoryView
 from api.views import postCommentsView
-from api.views import languageView
+from api.views.languageView import LanguageView
 from api.views.itemView import ItemView
 from api.views.itemTagView import ItemTagView
 from api.views import salesHistoryView
@@ -32,8 +32,8 @@ urlpatterns = [
     path('itemTag/create/', ItemTagView.create, name = 'itemTag_create_view'),
 
         # ---------- Languages Routes
-    path('language/list/', languageView.LanguageList.as_view(), name='language_list_view'),
-    path('language/create/', languageView.LanguageCreate.as_view(), name='language_create_view'),
+    path('language/list/', LanguageView.list, name = 'language_list_view'),
+    path('language/create/', LanguageView.create, name = 'language_create_view'),
 
     # ---------- Posts Routes
     path('post/list/', postView.PostList.as_view(), name='post_list_view'),

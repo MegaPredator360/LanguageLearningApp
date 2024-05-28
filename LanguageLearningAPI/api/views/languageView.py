@@ -1,19 +1,59 @@
 from django.shortcuts import render
-from rest_framework import generics
-from api.models.language import Language
-from api.serializers.languageSerializer import LanguageSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from api.dtos.responseAPI import ResponseAPI
+from api.services.languageService import LanguageService
 
-# Obtain the list of languages availables
-class LanguageList(generics.ListAPIView):
+class LanguageView:
 
-    # SQL Query
-    queryset = Language.objects.all()
+    @api_view(['GET'])
+    def list(request):
 
-    # Serializer
-    serializer_class = LanguageSerializer
+        # Declare the service to use
+        languageService = LanguageService()
+        response = ResponseAPI()
 
-# Add a support to a new Language
-class LanguageCreate(generics.CreateAPIView):
+        try:
 
-    # Serializer
-    serializer_class = LanguageSerializer
+            # Set the status of the request a success
+            response.status = True
+
+            # Return the data
+            response.value = languageService.list()
+
+        except ValueError as e:
+
+            # Set the status of the request as failed
+            response.status = False
+
+            # Send the message of why it failed
+            response.msg = str(e)
+
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
+
+    @api_view(['POST'])
+    def create(request):
+
+        # Declare the service to use
+        languageService = LanguageService()
+        response = ResponseAPI()
+
+        try:
+
+            # Set the status of the request a success
+            response.status = True
+
+            # Return the data
+            response.value = languageService.create(request.data)
+
+        except ValueError as e:
+
+            # Set the status of the request as failed
+            response.status = False
+
+            # Send the message of why it failed
+            response.msg = str(e)
+
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
