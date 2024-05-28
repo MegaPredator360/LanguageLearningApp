@@ -1,43 +1,111 @@
 from django.shortcuts import render
-from rest_framework import generics
-from api.models.post_comments import PostComments
-from api.serializers.postCommentsSerializer import PostCommentsSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from api.dtos.responseAPI import ResponseAPI
+from api.services.postCommentService import PostCommentsService
 
-# Obtain a list of all comments made
-class PostCommentsList(generics.ListAPIView):
+class PostCommentView:
 
-    # SQL Query
-    queryset = PostComments.objects.all()
+    @api_view(['GET'])
+    def list(request):
 
-    # Serializer
-    serializer_class = PostCommentsSerializer
+        # Declare the service to use
+        postCommentService = PostCommentsService()
+        response = ResponseAPI()
 
-# Create comments on a post
-class PostCommentsCreate(generics.CreateAPIView):
+        try:
 
-    # Serializer
-    serializer_class = PostCommentsSerializer
+            # Set the status of the request a success
+            response.status = True
 
-# Update comments of a post
-class PostCommentsUpdate(generics.UpdateAPIView):
+            # Return the data
+            response.value = postCommentService.list()
 
-    # SQL Query
-    queryset = PostComments.objects.all()
+        except ValueError as e:
 
-    # Serializer
-    serializer_class = PostCommentsSerializer
+            # Set the status of the request as failed
+            response.status = False
 
-    # Primary Key of table
-    lookup_field = 'pk'
+            # Send the message of why it failed
+            response.msg = str(e)
 
-# Delete comment from a post
-class PostCommentsDelete(generics.DestroyAPIView):
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
 
-    # SQL Query
-    queryset = PostComments.objects.all()
+    @api_view(['POST'])
+    def create(request):
 
-    # Serializer
-    serializer_class = PostCommentsSerializer
+        # Declare the service to use
+        postCommentService = PostCommentsService()
+        response = ResponseAPI()
 
-    # Primary Key of table
-    lookup_field = 'pk'
+        try:
+
+            # Set the status of the request a success
+            response.status = True
+
+            # Return the data
+            response.value = postCommentService.create(request.data)
+
+        except ValueError as e:
+
+            # Set the status of the request as failed
+            response.status = False
+
+            # Send the message of why it failed
+            response.msg = str(e)
+
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
+
+    @api_view(['PUT'])
+    def update(request):
+
+        # Declare the service to use
+        postCommentService = PostCommentsService()
+        response = ResponseAPI()
+
+        try:
+
+            # Set the status of the request a success
+            response.status = True
+
+            # Return the data
+            response.value = postCommentService.update(request.data)
+
+        except ValueError as e:
+
+            # Set the status of the request as failed
+            response.status = False
+
+            # Send the message of why it failed
+            response.msg = str(e)
+
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
+
+    @api_view(['DELETE'])
+    def delete(request, id: int):
+
+        # Declare the service to use
+        postCommentService = PostCommentsService()
+        response = ResponseAPI()
+
+        try:
+
+            # Set the status of the request a success
+            response.status = True
+
+            # Return the data
+            response.value = postCommentService.delete(id)
+
+        except ValueError as e:
+
+            # Set the status of the request as failed
+            response.status = False
+
+            # Send the message of why it failed
+            response.msg = str(e)
+
+        # Return the response
+        return Response(status = 200, data = response.__dict__)

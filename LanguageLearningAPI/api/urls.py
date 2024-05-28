@@ -3,7 +3,7 @@ from api.views.userView import UserView
 from api.views.roleView import RoleView
 from api.views.postView import PostView
 from api.views.postHistoryView import PostHistoryView
-from api.views import postCommentsView
+from api.views.postCommentsView import PostCommentView
 from api.views.languageView import LanguageView
 from api.views.itemView import ItemView
 from api.views.itemTagView import ItemTagView
@@ -45,10 +45,10 @@ urlpatterns = [
     path('postHistory/create/', PostHistoryView.create, name = 'postHistory_create_view'),
 
         # ---------- Post Comments Routes
-    path('postComments/list/', postCommentsView.PostCommentsList.as_view(), name='postComments_list_view'),
-    path('postComments/create/', postCommentsView.PostCommentsCreate.as_view(), name='postComments_create_view'),
-    path('postComments/update/<int:pk>/', postCommentsView.PostCommentsUpdate.as_view(), name='postComments_update_view'),
-    path('postComments/delete/<int:pk>/', postCommentsView.PostCommentsDelete.as_view(), name='postComments_delete_view'),
+    path('postComments/list/', PostCommentView.list, name = 'postComments_list_view'),
+    path('postComments/create/', PostCommentView.create, name = 'postComments_create_view'),
+    path('postComments/update/', PostCommentView.update, name = 'postComments_update_view'),
+    path('postComments/delete/<int:id>/', PostCommentView.delete, name = 'postComments_delete_view'),
 
             # ---------- Sales History Routes
     path('salesHistory/list/', salesHistoryView.SalesHistoryList.as_view(), name='salesHistory_list_view'),
