@@ -1,6 +1,6 @@
 from django.urls import path
-from api.views import userView
-from api.views import roleView
+from api.views.userView import UserView
+from api.views.roleView import RoleView
 from api.views import postView
 from api.views import postHistoryView
 from api.views import postCommentsView
@@ -13,13 +13,13 @@ from api.views import salesHistoryView
 urlpatterns = [
     # ---------- User Routes
     # Route,           View,              Name of View
-    path('user/list/', userView.userList, name ='user_list_view'),
-    path('user/create/', userView.userCreate, name ='user_create_view'),
-    path('user/update/', userView.userUpdate, name='user_update_view'),
-    path('user/delete/<int:id>/', userView.userDelete, name='user_delete_view'),
+    path('user/list/', UserView.userList, name ='user_list_view'),
+    path('user/create/', UserView.userCreate, name ='user_create_view'),
+    path('user/update/', UserView.userUpdate, name ='user_update_view'),
+    path('user/delete/<int:id>/', UserView.userDelete, name ='user_delete_view'),
 
     # ---------- Role Routes
-    path('role/list/', roleView.roleList, name='role_list_view'),
+    path('role/list/', RoleView.roleList, name='role_list_view'),
 
     # ---------- Item Routes
     path('item/list/', itemView.ItemList.as_view(), name='item_list_view'),

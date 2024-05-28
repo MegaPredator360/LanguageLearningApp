@@ -4,29 +4,30 @@ from rest_framework.response import Response
 from api.services.roleService import RoleService
 from api.dtos.responseAPI import ResponseAPI
 
-# Declare the service to use
-roleService = RoleService()
+class RoleView:
 
-@api_view(['GET'])
-def roleList(request):
+    @api_view(['GET'])
+    def roleList(request):
 
-    response = ResponseAPI()
+        # Declare the service to use
+        roleService = RoleService()
+        response = ResponseAPI()
 
-    try:
+        try:
 
-        # Set the status of the request a success
-        response.status = True
+            # Set the status of the request a success
+            response.status = True
 
-        # Return the data
-        response.value = roleService.list()
+            # Return the data
+            response.value = roleService.list()
 
-    except ValueError as e:
+        except ValueError as e:
 
-        # Set the status of the request as failed
-        response.status = False
+            # Set the status of the request as failed
+            response.status = False
 
-        # Send the message of why it failed
-        response.msg = str(e)
+            # Send the message of why it failed
+            response.msg = str(e)
 
-    # Return the response
-    return Response(status = 200, data = response.__dict__)
+        # Return the response
+        return Response(status = 200, data = response.__dict__)

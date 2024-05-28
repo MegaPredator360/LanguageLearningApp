@@ -2,103 +2,110 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from api.dtos.responseAPI import ResponseAPI
-from LanguageLearningAPI.api.services.userService import UserService
+from api.services.userService import UserService
 
-# Declare the service to use
-userService = UserService()
+class UserView:
 
-@api_view(['GET'])
-def userList(request):
+    @api_view(['GET'])
+    def userList(request):
 
-    response = ResponseAPI()
+        # Declare the service to use
+        userService = UserService()
+        response = ResponseAPI()
 
-    try:
+        try:
 
-        # Set the status of the request a success
-        response.status = True
+            # Set the status of the request a success
+            response.status = True
 
-        # Return the data
-        response.value = userService.list()
+            # Return the data
+            response.value = userService.list()
 
-    except ValueError as e:
+        except ValueError as e:
 
-        # Set the status of the request as failed
-        response.status = False
+            # Set the status of the request as failed
+            response.status = False
 
-        # Send the message of why it failed
-        response.msg = str(e)
+            # Send the message of why it failed
+            response.msg = str(e)
 
-    # Return the response
-    return Response(status = 200, data = response.__dict__)
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
 
-@api_view(['POST'])
-def userCreate(request):
+    @api_view(['POST'])
+    def userCreate(request):
 
-    response = ResponseAPI()
+        # Declare the service to use
+        userService = UserService()
+        response = ResponseAPI()
 
-    try:
+        try:
 
-        # Set the status of the request a success
-        response.status = True
+            # Set the status of the request a success
+            response.status = True
 
-        # Return the data
-        response.value = userService.create(request.data)
+            # Return the data
+            response.value = userService.create(request.data)
 
-    except ValueError as e:
+        except ValueError as e:
 
-        # Set the status of the request as failed
-        response.status = False
+            # Set the status of the request as failed
+            response.status = False
 
-        # Send the message of why it failed
-        response.msg = str(e)
+            # Send the message of why it failed
+            response.msg = str(e)
 
-    # Return the response
-    return Response(status = 200, data = response.__dict__)
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
 
-@api_view(['PUT'])
-def userUpdate(request):
+    @api_view(['PUT'])
+    def userUpdate(request):
 
-    response = ResponseAPI()
+        # Declare the service to use
+        userService = UserService()
+        response = ResponseAPI()
 
-    try:
+        try:
 
-        # Set the status of the request a success
-        response.status = True
+            # Set the status of the request a success
+            response.status = True
 
-        # Return the data
-        response.value = userService.update(request.data)
+            # Return the data
+            response.value = userService.update(request.data)
 
-    except ValueError as e:
+        except ValueError as e:
 
-        # Set the status of the request as failed
-        response.status = False
+            # Set the status of the request as failed
+            response.status = False
 
-        # Send the message of why it failed
-        response.msg = str(e)
+            # Send the message of why it failed
+            response.msg = str(e)
 
-    # Return the response
-    return Response(status = 200, data = response.__dict__)
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
 
-@api_view(['DELETE'])
-def userDelete(request, id: int):
+    @api_view(['DELETE'])
+    def userDelete(request, id: int):
 
-    response = ResponseAPI()
+        # Declare the service to use
+        userService = UserService()
+        response = ResponseAPI()
 
-    try:
+        try:
 
-        # Set the status of the request a success
-        response.status = True
+            # Set the status of the request a success
+            response.status = True
 
-        # Return the data
-        response.value = userService.delete(id)
+            # Return the data
+            response.value = userService.delete(id)
 
-    except ValueError as e:
+        except ValueError as e:
 
-        # Set the status of the request as failed
-        response.status = False
+            # Set the status of the request as failed
+            response.status = False
 
-        # Send the message of why it failed
-        response.msg = str(e)
+            # Send the message of why it failed
+            response.msg = str(e)
 
-    # Return the response
-    return Response(status = 200, data = response.__dict__)
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
