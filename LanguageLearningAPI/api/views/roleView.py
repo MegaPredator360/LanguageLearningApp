@@ -7,7 +7,7 @@ from api.dtos.responseAPI import ResponseAPI
 class RoleView:
 
     @api_view(['GET'])
-    def roleList(request):
+    def list(request):
 
         # Declare the service to use
         roleService = RoleService()

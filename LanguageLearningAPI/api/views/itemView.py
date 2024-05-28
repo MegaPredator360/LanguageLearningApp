@@ -7,7 +7,7 @@ from api.services.itemService import ItemService
 class ItemView:
 
     @api_view(['GET'])
-    def itemList(request):
+    def list(request):
 
         # Declare the service to use
         itemService = ItemService()
@@ -33,7 +33,7 @@ class ItemView:
         return Response(status = 200, data = response.__dict__)
 
     @api_view(['POST'])
-    def itemCreate(request):
+    def create(request):
 
         # Declare the service to use
         itemService = ItemService()
@@ -59,7 +59,7 @@ class ItemView:
         return Response(status = 200, data = response.__dict__)
 
     @api_view(['PUT'])
-    def itemUpdate(request):
+    def update(request):
 
         # Declare the service to use
         itemService = ItemService()
@@ -85,7 +85,7 @@ class ItemView:
         return Response(status = 200, data = response.__dict__)
 
     @api_view(['DELETE'])
-    def itemDelete(request, id: int):
+    def delete(request, id: int):
 
         # Declare the service to use
         itemService = ItemService()

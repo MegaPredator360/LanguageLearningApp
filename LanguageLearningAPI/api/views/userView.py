@@ -7,7 +7,7 @@ from api.services.userService import UserService
 class UserView:
 
     @api_view(['GET'])
-    def userList(request):
+    def list(request):
 
         # Declare the service to use
         userService = UserService()
@@ -33,7 +33,7 @@ class UserView:
         return Response(status = 200, data = response.__dict__)
 
     @api_view(['POST'])
-    def userCreate(request):
+    def create(request):
 
         # Declare the service to use
         userService = UserService()
@@ -59,7 +59,7 @@ class UserView:
         return Response(status = 200, data = response.__dict__)
 
     @api_view(['PUT'])
-    def userUpdate(request):
+    def update(request):
 
         # Declare the service to use
         userService = UserService()
@@ -85,7 +85,7 @@ class UserView:
         return Response(status = 200, data = response.__dict__)
 
     @api_view(['DELETE'])
-    def userDelete(request, id: int):
+    def delete(request, id: int):
 
         # Declare the service to use
         userService = UserService()

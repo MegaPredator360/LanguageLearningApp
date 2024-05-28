@@ -5,27 +5,27 @@ from api.views import postView
 from api.views import postHistoryView
 from api.views import postCommentsView
 from api.views import languageView
-from api.views import itemView
+from api.views.itemView import ItemView
 from api.views import itemTagView
 from api.views import salesHistoryView
 
 # Url is created
 urlpatterns = [
     # ---------- User Routes
-    # Route,           View,              Name of View
-    path('user/list/', UserView.userList, name ='user_list_view'),
-    path('user/create/', UserView.userCreate, name ='user_create_view'),
-    path('user/update/', UserView.userUpdate, name ='user_update_view'),
-    path('user/delete/<int:id>/', UserView.userDelete, name ='user_delete_view'),
+    # Route,           View,          Name of View
+    path('user/list/', UserView.list, name = 'user_list_view'),
+    path('user/create/', UserView.create, name = 'user_create_view'),
+    path('user/update/', UserView.update, name = 'user_update_view'),
+    path('user/delete/<int:id>/', UserView.delete, name = 'user_delete_view'),
 
     # ---------- Role Routes
-    path('role/list/', RoleView.roleList, name='role_list_view'),
+    path('role/list/', RoleView.list, name = 'role_list_view'),
 
     # ---------- Item Routes
-    path('item/list/', itemView.ItemList.as_view(), name='item_list_view'),
-    path('item/create/', itemView.ItemCreate.as_view(), name='item_create_view'),
-    path('item/update/<int:pk>/', itemView.ItemUpdate.as_view(), name='item_update_view'),
-    path('item/delete/<int:pk>/', itemView.ItemDelete.as_view(), name='item_delete_view'),
+    path('item/list/', ItemView.list, name = 'item_list_view'),
+    path('item/create/', ItemView.create, name = 'item_create_view'),
+    path('item/update/', ItemView.update, name = 'item_update_view'),
+    path('item/delete/<int:pk>/', ItemView.delete, name = 'item_delete_view'),
 
     # ---------- Item Tag Routes
     path('itemTag/list/', itemTagView.ItemTagList.as_view(), name='itemTag_list_view'),
