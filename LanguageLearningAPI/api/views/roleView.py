@@ -1,13 +1,32 @@
 from django.shortcuts import render
-from rest_framework import generics
-from api.models.role import Role
-from api.serializers.roleSerializer import RoleSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from api.services.roleService import RoleService
+from api.dtos.responseAPI import ResponseAPI
 
-# Obtain role list
-class RoleList(generics.ListAPIView):
+# Declare the service to use
+roleService = RoleService()
 
-    # SQL Query
-    queryset = Role.objects.all()
+@api_view(['GET'])
+def roleList(request):
 
-    # Serializer
-    serializer_class = RoleSerializer
+    response = ResponseAPI()
+
+    try:
+
+        # Set the status of the request a success
+        response.status = True
+
+        # Return the data
+        response.value = roleService.list()
+
+    except ValueError as e:
+
+        # Set the status of the request as failed
+        response.status = False
+
+        # Send the message of why it failed
+        response.msg = str(e)
+
+    # Return the response
+    return Response(status = 200, data = response.__dict__)

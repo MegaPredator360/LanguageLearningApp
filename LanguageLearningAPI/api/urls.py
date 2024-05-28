@@ -19,7 +19,7 @@ urlpatterns = [
     path('user/delete/<int:id>/', userView.userDelete, name='user_delete_view'),
 
     # ---------- Role Routes
-    path('role/list/', roleView.RoleList.as_view(), name='role_list_view'),
+    path('role/list/', roleView.roleList, name='role_list_view'),
 
     # ---------- Item Routes
     path('item/list/', itemView.ItemList.as_view(), name='item_list_view'),
