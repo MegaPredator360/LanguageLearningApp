@@ -1,7 +1,6 @@
 from api.serializers.languageSerializer import LanguageSerializer
 from api.models.language import Language
 
-
 class LanguageService:
 
     # Obtain the list of all languages
