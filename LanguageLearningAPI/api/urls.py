@@ -1,7 +1,7 @@
 from django.urls import path
 from api.views.userView import UserView
 from api.views.roleView import RoleView
-from api.views import postView
+from api.views.postView import PostView
 from api.views import postHistoryView
 from api.views import postCommentsView
 from api.views.languageView import LanguageView
@@ -25,7 +25,7 @@ urlpatterns = [
     path('item/list/', ItemView.list, name = 'item_list_view'),
     path('item/create/', ItemView.create, name = 'item_create_view'),
     path('item/update/', ItemView.update, name = 'item_update_view'),
-    path('item/delete/<int:pk>/', ItemView.delete, name = 'item_delete_view'),
+    path('item/delete/<int:id>/', ItemView.delete, name = 'item_delete_view'),
 
     # ---------- Item Tag Routes
     path('itemTag/list/', ItemTagView.list, name = 'itemTag_list_view'),
@@ -36,9 +36,9 @@ urlpatterns = [
     path('language/create/', LanguageView.create, name = 'language_create_view'),
 
     # ---------- Posts Routes
-    path('post/list/', postView.PostList.as_view(), name='post_list_view'),
-    path('post/create/', postView.PostCreate.as_view(), name='post_create_view'),
-    path('post/delete/<int:pk>/', postView.PostDelete.as_view(), name='post_delete_view'),
+    path('post/list/', PostView.list, name = 'post_list_view'),
+    path('post/create/', PostView.create, name = 'post_create_view'),
+    path('post/delete/<int:id>/', PostView.delete, name = 'post_delete_view'),
 
         # ---------- Posts History Routes
     path('postHistory/list/', postHistoryView.PostHistoryList.as_view(), name='postHistory_list_view'),

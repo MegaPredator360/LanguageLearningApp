@@ -1,31 +1,85 @@
 from django.shortcuts import render
-from rest_framework import generics
-from api.models.post import Post
-from api.serializers.postSerializer import PostSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from api.dtos.responseAPI import ResponseAPI
+from api.services.postService import PostService
 
-# Obtain list of posts
-class PostList(generics.ListAPIView):
+class PostView:
 
-    # SQL Query
-    queryset = Post.objects.all()
+    @api_view(['GET'])
+    def list(request):
 
-    # Serializer
-    serializer_class = PostSerializer
+        # Declare the service to use
+        postService = PostService()
+        response = ResponseAPI()
 
-# Create posts
-class PostCreate(generics.CreateAPIView):
+        try:
 
-    # Serializer
-    serializer_class = PostSerializer
+            # Set the status of the request a success
+            response.status = True
 
-# Delete posts
-class PostDelete(generics.DestroyAPIView):
+            # Return the data
+            response.value = postService.list()
 
-    # SQL Query
-    queryset = Post.objects.all()
+        except ValueError as e:
 
-    # Serializer
-    serializer_class = PostSerializer
+            # Set the status of the request as failed
+            response.status = False
 
-    # Primary Key of table
-    lookup_field = 'pk'
+            # Send the message of why it failed
+            response.msg = str(e)
+
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
+
+    @api_view(['POST'])
+    def create(request):
+
+        # Declare the service to use
+        postService = PostService()
+        response = ResponseAPI()
+
+        try:
+
+            # Set the status of the request a success
+            response.status = True
+
+            # Return the data
+            response.value = postService.create(request.data)
+
+        except ValueError as e:
+
+            # Set the status of the request as failed
+            response.status = False
+
+            # Send the message of why it failed
+            response.msg = str(e)
+
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
+
+    @api_view(['DELETE'])
+    def delete(request, id: int):
+
+        # Declare the service to use
+        postService = PostService()
+        response = ResponseAPI()
+
+        try:
+
+            # Set the status of the request a success
+            response.status = True
+
+            # Return the data
+            response.value = postService.delete(id)
+
+        except ValueError as e:
+
+            # Set the status of the request as failed
+            response.status = False
+
+            # Send the message of why it failed
+            response.msg = str(e)
+
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
