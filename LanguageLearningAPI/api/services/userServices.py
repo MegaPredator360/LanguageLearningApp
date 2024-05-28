@@ -102,7 +102,7 @@ class UserService:
 
             return True
 
-        # If the user to update doesn't exist
+        # If the user to delete doesn't exist
         except User.DoesNotExist:
                 
                 # Send an excepction
