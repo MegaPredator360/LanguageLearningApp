@@ -1,19 +1,59 @@
 from django.shortcuts import render
-from rest_framework import generics
-from api.models.post_history import PostHistory
-from api.serializers.postHistorySerializer import PostHistorySerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from api.dtos.responseAPI import ResponseAPI
+from api.services.postHistoryService import PostHistoryService
 
-# Obtain the list of edits / updates made to a post
-class PostHistoryList(generics.ListAPIView):
+class PostHistoryView:
 
-    # SQL Query
-    queryset = PostHistory.objects.all()
+    @api_view(['GET'])
+    def list(request):
 
-    # Serializer
-    serializer_class = PostHistorySerializer
+        # Declare the service to use
+        postHistoryService = PostHistoryService()
+        response = ResponseAPI()
 
-# Add an edit / update to a post
-class PostHistoryCreate(generics.CreateAPIView):
+        try:
 
-    # Serializer
-    serializer_class = PostHistorySerializer
+            # Set the status of the request a success
+            response.status = True
+
+            # Return the data
+            response.value = postHistoryService.list()
+
+        except ValueError as e:
+
+            # Set the status of the request as failed
+            response.status = False
+
+            # Send the message of why it failed
+            response.msg = str(e)
+
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
+
+    @api_view(['POST'])
+    def create(request):
+
+        # Declare the service to use
+        postHistoryService = PostHistoryService()
+        response = ResponseAPI()
+
+        try:
+
+            # Set the status of the request a success
+            response.status = True
+
+            # Return the data
+            response.value = postHistoryService.create(request.data)
+
+        except ValueError as e:
+
+            # Set the status of the request as failed
+            response.status = False
+
+            # Send the message of why it failed
+            response.msg = str(e)
+
+        # Return the response
+        return Response(status = 200, data = response.__dict__)

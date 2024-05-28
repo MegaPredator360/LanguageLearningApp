@@ -2,7 +2,7 @@ from django.urls import path
 from api.views.userView import UserView
 from api.views.roleView import RoleView
 from api.views.postView import PostView
-from api.views import postHistoryView
+from api.views.postHistoryView import PostHistoryView
 from api.views import postCommentsView
 from api.views.languageView import LanguageView
 from api.views.itemView import ItemView
@@ -41,8 +41,8 @@ urlpatterns = [
     path('post/delete/<int:id>/', PostView.delete, name = 'post_delete_view'),
 
         # ---------- Posts History Routes
-    path('postHistory/list/', postHistoryView.PostHistoryList.as_view(), name='postHistory_list_view'),
-    path('postHistory/create/', postHistoryView.PostHistoryCreate.as_view(), name='postHistory_create_view'),
+    path('postHistory/list/', PostHistoryView.list, name = 'postHistory_list_view'),
+    path('postHistory/create/', PostHistoryView.create, name = 'postHistory_create_view'),
 
         # ---------- Post Comments Routes
     path('postComments/list/', postCommentsView.PostCommentsList.as_view(), name='postComments_list_view'),
