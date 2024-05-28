@@ -1,7 +1,6 @@
 from api.serializers.postHistorySerializer import PostHistorySerializer
 from api.models.post_history import PostHistory
 
-
 class PostHistoryService:
 
     # Obtain the list of all history of posts

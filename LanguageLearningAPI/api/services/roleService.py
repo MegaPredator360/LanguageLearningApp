@@ -1,7 +1,6 @@
 from api.models.role import Role
 from api.serializers.roleSerializer import RoleSerializer
 
-
 class RoleService:
 
     def list(self):
