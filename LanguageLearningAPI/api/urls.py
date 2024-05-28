@@ -7,7 +7,7 @@ from api.views.postCommentsView import PostCommentView
 from api.views.languageView import LanguageView
 from api.views.itemView import ItemView
 from api.views.itemTagView import ItemTagView
-from api.views import salesHistoryView
+from api.views.salesHistoryView import SalesHistoryView
 
 # Url is created
 urlpatterns = [
@@ -51,6 +51,6 @@ urlpatterns = [
     path('postComments/delete/<int:id>/', PostCommentView.delete, name = 'postComments_delete_view'),
 
             # ---------- Sales History Routes
-    path('salesHistory/list/', salesHistoryView.SalesHistoryList.as_view(), name='salesHistory_list_view'),
-    path('salesHistory/create/', salesHistoryView.SalesHistoryCreate.as_view(), name='salesHistory_create_view'),
+    path('salesHistory/list/', SalesHistoryView.list, name = 'salesHistory_list_view'),
+    path('salesHistory/create/', SalesHistoryView.create, name = 'salesHistory_create_view'),
 ]
