@@ -1,43 +1,111 @@
 from django.shortcuts import render
-from rest_framework import generics
-from api.models.item import Item
-from api.serializers.itemSerializer import ItemSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from api.dtos.responseAPI import ResponseAPI
+from api.services.itemService import ItemService
 
-# Obtain items list
-class ItemList(generics.ListAPIView):
+class ItemView:
 
-    # SQL Query
-    queryset = Item.objects.all()
+    @api_view(['GET'])
+    def itemList(request):
 
-    # Serializer
-    serializer_class = ItemSerializer
+        # Declare the service to use
+        itemService = ItemService()
+        response = ResponseAPI()
 
-# Create items
-class ItemCreate(generics.CreateAPIView):
+        try:
 
-    # Serializer
-    serializer_class = ItemSerializer
+            # Set the status of the request a success
+            response.status = True
 
-# Update item
-class ItemUpdate(generics.UpdateAPIView):
+            # Return the data
+            response.value = itemService.list()
 
-    # SQL Query
-    queryset = Item.objects.all()
+        except ValueError as e:
 
-    # Serializer
-    serializer_class = ItemSerializer
+            # Set the status of the request as failed
+            response.status = False
 
-    # Primary Key of table
-    lookup_field = 'pk'
+            # Send the message of why it failed
+            response.msg = str(e)
 
-# Delete items
-class ItemDelete(generics.DestroyAPIView):
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
 
-    # SQL Query
-    queryset = Item.objects.all()
+    @api_view(['POST'])
+    def itemCreate(request):
 
-    # Serializer
-    serializer_class = ItemSerializer
+        # Declare the service to use
+        itemService = ItemService()
+        response = ResponseAPI()
 
-    # Primary Key of table
-    lookup_field = 'pk'
+        try:
+
+            # Set the status of the request a success
+            response.status = True
+
+            # Return the data
+            response.value = itemService.create(request.data)
+
+        except ValueError as e:
+
+            # Set the status of the request as failed
+            response.status = False
+
+            # Send the message of why it failed
+            response.msg = str(e)
+
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
+
+    @api_view(['PUT'])
+    def itemUpdate(request):
+
+        # Declare the service to use
+        itemService = ItemService()
+        response = ResponseAPI()
+
+        try:
+
+            # Set the status of the request a success
+            response.status = True
+
+            # Return the data
+            response.value = itemService.update(request.data)
+
+        except ValueError as e:
+
+            # Set the status of the request as failed
+            response.status = False
+
+            # Send the message of why it failed
+            response.msg = str(e)
+
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
+
+    @api_view(['DELETE'])
+    def itemDelete(request, id: int):
+
+        # Declare the service to use
+        itemService = ItemService()
+        response = ResponseAPI()
+
+        try:
+
+            # Set the status of the request a success
+            response.status = True
+
+            # Return the data
+            response.value = itemService.delete(id)
+
+        except ValueError as e:
+
+            # Set the status of the request as failed
+            response.status = False
+
+            # Send the message of why it failed
+            response.msg = str(e)
+
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
