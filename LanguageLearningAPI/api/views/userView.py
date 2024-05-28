@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from api.dtos.responseAPI import ResponseAPI
-from api.services.userServices import UserService
+from LanguageLearningAPI.api.services.userService import UserService
 
 # Declare the service to use
 userService = UserService()
