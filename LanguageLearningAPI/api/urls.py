@@ -6,7 +6,7 @@ from api.views import postHistoryView
 from api.views import postCommentsView
 from api.views import languageView
 from api.views.itemView import ItemView
-from api.views import itemTagView
+from api.views.itemTagView import ItemTagView
 from api.views import salesHistoryView
 
 # Url is created
@@ -28,8 +28,8 @@ urlpatterns = [
     path('item/delete/<int:pk>/', ItemView.delete, name = 'item_delete_view'),
 
     # ---------- Item Tag Routes
-    path('itemTag/list/', itemTagView.ItemTagList.as_view(), name='itemTag_list_view'),
-    path('itemTag/create/', itemTagView.ItemTagCreate.as_view(), name='itemTag_create_view'),
+    path('itemTag/list/', ItemTagView.list, name = 'itemTag_list_view'),
+    path('itemTag/create/', ItemTagView.create, name = 'itemTag_create_view'),
 
         # ---------- Languages Routes
     path('language/list/', languageView.LanguageList.as_view(), name='language_list_view'),
