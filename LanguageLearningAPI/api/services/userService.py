@@ -1,6 +1,7 @@
 from api.models.role import Role
 from api.models.user import User
 from api.serializers.userSerializer import UserSerializer
+from api.services.utilityService import UtilityService
 
 class UserService:
 
@@ -27,10 +28,13 @@ class UserService:
 
         try:
 
+            # Encrypt the password
+            user['password'] = UtilityService().encryptPassword(user['password'])
+
             # Serialize the data
             serializer = UserSerializer(data = user)
 
-            # If the data is valid
+            # If the data matches with what is expected
             if serializer.is_valid():
 
                 # Save the new data into the database
