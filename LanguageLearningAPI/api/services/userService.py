@@ -1,4 +1,3 @@
-from api.models.role import Role
 from api.models.user import User
 from api.serializers.userSerializer import UserSerializer
 from api.services.utilityService import UtilityService
@@ -26,10 +25,13 @@ class UserService:
     # Create a new user
     def create(self, user: dict):
 
+        # Create the utility service object
+        utilityService = UtilityService()
+
         try:
 
             # Encrypt the password
-            user['password'] = UtilityService().encryptPassword(user['password'])
+            user['password'] = utilityService.encryptPassword(user['password'])
 
             # Serialize the data
             serializer = UserSerializer(data = user)
