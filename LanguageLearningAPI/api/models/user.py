@@ -11,6 +11,7 @@ class User(models.Model):
     password = models.CharField(max_length = 255)
     birth_date = models.DateField()
     country = models.CharField(max_length = 20)
+    active = models.BinaryField()
     role = models.ForeignKey(Role, on_delete = models.CASCADE, related_name = 'users')
 
     def __str__(self):
