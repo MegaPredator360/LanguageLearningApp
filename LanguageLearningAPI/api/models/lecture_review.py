@@ -1,6 +1,6 @@
 from django.db import models
 from api.models.user import User
-from LanguageLearningAPI.api.models.lecture import Lecture
+from api.models.lecture import Lecture
 
 class LectureReview(models.Model):
     lecture = models.ForeignKey(Lecture, on_delete = models.CASCADE, related_name = 'lectures')

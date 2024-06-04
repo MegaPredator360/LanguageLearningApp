@@ -1,5 +1,5 @@
 from django.db import models
-from LanguageLearningAPI.api.models.selection_exercise import SelectionExercise
+from api.models.selection_exercise import SelectionExercise
 
 class SelectionAnswer(models.Model):
     selection = models.ForeignKey(SelectionExercise, on_delete = models.CASCADE, related_name = 'selections')

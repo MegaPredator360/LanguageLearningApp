@@ -1,7 +1,7 @@
 from django.db import models
-from LanguageLearningAPI.api.models.practice import Practice
+from api.models.practice import Practice
 
-class Sentence_Exercise(models.Model):
+class SentenceExercise(models.Model):
     pratice = models.ForeignKey(Practice, on_delete = models.CASCADE, related_name = 'practices')
     exercise_number = models.IntegerField()
     sentence_complete = models.TextField()
