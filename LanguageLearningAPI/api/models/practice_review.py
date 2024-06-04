@@ -10,4 +10,4 @@ class PracticeReview(models.Model):
     user_rate = models.FloatField()
 
     def __str__(self):
-        return self.name
+        return self.comment

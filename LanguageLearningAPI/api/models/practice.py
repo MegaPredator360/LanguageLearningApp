@@ -13,4 +13,4 @@ class Practice(models.Model):
 
 
     def __str__(self):
-        return self.role_name
+        return self.name
