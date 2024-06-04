@@ -1,16 +1,15 @@
-from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from api.dtos.responseAPI import ResponseAPI
-from api.services.itemTagService import ItemTagService
+from api.services.topic_service import TopicService
 
-class ItemTagView:
+class TopicView:
 
     @api_view(['GET'])
     def list(request):
 
         # Declare the service to use
-        itemTagService = ItemTagService()
+        topicService = TopicService()
         response = ResponseAPI()
 
         try:
@@ -19,7 +18,7 @@ class ItemTagView:
             response.status = True
 
             # Return the data
-            response.value = itemTagService.list()
+            response.value = topicService.list()
 
         except ValueError as e:
 
@@ -36,7 +35,7 @@ class ItemTagView:
     def create(request):
 
         # Declare the service to use
-        itemTagService = ItemTagService()
+        topicService = TopicService()
         response = ResponseAPI()
 
         try:
@@ -45,7 +44,7 @@ class ItemTagView:
             response.status = True
 
             # Return the data
-            response.value = itemTagService.create(request.data)
+            response.value = topicService.create(request.data)
 
         except ValueError as e:
 

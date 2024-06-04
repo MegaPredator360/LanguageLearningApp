@@ -1,16 +1,15 @@
-from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from api.dtos.responseAPI import ResponseAPI
-from api.services.itemService import ItemService
+from api.services.lecture_review_service import LectureReviewService
 
-class ItemView:
+class LectureReviewView:
 
     @api_view(['GET'])
     def list(request):
 
         # Declare the service to use
-        itemService = ItemService()
+        lectureReviewService = LectureReviewService()
         response = ResponseAPI()
 
         try:
@@ -19,7 +18,7 @@ class ItemView:
             response.status = True
 
             # Return the data
-            response.value = itemService.list()
+            response.value = lectureReviewService.list()
 
         except ValueError as e:
 
@@ -36,7 +35,7 @@ class ItemView:
     def create(request):
 
         # Declare the service to use
-        itemService = ItemService()
+        lectureReviewService = LectureReviewService()
         response = ResponseAPI()
 
         try:
@@ -45,7 +44,7 @@ class ItemView:
             response.status = True
 
             # Return the data
-            response.value = itemService.create(request.data)
+            response.value = lectureReviewService.create(request.data)
 
         except ValueError as e:
 
@@ -62,7 +61,7 @@ class ItemView:
     def update(request):
 
         # Declare the service to use
-        itemService = ItemService()
+        lectureReviewService = LectureReviewService()
         response = ResponseAPI()
 
         try:
@@ -71,7 +70,7 @@ class ItemView:
             response.status = True
 
             # Return the data
-            response.value = itemService.update(request.data)
+            response.value = lectureReviewService.update(request.data)
 
         except ValueError as e:
 
@@ -88,7 +87,7 @@ class ItemView:
     def delete(request, id: int):
 
         # Declare the service to use
-        itemService = ItemService()
+        lectureReviewService = LectureReviewService()
         response = ResponseAPI()
 
         try:
@@ -97,7 +96,7 @@ class ItemView:
             response.status = True
 
             # Return the data
-            response.value = itemService.delete(id)
+            response.value = lectureReviewService.delete(id)
 
         except ValueError as e:
 

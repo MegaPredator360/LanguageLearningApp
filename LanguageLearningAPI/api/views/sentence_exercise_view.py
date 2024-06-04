@@ -1,16 +1,15 @@
-from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from api.dtos.responseAPI import ResponseAPI
-from api.services.userService import UserService
+from api.services.sentence_exercise_service import SentenceExerciseService
 
-class UserView:
+class SentenceExerciseView:
 
     @api_view(['GET'])
     def list(request):
 
         # Declare the service to use
-        userService = UserService()
+        sentenceExerciseService = SentenceExerciseService()
         response = ResponseAPI()
 
         try:
@@ -19,7 +18,7 @@ class UserView:
             response.status = True
 
             # Return the data
-            response.value = userService.list()
+            response.value = sentenceExerciseService.list()
 
         except ValueError as e:
 
@@ -36,7 +35,7 @@ class UserView:
     def create(request):
 
         # Declare the service to use
-        userService = UserService()
+        sentenceExerciseService = SentenceExerciseService()
         response = ResponseAPI()
 
         try:
@@ -45,7 +44,7 @@ class UserView:
             response.status = True
 
             # Return the data
-            response.value = userService.create(request.data)
+            response.value = sentenceExerciseService.create(request.data)
 
         except ValueError as e:
 
@@ -62,7 +61,7 @@ class UserView:
     def update(request):
 
         # Declare the service to use
-        userService = UserService()
+        sentenceExerciseService = SentenceExerciseService()
         response = ResponseAPI()
 
         try:
@@ -71,7 +70,7 @@ class UserView:
             response.status = True
 
             # Return the data
-            response.value = userService.update(request.data)
+            response.value = sentenceExerciseService.update(request.data)
 
         except ValueError as e:
 
@@ -88,7 +87,7 @@ class UserView:
     def delete(request, id: int):
 
         # Declare the service to use
-        userService = UserService()
+        sentenceExerciseService = SentenceExerciseService()
         response = ResponseAPI()
 
         try:
@@ -97,7 +96,7 @@ class UserView:
             response.status = True
 
             # Return the data
-            response.value = userService.delete(id)
+            response.value = sentenceExerciseService.delete(id)
 
         except ValueError as e:
 

@@ -1,16 +1,15 @@
-from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from api.dtos.responseAPI import ResponseAPI
-from api.services.postCommentService import PostCommentsService
+from api.services.exercise_resource_service import ExerciseResourceService
 
-class PostCommentView:
+class ExerciseResourceView:
 
     @api_view(['GET'])
     def list(request):
 
         # Declare the service to use
-        postCommentService = PostCommentsService()
+        exerciseResourceService = ExerciseResourceService()
         response = ResponseAPI()
 
         try:
@@ -19,7 +18,7 @@ class PostCommentView:
             response.status = True
 
             # Return the data
-            response.value = postCommentService.list()
+            response.value = exerciseResourceService.list()
 
         except ValueError as e:
 
@@ -36,7 +35,7 @@ class PostCommentView:
     def create(request):
 
         # Declare the service to use
-        postCommentService = PostCommentsService()
+        exerciseResourceService = ExerciseResourceService()
         response = ResponseAPI()
 
         try:
@@ -45,7 +44,7 @@ class PostCommentView:
             response.status = True
 
             # Return the data
-            response.value = postCommentService.create(request.data)
+            response.value = exerciseResourceService.create(request.data)
 
         except ValueError as e:
 
@@ -62,7 +61,7 @@ class PostCommentView:
     def update(request):
 
         # Declare the service to use
-        postCommentService = PostCommentsService()
+        exerciseResourceService = ExerciseResourceService()
         response = ResponseAPI()
 
         try:
@@ -71,7 +70,7 @@ class PostCommentView:
             response.status = True
 
             # Return the data
-            response.value = postCommentService.update(request.data)
+            response.value = exerciseResourceService.update(request.data)
 
         except ValueError as e:
 
@@ -88,7 +87,7 @@ class PostCommentView:
     def delete(request, id: int):
 
         # Declare the service to use
-        postCommentService = PostCommentsService()
+        exerciseResourceService = ExerciseResourceService()
         response = ResponseAPI()
 
         try:
@@ -97,7 +96,7 @@ class PostCommentView:
             response.status = True
 
             # Return the data
-            response.value = postCommentService.delete(id)
+            response.value = exerciseResourceService.delete(id)
 
         except ValueError as e:
 

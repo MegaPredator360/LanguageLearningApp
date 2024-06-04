@@ -1,8 +1,7 @@
-from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from api.services.roleService import RoleService
 from api.dtos.responseAPI import ResponseAPI
+from api.services.role_service import RoleService
 
 class RoleView:
 

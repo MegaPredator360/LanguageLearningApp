@@ -1,8 +1,7 @@
-from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from api.dtos.responseAPI import ResponseAPI
-from api.services.languageService import LanguageService
+from api.services.language_service import LanguageService
 
 class LanguageView:
 
