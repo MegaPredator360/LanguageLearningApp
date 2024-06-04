@@ -1,18 +1,18 @@
-from api.serializers.itemSerializer import ItemSerializer
-from api.models.item import Item
+from api.models.practice import Practice
+from api.serializers.practice_serializer import PracticeSerializer
 
-class ItemService:
+class PracticeService:
 
-    # Obtain the list of all items
+    # Obtain the list of all practices
     def list(self):
 
         try:
 
-            # Obtain all items
-            items = Item.objects.all()
+            # Obtain all practices
+            practices = Practice.objects.all()
 
             # We serialize the objects
-            serializer = ItemSerializer(items, many = True)
+            serializer = PracticeSerializer(practices, many = True)
 
             return serializer.data
 
@@ -21,13 +21,13 @@ class ItemService:
             # Send the exception
             raise e
 
-    # Create a new item
-    def create(self, item: dict):
+    # Create a practice
+    def create(self, practice: dict):
 
         try:
 
             # Serialize the data
-            serializer = ItemSerializer(data = item)
+            serializer = PracticeSerializer(data = practice)
 
             # If the data is valid
             if serializer.is_valid():
@@ -40,7 +40,7 @@ class ItemService:
                 errors = serializer.errors
 
                 # Raise an exception with detailed error information
-                raise ValueError(f'Errors occurred while saving the item: {errors}')
+                raise ValueError(f'Errors occurred while saving the practice: {errors}')
 
             # Return a response
             return serializer.data
@@ -50,16 +50,16 @@ class ItemService:
             # Send the exception
             raise e
 
-    # Update an item
-    def update(self, item: dict):
+    # Update a practice
+    def update(self, practice: dict):
 
         try:
 
-            # Retrieve the specific item
-            itemFound = Item.objects.get(id = item['id'])
+            # Retrieve the specific practice
+            practiceFound = Practice.objects.get(id = practice['id'])
 
             # Update de data
-            serializer = ItemSerializer(instance = itemFound, data = item)
+            serializer = PracticeSerializer(instance = practiceFound, data = practice)
 
             # If the data is valid
             if serializer.is_valid():
@@ -72,15 +72,15 @@ class ItemService:
                 errors = serializer.errors
 
                 # Raise an exception with detailed error information
-                raise ValueError(f'Errors occurred while saving the item: {errors}')
+                raise ValueError(f'Errors occurred while saving the practice: {errors}')
 
             return serializer.data
 
-        # If the item to update doesn't exist
-        except Item.DoesNotExist:
+        # If the practice to update doesn't exist
+        except Practice.DoesNotExist:
 
                 # Send an excepction
-                raise ValueError('The item to update does not exist')
+                raise ValueError('The practice exercise to update does not exist')
 
         # Any other posible exception
         except ValueError as e:
@@ -88,24 +88,24 @@ class ItemService:
             # Send the exception
             raise e
 
-    # Delete an item
-    def delete(self, itemId: int) -> bool:
+    # Delete a practice
+    def delete(self, practiceId: int) -> bool:
 
         try:
 
-            # Retrieve the specific item
-            itemFound = Item.objects.get(id = itemId)
+            # Retrieve the specific practice
+            practiceFound = Practice.objects.get(id = practiceId)
 
-            # Delete the item
-            itemFound.delete()
+            # Delete the practice
+            practiceFound.delete()
 
             return True
 
-        # If the item to delete doesn't exist
-        except Item.DoesNotExist:
-                
+        # If the practice to delete doesn't exist
+        except Practice.DoesNotExist:
+
                 # Send an excepction
-                raise ValueError('The item to delete does not exist')
+                raise ValueError('The practice to delete does not exist')
 
         # Any other posible exception
         except ValueError as e:

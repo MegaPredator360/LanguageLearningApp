@@ -1,5 +1,5 @@
+from api.serializers.role_serializer import RoleSerializer
 from api.models.role import Role
-from api.serializers.roleSerializer import RoleSerializer
 
 class RoleService:
 

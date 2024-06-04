@@ -1,18 +1,18 @@
-from api.serializers.itemTagSerializer import ItemTagSerializer
-from api.models.item_tag import ItemTag
+from api.serializers.language_serializer import LanguageSerializer
+from api.models.language import Language
 
-class ItemTagService:
+class LanguageService:
 
-    # Obtain the list of all items tags
+    # Obtain the list of all languages
     def list(self):
 
         try:
 
-            # Obtain all items tags
-            itemTags = ItemTag.objects.all()
+            # Obtain all languages
+            languages = Language.objects.all()
 
             # We serialize the objects
-            serializer = ItemTagSerializer(itemTags, many = True)
+            serializer = LanguageSerializer(languages, many = True)
 
             return serializer.data
 
@@ -22,12 +22,12 @@ class ItemTagService:
             raise e
 
     # Create a new item
-    def create(self, itemTag: dict):
+    def create(self, language: dict):
 
         try:
 
             # Serialize the data
-            serializer = ItemTagSerializer(data = itemTag)
+            serializer = LanguageSerializer(data = language)
 
             # If the data is valid
             if serializer.is_valid():
@@ -40,7 +40,7 @@ class ItemTagService:
                 errors = serializer.errors
 
                 # Raise an exception with detailed error information
-                raise ValueError(f'Errors occurred while saving the item tag: {errors}')
+                raise ValueError(f'Errors occurred while saving the language: {errors}')
 
             # Return a response
             return serializer.data

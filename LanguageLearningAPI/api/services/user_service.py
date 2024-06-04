@@ -1,6 +1,6 @@
 from api.models.user import User
-from api.serializers.userSerializer import UserSerializer
-from api.services.utilityService import UtilityService
+from api.serializers.user_serializer import UserSerializer
+from api.services.utility_service import UtilityService
 
 class UserService:
 

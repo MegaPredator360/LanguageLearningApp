@@ -1,18 +1,18 @@
-from api.models.post import Post
-from api.serializers.postSerializer import PostSerializer
+from api.models.lecture import Lecture
+from api.serializers.lecture_serializer import LectureSerializer
 
-class PostService:
+class LectureService:
 
-    # Obtain the list of all posts
+    # Obtain the list of all lectures
     def list(self):
 
         try:
 
-            # Obtain all posts
-            posts = Post.objects.all()
+            # Obtain all lectures
+            lectures = Lecture.objects.all()
 
             # We serialize the objects
-            serializer = PostSerializer(posts, many = True)
+            serializer = LectureSerializer(lectures, many = True)
 
             return serializer.data
 
@@ -21,13 +21,13 @@ class PostService:
             # Send the exception
             raise e
 
-    # Create a new post
-    def create(self, post: dict):
+    # Create a new lecture
+    def create(self, lecture: dict):
 
         try:
 
             # Serialize the data
-            serializer = PostSerializer(data = post)
+            serializer = LectureSerializer(data = lecture)
 
             # If the data is valid
             if serializer.is_valid():
@@ -40,7 +40,7 @@ class PostService:
                 errors = serializer.errors
 
                 # Raise an exception with detailed error information
-                raise ValueError(f'Errors occurred while saving the post: {errors}')
+                raise ValueError(f'Errors occurred while saving the lecture: {errors}')
 
             # Return a response
             return serializer.data
@@ -50,24 +50,24 @@ class PostService:
             # Send the exception
             raise e
 
-    # Delete a post
-    def delete(self, postId: int) -> bool:
+    # Delete a lecture
+    def delete(self, lectureId: int) -> bool:
 
         try:
 
-            # Retrieve the specific post
-            postFound = Post.objects.get(id = postId)
+            # Retrieve the specific lecture
+            lectureFound = Lecture.objects.get(id = lectureId)
 
-            # Delete the post
-            postFound.delete()
+            # Delete the lecture
+            lectureFound.delete()
 
             return True
 
-        # If the post to delete doesn't exist
-        except Post.DoesNotExist:
-                
+        # If the lecture to delete doesn't exist
+        except Lecture.DoesNotExist:
+
                 # Send an excepction
-                raise ValueError('The post to delete does not exist')
+                raise ValueError('The lecture to delete does not exist')
 
         # Any other posible exception
         except ValueError as e:

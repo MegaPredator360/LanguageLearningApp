@@ -1,19 +1,18 @@
-from api.serializers.salesHistorySerializer import SalesHistorySerializer
-from api.models.sales_history import SalesHistory
+from api.models.topic import Topic
+from api.serializers.topic_serializer import TopicSerializer
 
+class TopicService:
 
-class SalesHistoryService:
-
-    # Obtain the list of the history of all sales made
+    # Obtain the list of all topics
     def list(self):
 
         try:
 
-            # Obtain all sales made
-            salesHistories = SalesHistory.objects.all()
+            # Obtain all topics
+            topics = Topic.objects.all()
 
             # We serialize the objects
-            serializer = SalesHistorySerializer(salesHistories, many = True)
+            serializer = TopicSerializer(topics, many = True)
 
             return serializer.data
 
@@ -22,13 +21,13 @@ class SalesHistoryService:
             # Send the exception
             raise e
 
-    # Create a new sale
-    def create(self, salesHistory: dict):
+    # Create a new item
+    def create(self, topic: dict):
 
         try:
 
             # Serialize the data
-            serializer = SalesHistorySerializer(data = salesHistory)
+            serializer = TopicSerializer(data = topic)
 
             # If the data is valid
             if serializer.is_valid():
@@ -41,7 +40,7 @@ class SalesHistoryService:
                 errors = serializer.errors
 
                 # Raise an exception with detailed error information
-                raise ValueError(f'Errors occurred while saving the sale: {errors}')
+                raise ValueError(f'Errors occurred while saving the topic: {errors}')
 
             # Return a response
             return serializer.data
