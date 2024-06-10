@@ -31,8 +31,8 @@ urlpatterns = [
     path('language/create/', LanguageView.create, name = 'language_create_view'),
 
     # ---------- Topics Routes
-    path('language/list/', TopicView.list, name = 'topic_list_view'),
-    path('language/create/', TopicView.create, name = 'topic_create_view'),
+    path('topic/list/', TopicView.list, name = 'topic_list_view'),
+    path('topic/create/', TopicView.create, name = 'topic_create_view'),
 
     # ---------- Lecture Routes
     path('lecture/list/', LectureView.list, name = 'lecture_list_view'),
