@@ -9,7 +9,7 @@ class User(models.Model):
     birth_date = models.DateField()
     country = models.CharField(max_length = 20)
     active = models.BooleanField()
-    role = models.ForeignKey(Role, on_delete = models.CASCADE, related_name = 'users')
+    role = models.ForeignKey(Role, on_delete = models.CASCADE, related_name = 'user_role')
 
     class Meta:
         constraints = [

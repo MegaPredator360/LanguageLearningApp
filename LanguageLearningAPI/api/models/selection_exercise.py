@@ -2,7 +2,7 @@ from django.db import models
 from api.models.practice import Practice
 
 class SelectionExercise(models.Model):
-    practice = models.ForeignKey(Practice, on_delete = models.CASCADE, related_name = 'practices')
+    practice = models.ForeignKey(Practice, on_delete = models.CASCADE, related_name = 'selection_practices')
     exercise_number = models.IntegerField()
     question = models.CharField(max_length=255)
     option_a = models.CharField(max_length=255)

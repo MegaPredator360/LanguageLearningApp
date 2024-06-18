@@ -2,7 +2,7 @@ from django.db import models
 from api.models.practice import Practice
 
 class SentenceExercise(models.Model):
-    pratice = models.ForeignKey(Practice, on_delete = models.CASCADE, related_name = 'practices')
+    pratice = models.ForeignKey(Practice, on_delete = models.CASCADE, related_name = 'sentence_practices')
     exercise_number = models.IntegerField()
     sentence_complete = models.TextField()
     sentence_incomplete = models.TextField()
