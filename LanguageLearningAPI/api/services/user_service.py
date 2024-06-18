@@ -119,3 +119,31 @@ class UserService:
 
             # Send the exception
             raise e
+
+    # Validar el login
+    def verifyLogin(self, login: dict):
+        # Create the utility service object
+        utilityService = UtilityService()
+        try:
+            encriptedPassword=utilityService.encryptPassword(login['password'])
+            # Retrieve the specific user
+            userFound = User.objects.get(email= login['email'], password= encriptedPassword )
+
+            # Update de data
+            serializer = UserSerializer(userFound, many=False)
+
+           
+
+            return serializer.data
+
+        # If the user to update doesn't exist
+        except User.DoesNotExist:
+
+                # Send an excepction
+                raise ValueError('User or password are not correct')
+
+        # Any other posible exception
+        except ValueError as e:
+
+            # Send the exception
+            raise e

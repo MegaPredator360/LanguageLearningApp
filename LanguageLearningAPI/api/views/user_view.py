@@ -108,3 +108,33 @@ class UserView:
 
         # Return the response
         return Response(status = 200, data = response.__dict__)
+    
+
+    
+    @api_view(['POST'])
+    def login(request):
+
+        # Declare the service to use
+        userService = UserService()
+        response = ResponseAPI()
+
+        try:
+
+            print(request.data)
+
+            # Set the status of the request a success
+            response.status = True
+
+            # Return the data
+            response.value = userService.verifyLogin(request.data)
+
+        except ValueError as e:
+
+            # Set the status of the request as failed
+            response.status = False
+
+            # Send the message of why it failed
+            response.msg = str(e)
+
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
