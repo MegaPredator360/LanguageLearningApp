@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.css'
-import '../layout/layout.css'
+import './layout.css'
 import { Button, Divider } from "antd"
 
 function LayoutView() {
