@@ -112,7 +112,7 @@ const LoginView: React.FC = () => {
             <Divider />
             <p className='text-center'>Don't have an account?</p>
             <Button type="default" block>
-              Register
+              Create an account
             </Button>
           </Card>
         </Space>

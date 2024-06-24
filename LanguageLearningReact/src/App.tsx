@@ -1,21 +1,29 @@
 import './App.css'
-import { createBrowserRouter, RouterProvider} from 'react-router-dom';
-import Home from './Views/home';
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import LoginView from './Views/login';
-import Lecture from './Views/lecture';
+import LayoutView from './Views/layout/layout';
+import HomeView from './Views/home';
+import LectureView from './Views/lecture';
 
 function App() {
 
   const router = createBrowserRouter([
-    {path: "/", element: <Home/>, },
-    {path: "/login", element: <LoginView/>},
-    {path: "/lecture", element: <Lecture/>}
+    {
+      path: "/",
+      element: <LayoutView />,
+      children: [
+        { path: "home", element: <HomeView /> },
+        { path: "lecture", element: <LectureView /> },
+        { path: "", element: <Navigate to = "home" /> }
+      ]
+    },
+    { path: "/login", element: <LoginView /> },
+    { path: "", element: <Navigate to = "/" /> }
   ])
 
   return (
     <>
-       <div className='background'><RouterProvider router={router}/></div>
-      
+      <div className='background'><RouterProvider router={router} /></div>
     </>
   )
 }
