@@ -1,5 +1,4 @@
 import { useNavigate, Outlet } from "react-router-dom"
-import 'bootstrap/dist/css/bootstrap.css'
 import './layout.css'
 import { Button, ConfigProvider, Divider } from "antd"
 import { FacebookOutlined, TwitterOutlined, InstagramOutlined, YoutubeOutlined } from "@ant-design/icons"
@@ -15,7 +14,7 @@ function LayoutView() {
                 {/* Top Navigation Bar */}
                 <div className="topnav fixed-top">
                     <div className="d-flex container">
-                        <h4>LinguaLearn</h4>
+                        <button onClick={() => navigate('/home')} className="logo-text blank-button">LinguaLearn</button>
                         <span className="flex-grow-1 flex-shrink-1 flex-basis-auto"></span>
                         <Button type='text'>Search</Button>
                         <Divider type='vertical' className="h-auto" />

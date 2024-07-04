@@ -1,8 +1,9 @@
 import './App.css'
+import 'bootstrap/dist/css/bootstrap.css'
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import LoginView from './Views/login';
 import LayoutView from './Views/layout/layout';
-import HomeView from './Views/home';
+import HomeView from './Views/home/home'
 import LectureView from './Views/lecture';
 
 function App() {
