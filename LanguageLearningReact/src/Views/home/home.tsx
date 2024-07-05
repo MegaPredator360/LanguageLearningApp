@@ -110,18 +110,18 @@ function HomeView() {
         </div>
       </div>
       <div className="bg-secondary-subtle">
-        <div className="container">
+        <div className="container mb-5">
           <h3 className="text-center my-5">Popular Excersices</h3>
 
           {/* Ejercicios más populares */}
           <div className="d-flex justify-content-center">
             <Card
               bordered={false}
-              style={{  width: 300 }}
-              styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' }}}
+              style={{ width: 300 }}
+              styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' } }}
               hoverable
               className="mx-2"
-              
+
             >
               {/* Titulo de ejercicio */}
               <div style={{ whiteSpace: 'pre-line', fontSize: '16px', fontWeight: 'bold' }}>
@@ -152,7 +152,7 @@ function HomeView() {
             <Card
               bordered={false}
               style={{ width: 300 }}
-              styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' }}}
+              styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' } }}
               hoverable
               className="mx-2"
             >
@@ -184,7 +184,7 @@ function HomeView() {
             <Card
               bordered={false}
               style={{ width: 300 }}
-              styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' }}}
+              styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' } }}
               hoverable
               className="mx-2 d-flex flex-column justify-content-between"
             >
@@ -216,7 +216,7 @@ function HomeView() {
             <Card
               bordered={false}
               style={{ width: 300 }}
-              styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' }}}
+              styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' } }}
               hoverable
               className="mx-2"
             >
@@ -248,6 +248,297 @@ function HomeView() {
           </div>
         </div>
       </div>
+      <div className="bg-white">
+        <div className="container mb-5">
+          <h3 className="text-center my-5">Popular Lectures</h3>
+
+          {/* Lecturas más populares */}
+          <div className="d-flex justify-content-center">
+            <Card
+              bordered={false}
+              style={{ width: 300 }}
+              styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' } }}
+              hoverable
+              className="mx-2"
+
+            >
+              {/* Titulo de ejercicio */}
+              <div style={{ whiteSpace: 'pre-line', fontSize: '16px', fontWeight: 'bold' }}>
+                Introduction to Artificial Intelligence
+              </div>
+              <Divider />
+
+              {/* Descripcion */}
+              <div>
+                This lecture provides an overview of Artificial Intelligence (AI),
+                its history, and its fundamental concepts. It covers the various branches of AI,
+                including machine learning, natural language processing, and computer vision,
+                and discusses real-world applications and ethical considerations.
+              </div>
+
+              {/* Detalles del ejercicio */}
+              <div className="mt-auto">
+                <Divider />
+
+                {/* Creador */}
+                <div className="fw-bold">Aaron</div>
+
+                {/* Puntuaciones */}
+                <div className="d-flex">
+                  <p className="m-0"><StarOutlined /> 5</p>
+                  <span className="flex-grow-1 flex-shrink-1 flex-basis-auto"></span>
+                  <p className="my-0 mx-2"><EyeOutlined /> 10.5K</p>
+                  <p className="my-0 mx-2"><LikeOutlined /> 5.3K</p>
+                  <p className="my-0 mx-2"><DislikeOutlined /> 76</p>
+                </div>
+              </div>
+            </Card>
+            <Card
+              bordered={false}
+              style={{ width: 300 }}
+              styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' } }}
+              hoverable
+              className="mx-2"
+            >
+              <div style={{ whiteSpace: 'pre-line', fontSize: '16px', fontWeight: 'bold' }}>
+                Fundamentals of Quantum Computing
+              </div>
+              <Divider />
+              <div>
+                This lecture delves into the basics of quantum computing,
+                explaining the principles of quantum mechanics that underpin this technology.
+                Key topics include qubits, quantum gates, and quantum algorithms,
+                with an exploration of the potential advantages and current limitations of quantum computers.
+              </div>
+              <div className="mt-auto">
+                <Divider />
+
+                {/* Creador */}
+                <div className="fw-bold">Veronica</div>
+
+                {/* Puntuaciones */}
+                <div className="d-flex">
+                  <p className="m-0"><StarOutlined /> 5</p>
+                  <span className="flex-grow-1 flex-shrink-1 flex-basis-auto"></span>
+                  <p className="my-0 mx-2"><EyeOutlined /> 10.5K</p>
+                  <p className="my-0 mx-2"><LikeOutlined /> 5.3K</p>
+                  <p className="my-0 mx-2"><DislikeOutlined /> 76</p>
+                </div>
+              </div>
+            </Card>
+            <Card
+              bordered={false}
+              style={{ width: 300 }}
+              styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' } }}
+              hoverable
+              className="mx-2 d-flex flex-column justify-content-between"
+            >
+              <div style={{ whiteSpace: 'pre-line', fontSize: '16px', fontWeight: 'bold' }}>
+                Climate Change and Environmental Policy
+              </div>
+              <Divider />
+              <div>
+                This lecture examines the science of climate change, its impacts on the environment,
+                and the role of human activities. It also discusses global and national policies aimed
+                at mitigating climate change, including international agreements like the Paris
+                Agreement and various strategies for reducing greenhouse gas emissions.
+              </div>
+              <div className="mt-auto">
+                <Divider />
+
+                {/* Creador */}
+                <div className="fw-bold">Edgar</div>
+
+                {/* Puntuaciones */}
+                <div className="d-flex">
+                  <p className="m-0"><StarOutlined /> 5</p>
+                  <span className="flex-grow-1 flex-shrink-1 flex-basis-auto"></span>
+                  <p className="my-0 mx-2"><EyeOutlined /> 10.5K</p>
+                  <p className="my-0 mx-2"><LikeOutlined /> 5.3K</p>
+                  <p className="my-0 mx-2"><DislikeOutlined /> 76</p>
+                </div>
+              </div>
+            </Card>
+            <Card
+              bordered={false}
+              style={{ width: 300 }}
+              styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' } }}
+              hoverable
+              className="mx-2"
+            >
+              <div style={{ whiteSpace: 'pre-line', fontSize: '16px', fontWeight: 'bold' }}>
+                Modern Software Development Practices
+              </div>
+              <Divider />
+              <div>
+                This lecture focuses on contemporary methodologies and tools used in software development.
+                Topics include Agile and DevOps practices, version control systems, continuous
+                integration/continuous deployment (CI/CD) pipelines, and the importance of testing and code
+                quality in creating robust software solutions.
+              </div>
+              <div className="mt-auto">
+                <Divider />
+
+                {/* Creador */}
+                <div className="fw-bold">Daniel</div>
+
+                {/* Puntuaciones */}
+                <div className="d-flex">
+                  <p className="m-0"><StarOutlined /> 5</p>
+                  <span className="flex-grow-1 flex-shrink-1 flex-basis-auto"></span>
+                  <p className="my-0 mx-2"><EyeOutlined /> 10.5K</p>
+                  <p className="my-0 mx-2"><LikeOutlined /> 5.3K</p>
+                  <p className="my-0 mx-2"><DislikeOutlined /> 76</p>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </div >
+      <div className="bg-secondary-subtle">
+        <div className="container mb-5">
+          <h3 className="text-center my-5">Latest Content</h3>
+
+          {/* Contenido màs reciente */}
+          <div className="d-flex justify-content-center">
+            <Card
+              bordered={false}
+              style={{ width: 300 }}
+              styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' } }}
+              hoverable
+              className="mx-2"
+
+            >
+              {/* Titulo de ejercicio */}
+              <div style={{ whiteSpace: 'pre-line', fontSize: '16px', fontWeight: 'bold' }}>
+                The History of Ancient Civilizations
+              </div>
+              <Divider />
+
+              {/* Descripcion */}
+              <div>
+                This lecture explores the major ancient civilizations, including Mesopotamia,
+                Egypt, the Indus Valley, and China. It covers their contributions to human culture,
+                advancements in technology, governance systems, and their lasting impacts on modern society.
+              </div>
+
+              {/* Detalles del ejercicio */}
+              <div className="mt-auto">
+                <Divider />
+
+                {/* Creador */}
+                <div className="fw-bold">Aaron</div>
+
+                {/* Puntuaciones */}
+                <div className="d-flex">
+                  <p className="m-0"><StarOutlined /> 5</p>
+                  <span className="flex-grow-1 flex-shrink-1 flex-basis-auto"></span>
+                  <p className="my-0 mx-2"><EyeOutlined /> 10.5K</p>
+                  <p className="my-0 mx-2"><LikeOutlined /> 5.3K</p>
+                  <p className="my-0 mx-2"><DislikeOutlined /> 76</p>
+                </div>
+              </div>
+            </Card>
+            <Card
+              bordered={false}
+              style={{ width: 300 }}
+              styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' } }}
+              hoverable
+              className="mx-2"
+            >
+              <div style={{ whiteSpace: 'pre-line', fontSize: '16px', fontWeight: 'bold' }}>
+                Clause Identification and Classification
+              </div>
+              <Divider />
+              <div>
+                This exercise involves identifying and classifying different types of clauses in a sentence,
+                such as independent clauses, dependent clauses, relative clauses, etc.
+                This helps in understanding complex sentence structures and the relationships between different parts of a sentence.
+              </div>
+              <div className="mt-auto">
+                <Divider />
+
+                {/* Creador */}
+                <div className="fw-bold">Veronica</div>
+
+                {/* Puntuaciones */}
+                <div className="d-flex">
+                  <p className="m-0"><StarOutlined /> 5</p>
+                  <span className="flex-grow-1 flex-shrink-1 flex-basis-auto"></span>
+                  <p className="my-0 mx-2"><EyeOutlined /> 10.5K</p>
+                  <p className="my-0 mx-2"><LikeOutlined /> 5.3K</p>
+                  <p className="my-0 mx-2"><DislikeOutlined /> 76</p>
+                </div>
+              </div>
+            </Card>
+            <Card
+              bordered={false}
+              style={{ width: 300 }}
+              styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' } }}
+              hoverable
+              className="mx-2 d-flex flex-column justify-content-between"
+            >
+              <div style={{ whiteSpace: 'pre-line', fontSize: '16px', fontWeight: 'bold' }}>
+                Neuroscience: Understanding the Brain
+              </div>
+              <Divider />
+              <div>
+                This lecture introduces the field of neuroscience, focusing on the structure and
+                function of the brain and nervous system. Topics include neural communication,
+                brain anatomy, cognitive functions, and recent advancements in brain research,
+                such as neuroimaging techniques.
+              </div>
+              <div className="mt-auto">
+                <Divider />
+
+                {/* Creador */}
+                <div className="fw-bold">Edgar</div>
+
+                {/* Puntuaciones */}
+                <div className="d-flex">
+                  <p className="m-0"><StarOutlined /> 5</p>
+                  <span className="flex-grow-1 flex-shrink-1 flex-basis-auto"></span>
+                  <p className="my-0 mx-2"><EyeOutlined /> 10.5K</p>
+                  <p className="my-0 mx-2"><LikeOutlined /> 5.3K</p>
+                  <p className="my-0 mx-2"><DislikeOutlined /> 76</p>
+                </div>
+              </div>
+            </Card>
+            <Card
+              bordered={false}
+              style={{ width: 300 }}
+              styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' } }}
+              hoverable
+              className="mx-2"
+            >
+              <div style={{ whiteSpace: 'pre-line', fontSize: '16px', fontWeight: 'bold' }}>
+                Verb Tense Consistency
+              </div>
+              <Divider />
+              <div>
+                This exercise focuses on ensuring verb tense consistency within a sentence or a paragraph. 
+                The task is to identify and correct any verb tense inconsistencies. 
+                This helps in maintaining clarity and coherence in writing.
+              </div>
+              <div className="mt-auto">
+                <Divider />
+
+                {/* Creador */}
+                <div className="fw-bold">Daniel</div>
+
+                {/* Puntuaciones */}
+                <div className="d-flex">
+                  <p className="m-0"><StarOutlined /> 5</p>
+                  <span className="flex-grow-1 flex-shrink-1 flex-basis-auto"></span>
+                  <p className="my-0 mx-2"><EyeOutlined /> 10.5K</p>
+                  <p className="my-0 mx-2"><LikeOutlined /> 5.3K</p>
+                  <p className="my-0 mx-2"><DislikeOutlined /> 76</p>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </div >
     </>
   )
 }
