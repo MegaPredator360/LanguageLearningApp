@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card, Divider, Button, Input, Space, notification } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import userService from '../Services/userService';
-import { Login } from '../Interfaces/loginInterface';
+import userService from '../Services/user-service';
+import { Login } from '../Interfaces/login-interface';
 
 const LoginView: React.FC = () => {
 

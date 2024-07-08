@@ -1,5 +1,5 @@
-import { Login } from "../Interfaces/loginInterface";
-import { ResponseAPI } from "../Interfaces/responseApi";
+import { Login } from "../Interfaces/login-interface";
+import { ResponseAPI } from "../Interfaces/response-api-interface";
 import { Environment } from "../environment/environment";
 
 class UserService {
