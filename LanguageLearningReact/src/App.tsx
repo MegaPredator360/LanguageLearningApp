@@ -5,6 +5,7 @@ import LoginView from './Views/login';
 import LayoutView from './Views/layout/layout';
 import HomeView from './Views/home/home'
 import LectureView from './Views/lecture';
+import RegisterView from './Views/register';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       ]
     },
     { path: "/login", element: <LoginView /> },
+    { path: "/register", element: <RegisterView /> },
     { path: "", element: <Navigate to = "/" /> }
   ])
 
