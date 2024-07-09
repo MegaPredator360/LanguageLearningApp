@@ -3,6 +3,7 @@ from django.db import migrations, transaction
 def createInitialData(apps, schema_editor):
     Role = apps.get_model('api', 'Role')
     User = apps.get_model('api', 'User')
+    Topic = apps.get_model('api', 'Topic')
 
     try:
         with transaction.atomic():
@@ -48,6 +49,25 @@ def createInitialData(apps, schema_editor):
                 ),
             ])
             print("Users created successfully.")
+
+            # Create Topics
+            Topic.objects.bulk_create([
+                Topic(name='Science Fiction'),
+                Topic(name='Biographies and Memoirs'),
+                Topic(name='History'),
+                Topic(name='Self-Help and Personal Development'),
+                Topic(name='Fantasy'),
+                Topic(name='Business and Economics'),
+                Topic(name='Psychology'),
+                Topic(name='Travel and Adventure'),
+                Topic(name='Cooking and Food'),
+                Topic(name='Health and Wellness'),
+                Topic(name='Art and Photography'),
+                Topic(name='Philosophy'),
+                Topic(name='Politics and Current Affairs'),
+            ])
+            print("Topics created successfully.")
+
     except Exception as e:
         print(f"Error occurred while creating initial data: {e}")
 
