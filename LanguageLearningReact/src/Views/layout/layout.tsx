@@ -5,6 +5,7 @@ import { FacebookOutlined, TwitterOutlined, InstagramOutlined, YoutubeOutlined }
 
 function LayoutView() {
 
+    // Navegacion atraves del layout
     const navigate = useNavigate()
 
     return (
@@ -19,7 +20,7 @@ function LayoutView() {
                         <Button type='text'>Search</Button>
                         <Divider type='vertical' className="h-auto" />
                         <Button type='text' onClick={() => navigate('/login')}>Log In</Button>
-                        <Button type='text'>Sign Up</Button>
+                        <Button type='text' onClick={() => navigate('/register')}>Sign Up</Button>
                     </div>
                 </div>
 
