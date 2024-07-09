@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Card, Divider, Button, Input, Space, notification, Row, Col, DatePicker, Select, Tooltip } from 'antd';
 import { UserOutlined, MailOutlined, InfoCircleOutlined } from '@ant-design/icons';
-import userService from '../services/user-service';
-import { User } from '../interfaces/user-interface';
+import userService from '../../services/user-service';
+import { User } from '../../interfaces/user-interface';
 import { useNavigate } from 'react-router-dom';
-import utilityService from '../services/utility-service';
+import utilityService from '../../services/utility-service';
 
 // Importacion de lista de paises
-import countryList from '../assets/json/data/country-list.json'
+import countryList from '../../assets/json/data/country-list.json'
 
 const RegisterView: React.FC = () => {
 
