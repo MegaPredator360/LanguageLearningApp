@@ -30,6 +30,9 @@ class UserService:
 
         try:
 
+            # Assign the role to the user
+            user['role'] = 3
+
             # Encrypt the password
             user['password'] = utilityService.encryptPassword(user['password'])
 
@@ -47,7 +50,7 @@ class UserService:
                 errors = serializer.errors
 
                 # Raise an exception with detailed error information
-                raise ValueError(f'Errors occurred while saving the user: {errors}')
+                raise ValueError(errors)
 
             # Return a response
             return serializer.data
