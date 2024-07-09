@@ -20,6 +20,7 @@ const LoginView: React.FC = () => {
 
   // Notificacion
   const [api, contextHolder] = notification.useNotification();
+  const [loading, setLoading] = useState(false)
 
   // Controlar el cambio de texto
   const handleEmailChanges = (e: any) => {
@@ -66,6 +67,9 @@ const LoginView: React.FC = () => {
       return
     }
 
+    // Se activa el icono de carga
+    setLoading(true)
+
     // Se crea objeto Login
     const login: Login = {
       email: emailValue,
@@ -75,14 +79,29 @@ const LoginView: React.FC = () => {
     // Se envia peticion
     await userService.Login(login).then(data => {
       if (data.status) {
+
+        // Procesamiento de datos
         console.log(data.value);
+
+        // Se desactiva el icono de carga
+        setLoading(false)
+
+        // Notificacion
+        api['success']({
+          message: 'Success',
+          description: "You've logged in successfully!",
+        });
       }
       else {
+        // Se desactiva el icono de carga
+        setLoading(false)
+
         // Notificacion
         api['error']({
           message: 'Error',
           description: data.msg,
         });
+
       }
     });
   }
@@ -125,6 +144,7 @@ const LoginView: React.FC = () => {
               type="default"
               block
               onClick={() => navigate('/register')}
+              loading={loading}
             >
               Create an account
             </Button>
