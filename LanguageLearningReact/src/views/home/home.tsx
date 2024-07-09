@@ -255,7 +255,6 @@ function HomeView() {
           {/* Lecturas más populares */}
           <div className="d-flex justify-content-center">
             <Card
-              bordered={false}
               style={{ width: 300 }}
               styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' } }}
               hoverable
@@ -294,7 +293,6 @@ function HomeView() {
               </div>
             </Card>
             <Card
-              bordered={false}
               style={{ width: 300 }}
               styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' } }}
               hoverable
@@ -327,7 +325,6 @@ function HomeView() {
               </div>
             </Card>
             <Card
-              bordered={false}
               style={{ width: 300 }}
               styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' } }}
               hoverable
@@ -360,7 +357,6 @@ function HomeView() {
               </div>
             </Card>
             <Card
-              bordered={false}
               style={{ width: 300 }}
               styles={{ body: { display: 'flex', flexDirection: 'column', height: '100%' } }}
               hoverable
