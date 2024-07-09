@@ -6,22 +6,13 @@ import { User } from '../interfaces/user-interface';
 import { useNavigate } from 'react-router-dom';
 import utilityService from '../services/utility-service';
 
+// Importacion de lista de paises
+import countryList from '../assets/json/data/country-list.json'
+
 const RegisterView: React.FC = () => {
 
-    const listaPaises = [
-        {
-            value: 'jack',
-            label: 'Jack',
-        },
-        {
-            value: 'lucy',
-            label: 'Lucy',
-        },
-        {
-            value: 'tom',
-            label: 'Tom',
-        },
-    ]
+    // Ordenar la lista por orden alfabetico
+    const countrySorted = countryList.sort((a, b) => a.value.localeCompare(b.value));
 
     // Navegador de paginas
     const navigate = useNavigate()
@@ -328,7 +319,7 @@ const RegisterView: React.FC = () => {
                                 placeholder="Select a country"
                                 optionFilterProp="label"
                                 onChange={handleCountryChange}
-                                options={listaPaises}
+                                options={countrySorted}
                                 className='w-50'
                                 status={countryError ? 'error' : ''}
                             />
