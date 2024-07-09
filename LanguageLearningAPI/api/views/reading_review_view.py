@@ -1,15 +1,15 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from api.dtos.responseAPI import ResponseAPI
-from api.services.lecture_service import LectureService
+from api.services.reading_review_service import ReadingReviewService
 
-class LectureView:
+class ReadingReviewView:
 
     @api_view(['GET'])
     def list(request):
 
         # Declare the service to use
-        lectureService = LectureService()
+        readingReviewService = ReadingReviewService()
         response = ResponseAPI()
 
         try:
@@ -18,7 +18,7 @@ class LectureView:
             response.status = True
 
             # Return the data
-            response.value = lectureService.list()
+            response.value = readingReviewService.list()
 
         except ValueError as e:
 
@@ -35,7 +35,7 @@ class LectureView:
     def create(request):
 
         # Declare the service to use
-        lectureService = LectureService()
+        readingReviewService = ReadingReviewService()
         response = ResponseAPI()
 
         try:
@@ -44,7 +44,33 @@ class LectureView:
             response.status = True
 
             # Return the data
-            response.value = lectureService.create(request.data)
+            response.value = readingReviewService.create(request.data)
+
+        except ValueError as e:
+
+            # Set the status of the request as failed
+            response.status = False
+
+            # Send the message of why it failed
+            response.msg = str(e)
+
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
+
+    @api_view(['PUT'])
+    def update(request):
+
+        # Declare the service to use
+        readingReviewService = ReadingReviewService()
+        response = ResponseAPI()
+
+        try:
+
+            # Set the status of the request a success
+            response.status = True
+
+            # Return the data
+            response.value = readingReviewService.update(request.data)
 
         except ValueError as e:
 
@@ -61,7 +87,7 @@ class LectureView:
     def delete(request, id: int):
 
         # Declare the service to use
-        lectureService = LectureService()
+        readingReviewService = ReadingReviewService()
         response = ResponseAPI()
 
         try:
@@ -70,7 +96,7 @@ class LectureView:
             response.status = True
 
             # Return the data
-            response.value = lectureService.delete(id)
+            response.value = readingReviewService.delete(id)
 
         except ValueError as e:
 

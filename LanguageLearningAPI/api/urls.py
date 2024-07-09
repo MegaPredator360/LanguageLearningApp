@@ -10,8 +10,8 @@ from api.views.topic_view import TopicView
 from api.views.true_false_exercise_view import TrueFalseExerciseView
 from api.views.user_view import UserView
 from api.views.role_view import RoleView
-from api.views.lecture_view import LectureView
-from api.views.lecture_review_view import LectureReviewView
+from api.views.reading_view import ReadingView
+from api.views.reading_review_view import ReadingReviewView
 from api.views.language_view import LanguageView
 
 # Url is created
@@ -35,16 +35,16 @@ urlpatterns = [
     path('topic/list/', TopicView.list, name = 'topic_list_view'),
     path('topic/create/', TopicView.create, name = 'topic_create_view'),
 
-    # ---------- Lecture Routes
-    path('lecture/list/', LectureView.list, name = 'lecture_list_view'),
-    path('lecture/create/', LectureView.create, name = 'lecture_create_view'),
-    path('lecture/delete/<int:id>/', LectureView.delete, name = 'lecture_delete_view'),
+    # ---------- Reading Routes
+    path('reading/list/', ReadingView.list, name = 'reading_list_view'),
+    path('reading/create/', ReadingView.create, name = 'reading_create_view'),
+    path('reading/delete/<int:id>/', ReadingView.delete, name = 'reading_delete_view'),
 
-    # ---------- Lecture Reviews Routes
-    path('lecture_review/list/', LectureReviewView.list, name = 'lecture_review_list_view'),
-    path('lecture_review/create/', LectureReviewView.create, name = 'lecture_review_create_view'),
-    path('lecture_review/update/', LectureReviewView.update, name = 'lecture_review_update_view'),
-    path('lecture_review/delete/<int:id>/', LectureReviewView.delete, name = 'lecture_review_delete_view'),
+    # ---------- Reading Reviews Routes
+    path('reading_review/list/', ReadingReviewView.list, name = 'reading_review_list_view'),
+    path('reading_review/create/', ReadingReviewView.create, name = 'reading_review_create_view'),
+    path('reading_review/update/', ReadingReviewView.update, name = 'reading_review_update_view'),
+    path('reading_review/delete/<int:id>/', ReadingReviewView.delete, name = 'reading_review_delete_view'),
 
     # ---------- Practice Routes
     path('practice/list/', PracticeView.list, name = 'practice_list_view'),

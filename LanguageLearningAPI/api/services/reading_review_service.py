@@ -1,7 +1,7 @@
-from api.models.lecture_review import LectureReview
-from api.serializers.lecture_review_serializer import LectureReviewSerializer
+from api.models.reading_review import ReadingReview
+from api.serializers.reading_review_serializer import ReadingReviewSerializer
 
-class LectureReviewService:
+class ReadingReviewService:
 
     # Obtain the list of all the reviews
     def list(self):
@@ -9,10 +9,10 @@ class LectureReviewService:
         try:
 
             # Obtain all the reviews
-            lectureReviews = LectureReview.objects.all()
+            readingReviews = ReadingReview.objects.all()
 
             # We serialize the objects
-            serializer = LectureReviewSerializer(lectureReviews, many = True)
+            serializer = ReadingReviewSerializer(readingReviews, many = True)
 
             return serializer.data
 
@@ -22,12 +22,12 @@ class LectureReviewService:
             raise e
 
     # Create a new review
-    def create(self, lectureReview: dict):
+    def create(self, readingReview: dict):
 
         try:
 
             # Serialize the data
-            serializer = LectureReviewSerializer(data = lectureReview)
+            serializer = ReadingReviewSerializer(data = readingReview)
 
             # If the data is valid
             if serializer.is_valid():
@@ -51,15 +51,15 @@ class LectureReviewService:
             raise e
 
     # Update a review
-    def update(self, lectureReview: dict):
+    def update(self, readingReview: dict):
 
         try:
 
-            # Retrieve the specific lecture review
-            lectureReviewFound = LectureReview.objects.get(id = lectureReview['id'])
+            # Retrieve the specific reading review
+            readingReviewFound = ReadingReview.objects.get(id = readingReview['id'])
 
             # Update de data
-            serializer = LectureReviewSerializer(instance = lectureReviewFound, data = lectureReview)
+            serializer = ReadingReviewSerializer(instance = readingReviewFound, data = readingReview)
 
             # If the data is valid
             if serializer.is_valid():
@@ -77,7 +77,7 @@ class LectureReviewService:
             return serializer.data
 
         # If the review to update doesn't exist
-        except LectureReview.DoesNotExist:
+        except ReadingReview.DoesNotExist:
 
                 # Send an excepction
                 raise ValueError('The review to update does not exist')
@@ -89,20 +89,20 @@ class LectureReviewService:
             raise e
 
     # Delete a review
-    def delete(self, lectureReviewId: int) -> bool:
+    def delete(self, readingReviewId: int) -> bool:
 
         try:
 
             # Retrieve the specific review
-            lectureReviewFound = LectureReview.objects.get(id = lectureReviewId)
+            readingReviewFound = ReadingReview.objects.get(id = readingReviewId)
 
             # Delete the review
-            lectureReviewFound.delete()
+            readingReviewFound.delete()
 
             return True
 
         # If the review to delete doesn't exist
-        except LectureReview.DoesNotExist:
+        except ReadingReview.DoesNotExist:
                 
                 # Send an excepction
                 raise ValueError('The review to delete does not exist')

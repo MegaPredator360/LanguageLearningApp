@@ -1,18 +1,18 @@
-from api.models.lecture import Lecture
-from api.serializers.lecture_serializer import LectureSerializer
+from api.models.reading import Reading
+from api.serializers.reading_serializer import ReadingSerializer
 
-class LectureService:
+class ReadingService:
 
-    # Obtain the list of all lectures
+    # Obtain the list of all readings
     def list(self):
 
         try:
 
-            # Obtain all lectures
-            lectures = Lecture.objects.all()
+            # Obtain all readings
+            readings = Reading.objects.all()
 
             # We serialize the objects
-            serializer = LectureSerializer(lectures, many = True)
+            serializer = ReadingSerializer(readings, many = True)
 
             return serializer.data
 
@@ -21,13 +21,13 @@ class LectureService:
             # Send the exception
             raise e
 
-    # Create a new lecture
-    def create(self, lecture: dict):
+    # Create a new reading
+    def create(self, reading: dict):
 
         try:
 
             # Serialize the data
-            serializer = LectureSerializer(data = lecture)
+            serializer = ReadingSerializer(data = reading)
 
             # If the data is valid
             if serializer.is_valid():
@@ -40,7 +40,7 @@ class LectureService:
                 errors = serializer.errors
 
                 # Raise an exception with detailed error information
-                raise ValueError(f'Errors occurred while saving the lecture: {errors}')
+                raise ValueError(f'Errors occurred while saving the reading: {errors}')
 
             # Return a response
             return serializer.data
@@ -50,24 +50,24 @@ class LectureService:
             # Send the exception
             raise e
 
-    # Delete a lecture
-    def delete(self, lectureId: int) -> bool:
+    # Delete a reading
+    def delete(self, readingId: int) -> bool:
 
         try:
 
-            # Retrieve the specific lecture
-            lectureFound = Lecture.objects.get(id = lectureId)
+            # Retrieve the specific reading
+            readingFound = Reading.objects.get(id = readingId)
 
-            # Delete the lecture
-            lectureFound.delete()
+            # Delete the reading
+            readingFound.delete()
 
             return True
 
-        # If the lecture to delete doesn't exist
-        except Lecture.DoesNotExist:
+        # If the reading to delete doesn't exist
+        except Reading.DoesNotExist:
 
                 # Send an excepction
-                raise ValueError('The lecture to delete does not exist')
+                raise ValueError('The reading to delete does not exist')
 
         # Any other posible exception
         except ValueError as e:

@@ -34,14 +34,14 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Lecture',
+            name='Reading',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=255)),
-                ('lecture_body', models.TextField()),
+                ('reading_body', models.TextField()),
                 ('publish_date', models.DateTimeField(auto_now_add=True)),
-                ('language', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='lecture_languages', to='api.language')),
-                ('topic', models.ManyToManyField(related_name='lecture_topics', to='api.topic')),
+                ('language', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reading_languages', to='api.language')),
+                ('topic', models.ManyToManyField(related_name='reading_topics', to='api.topic')),
             ],
         ),
         migrations.CreateModel(
@@ -151,20 +151,20 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='practice_users', to='api.user'),
         ),
         migrations.CreateModel(
-            name='LectureReview',
+            name='ReadingReview',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('comment', models.TextField()),
                 ('publish_date', models.DateTimeField(auto_now_add=True)),
                 ('user_rate', models.FloatField()),
-                ('lecture', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='lr_lectures', to='api.lecture')),
+                ('reading', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='lr_readings', to='api.reading')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='lr_users', to='api.user')),
             ],
         ),
         migrations.AddField(
-            model_name='lecture',
+            model_name='reading',
             name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='lecture_users', to='api.user'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reading_users', to='api.user'),
         ),
         migrations.AddConstraint(
             model_name='user',
