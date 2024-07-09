@@ -109,6 +109,11 @@ const LoginView: React.FC = () => {
   return (
     <>
       {contextHolder}
+      <div className="topnav fixed-top">
+        <div className="d-flex container">
+          <button onClick={() => navigate('/home')} className="logo-text blank-button">LinguaLearn</button>
+        </div>
+      </div>
       <div className='d-flex justify-content-center align-items-center vh-100'>
         <Space direction="vertical" size={16}>
           <Card
