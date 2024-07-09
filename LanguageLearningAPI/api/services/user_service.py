@@ -30,6 +30,22 @@ class UserService:
 
         try:
 
+            # Verify that the email hasn't been registered already
+            userFound = User.objects.filter(email = user['email']).exists()
+
+            if userFound:
+                
+                # Raise an exception detailing that the email is registered
+                raise ValueError(f'There is an account registered with the entered email')
+
+            # Verify that the username hasn't been taken already
+            userFound = User.objects.filter(username = user['username']).exists()
+
+            if userFound:
+                
+                # Raise an exception detailing that the username has been taken
+                raise ValueError(f'The entered username has been taken')
+
             # Assign the role to the user
             user['role'] = 3
 
