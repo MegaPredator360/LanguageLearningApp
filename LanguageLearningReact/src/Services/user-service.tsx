@@ -1,5 +1,6 @@
 import { Login } from "../Interfaces/login-interface";
 import { ResponseAPI } from "../Interfaces/response-api-interface";
+import { User } from "../Interfaces/user-interface";
 import { Environment } from "../environment/environment";
 
 class UserService {
@@ -7,6 +8,17 @@ class UserService {
 
     async Login(req: Login): Promise<ResponseAPI> {
         const response = await fetch(`${this.urlApi}login/`, {
+            method: 'POST',
+            body: JSON.stringify(req),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+        })
+        return response.json()
+    }
+
+    async Register(req: User): Promise<ResponseAPI> {
+        const response = await fetch(`${this.urlApi}create/`, {
             method: 'POST',
             body: JSON.stringify(req),
             headers: {
