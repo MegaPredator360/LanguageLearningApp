@@ -5,8 +5,8 @@ import LoginView from './views/auth/login';
 import RegisterView from './views/auth/register';
 import LayoutView from './views/layout/layout';
 import HomeView from './views/home/home'
-import LectureView from './views/lecture/view';
-import LectureFormView from './views/lecture/form';
+import ReadingView from './views/reading/view';
+import ReadingFormView from './views/reading/form';
 
 function App() {
 
@@ -16,8 +16,8 @@ function App() {
       element: <LayoutView />,
       children: [
         { path: "home", element: <HomeView /> },
-        { path: "lecture", element: <LectureView /> },
-        { path: "lecture/form", element: <LectureFormView /> },
+        { path: "reading", element: <ReadingView /> },
+        { path: "reading/form", element: <ReadingFormView /> },
         { path: "", element: <Navigate to = "home" /> }
       ]
     },

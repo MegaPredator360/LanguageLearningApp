@@ -250,7 +250,7 @@ function HomeView() {
       </div>
       <div className="bg-white">
         <div className="container mb-5">
-          <h3 className="text-center my-5">Popular Lectures</h3>
+          <h3 className="text-center my-5">Popular Readings</h3>
 
           {/* Lecturas más populares */}
           <div className="d-flex justify-content-center">
@@ -269,7 +269,7 @@ function HomeView() {
 
               {/* Descripcion */}
               <div>
-                This lecture provides an overview of Artificial Intelligence (AI),
+                This reading provides an overview of Artificial Intelligence (AI),
                 its history, and its fundamental concepts. It covers the various branches of AI,
                 including machine learning, natural language processing, and computer vision,
                 and discusses real-world applications and ethical considerations.
@@ -303,7 +303,7 @@ function HomeView() {
               </div>
               <Divider />
               <div>
-                This lecture delves into the basics of quantum computing,
+                This reading delves into the basics of quantum computing,
                 explaining the principles of quantum mechanics that underpin this technology.
                 Key topics include qubits, quantum gates, and quantum algorithms,
                 with an exploration of the potential advantages and current limitations of quantum computers.
@@ -335,7 +335,7 @@ function HomeView() {
               </div>
               <Divider />
               <div>
-                This lecture examines the science of climate change, its impacts on the environment,
+                This reading examines the science of climate change, its impacts on the environment,
                 and the role of human activities. It also discusses global and national policies aimed
                 at mitigating climate change, including international agreements like the Paris
                 Agreement and various strategies for reducing greenhouse gas emissions.
@@ -367,7 +367,7 @@ function HomeView() {
               </div>
               <Divider />
               <div>
-                This lecture focuses on contemporary methodologies and tools used in software development.
+                This reading focuses on contemporary methodologies and tools used in software development.
                 Topics include Agile and DevOps practices, version control systems, continuous
                 integration/continuous deployment (CI/CD) pipelines, and the importance of testing and code
                 quality in creating robust software solutions.
@@ -413,7 +413,7 @@ function HomeView() {
 
               {/* Descripcion */}
               <div>
-                This lecture explores the major ancient civilizations, including Mesopotamia,
+                This reading explores the major ancient civilizations, including Mesopotamia,
                 Egypt, the Indus Valley, and China. It covers their contributions to human culture,
                 advancements in technology, governance systems, and their lasting impacts on modern society.
               </div>
@@ -479,7 +479,7 @@ function HomeView() {
               </div>
               <Divider />
               <div>
-                This lecture introduces the field of neuroscience, focusing on the structure and
+                This reading introduces the field of neuroscience, focusing on the structure and
                 function of the brain and nervous system. Topics include neural communication,
                 brain anatomy, cognitive functions, and recent advancements in brain research,
                 such as neuroimaging techniques.

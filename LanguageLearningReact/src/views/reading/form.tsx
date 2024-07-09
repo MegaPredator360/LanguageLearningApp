@@ -1,7 +1,6 @@
 import { Button, Card, Col, Input, Row, Tooltip } from "antd"
 import { InfoCircleOutlined } from '@ant-design/icons';
 
-
 function ReadingFormView() {
 
     const { TextArea } = Input;
