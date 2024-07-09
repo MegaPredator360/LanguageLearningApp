@@ -1,11 +1,12 @@
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
-import LoginView from './views/login';
+import LoginView from './views/auth/login';
+import RegisterView from './views/auth/register';
 import LayoutView from './views/layout/layout';
 import HomeView from './views/home/home'
-import LectureView from './views/lecture';
-import RegisterView from './views/register';
+import LectureView from './views/lecture/view';
+import LectureFormView from './views/lecture/form';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       children: [
         { path: "home", element: <HomeView /> },
         { path: "lecture", element: <LectureView /> },
+        { path: "lecture/form", element: <LectureFormView /> },
         { path: "", element: <Navigate to = "home" /> }
       ]
     },
@@ -26,7 +28,7 @@ function App() {
 
   return (
     <>
-      <div className='background'><RouterProvider router={router} /></div>
+      <div className='background'><RouterProvider router = {router} /></div>
     </>
   )
 }
