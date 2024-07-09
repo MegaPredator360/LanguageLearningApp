@@ -1,6 +1,6 @@
-import { Login } from "../Interfaces/login-interface";
-import { ResponseAPI } from "../Interfaces/response-api-interface";
-import { User } from "../Interfaces/user-interface";
+import { Login } from "../interfaces/login-interface";
+import { ResponseAPI } from "../interfaces/response-api-interface";
+import { User } from "../interfaces/user-interface";
 import { Environment } from "../environment/environment";
 
 class UserService {
