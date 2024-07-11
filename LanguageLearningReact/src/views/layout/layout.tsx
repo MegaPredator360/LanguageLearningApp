@@ -1,12 +1,48 @@
 import { useNavigate, Outlet } from "react-router-dom"
 import './layout.css'
-import { Button, ConfigProvider, Divider } from "antd"
+import { Button, ConfigProvider, Divider, Dropdown, MenuProps } from "antd"
 import { FacebookOutlined, TwitterOutlined, InstagramOutlined, YoutubeOutlined } from "@ant-design/icons"
 
 function LayoutView() {
 
     // Navegacion atraves del layout
     const navigate = useNavigate()
+
+    // Opciones del menu
+    const items: MenuProps['items'] = [
+        {
+            key: '1',
+            label: (
+                <a className="text-decoration-none">
+                    Perfil
+                </a>
+            ),
+        },
+        {
+            key: '2',
+            label: (
+                <a className="text-decoration-none">
+                    Ajustes de Cuenta
+                </a>
+            ),
+        },
+        {
+            key: '3',
+            label: (
+                <a onClick={() => navigate('/reading/form')} className="text-decoration-none">
+                    Crear Lectura
+                </a>
+            ),
+        },
+        {
+            key: '4',
+            label: (
+                <a className="text-decoration-none">
+                    Crear Ejercicio
+                </a>
+            ),
+        },
+    ];
 
     return (
         <>
@@ -21,6 +57,9 @@ function LayoutView() {
                         <Divider type='vertical' className="h-auto" />
                         <Button type='text' onClick={() => navigate('/login')}>Log In</Button>
                         <Button type='text' onClick={() => navigate('/register')}>Sign Up</Button>
+                        <Dropdown menu={{ items }} placement="topRight">
+                            <Button type="text">Usuario</Button>
+                        </Dropdown>
                     </div>
                 </div>
 
