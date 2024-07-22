@@ -1,15 +1,15 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from api.dtos.responseAPI import ResponseAPI
-from api.services.practice_review_service import PracticeReviewService
+from LanguageLearningAPI.api.services.exercise_review_service import ExerciseReviewService
 
-class PracticeReviewView:
+class ExerciseReviewView:
 
     @api_view(['GET'])
     def list(request):
 
         # Declare the service to use
-        practiceReviewService = PracticeReviewService()
+        exerciseReviewService = ExerciseReviewService()
         response = ResponseAPI()
 
         try:
@@ -18,7 +18,7 @@ class PracticeReviewView:
             response.status = True
 
             # Return the data
-            response.value = practiceReviewService.list()
+            response.value = exerciseReviewService.list()
 
         except ValueError as e:
 
@@ -35,7 +35,7 @@ class PracticeReviewView:
     def create(request):
 
         # Declare the service to use
-        practiceReviewService = PracticeReviewService()
+        exerciseReviewService = ExerciseReviewService()
         response = ResponseAPI()
 
         try:
@@ -44,7 +44,7 @@ class PracticeReviewView:
             response.status = True
 
             # Return the data
-            response.value = practiceReviewService.create(request.data)
+            response.value = exerciseReviewService.create(request.data)
 
         except ValueError as e:
 
@@ -61,7 +61,7 @@ class PracticeReviewView:
     def update(request):
 
         # Declare the service to use
-        practiceReviewService = PracticeReviewService()
+        exerciseReviewService = ExerciseReviewService()
         response = ResponseAPI()
 
         try:
@@ -70,7 +70,7 @@ class PracticeReviewView:
             response.status = True
 
             # Return the data
-            response.value = practiceReviewService.update(request.data)
+            response.value = exerciseReviewService.update(request.data)
 
         except ValueError as e:
 
@@ -87,7 +87,7 @@ class PracticeReviewView:
     def delete(request, id: int):
 
         # Declare the service to use
-        practiceReviewService = PracticeReviewService()
+        exerciseReviewService = ExerciseReviewService()
         response = ResponseAPI()
 
         try:
@@ -96,7 +96,7 @@ class PracticeReviewView:
             response.status = True
 
             # Return the data
-            response.value = practiceReviewService.delete(id)
+            response.value = exerciseReviewService.delete(id)
 
         except ValueError as e:
 

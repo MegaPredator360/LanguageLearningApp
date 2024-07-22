@@ -1,15 +1,15 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from api.dtos.responseAPI import ResponseAPI
-from api.services.topic_service import TopicService
+from api.services.category_service import CategoryService
 
-class TopicView:
+class CategoryView:
 
     @api_view(['GET'])
     def list(request):
 
         # Declare the service to use
-        topicService = TopicService()
+        categoryService = CategoryService()
         response = ResponseAPI()
 
         try:
@@ -18,7 +18,7 @@ class TopicView:
             response.status = True
 
             # Return the data
-            response.value = topicService.list()
+            response.value = categoryService.list()
 
         except ValueError as e:
 
@@ -35,7 +35,7 @@ class TopicView:
     def create(request):
 
         # Declare the service to use
-        topicService = TopicService()
+        categoryService = CategoryService()
         response = ResponseAPI()
 
         try:
@@ -44,7 +44,7 @@ class TopicView:
             response.status = True
 
             # Return the data
-            response.value = topicService.create(request.data)
+            response.value = categoryService.create(request.data)
 
         except ValueError as e:
 
