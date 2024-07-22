@@ -1,8 +1,8 @@
 from django.db import models
-from api.models.practice import Practice
+from LanguageLearningAPI.api.models.exercise import Exercise
 
 class ExerciseResource(models.Model):
-    practice = models.ForeignKey(Practice, on_delete = models.CASCADE, related_name = 'excercices_practices')
+    exercise = models.ForeignKey(Exercise, on_delete = models.CASCADE, related_name = 'resource_exercise')
     exercise_number = models.IntegerField()
     description = models.TextField()
     media_type = models.CharField(max_length = 255)

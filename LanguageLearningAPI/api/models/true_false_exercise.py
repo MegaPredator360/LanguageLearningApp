@@ -1,8 +1,8 @@
 from django.db import models
-from api.models.practice import Practice
+from LanguageLearningAPI.api.models.exercise import Exercise
 
 class TrueFalseExercise(models.Model):
-    practice = models.ForeignKey(Practice, on_delete = models.CASCADE, related_name = 'tf_practices')
+    exercise = models.ForeignKey(Exercise, on_delete = models.CASCADE, related_name = 'tf_exercises')
     exercise_number = models.IntegerField()
     question = models.TextField()
     answer = models.BinaryField()

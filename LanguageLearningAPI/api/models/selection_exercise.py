@@ -1,8 +1,8 @@
 from django.db import models
-from api.models.practice import Practice
+from LanguageLearningAPI.api.models.exercise import Exercise
 
 class SelectionExercise(models.Model):
-    practice = models.ForeignKey(Practice, on_delete = models.CASCADE, related_name = 'selection_practices')
+    exercise = models.ForeignKey(Exercise, on_delete = models.CASCADE, related_name = 'selection_exercises')
     exercise_number = models.IntegerField()
     question = models.CharField(max_length=255)
     option_a = models.CharField(max_length=255)
