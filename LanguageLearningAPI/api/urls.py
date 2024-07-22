@@ -1,12 +1,12 @@
 from django.urls import path
 from api.views.exercise_resource_view import ExerciseResourceView
 from api.views.pairing_exercise_view import PairingExerciseView
-from api.views.practice_review_view import PracticeReviewView
-from api.views.practice_view import PracticeView
+from api.views.exercise_review_view import ExerciseReviewView
+from api.views.exercise_view import ExerciseView
 from api.views.selection_answer_view import SelectionAnswerView
 from api.views.selection_exercise_view import SelectionExerciseView
 from api.views.sentence_exercise_view import SentenceExerciseView
-from api.views.topic_view import TopicView
+from api.views.category_view import CategoryView
 from api.views.true_false_exercise_view import TrueFalseExerciseView
 from api.views.user_view import UserView
 from api.views.role_view import RoleView
@@ -31,9 +31,9 @@ urlpatterns = [
     path('language/list/', LanguageView.list, name = 'language_list_view'),
     path('language/create/', LanguageView.create, name = 'language_create_view'),
 
-    # ---------- Topics Routes
-    path('topic/list/', TopicView.list, name = 'topic_list_view'),
-    path('topic/create/', TopicView.create, name = 'topic_create_view'),
+    # ---------- Categories Routes
+    path('category/list/', CategoryView.list, name = 'category_list_view'),
+    path('category/create/', CategoryView.create, name = 'category_create_view'),
 
     # ---------- Reading Routes
     path('reading/list/', ReadingView.list, name = 'reading_list_view'),
@@ -46,17 +46,17 @@ urlpatterns = [
     path('reading_review/update/', ReadingReviewView.update, name = 'reading_review_update_view'),
     path('reading_review/delete/<int:id>/', ReadingReviewView.delete, name = 'reading_review_delete_view'),
 
-    # ---------- Practice Routes
-    path('practice/list/', PracticeView.list, name = 'practice_list_view'),
-    path('practice/create/', PracticeView.create, name = 'practice_create_view'),
-    path('practice/update/', PracticeView.update, name = 'practice_update_view'),
-    path('practice/delete/<int:id>/', PracticeView.delete, name = 'practice_delete_view'),
+    # ---------- Exercise Routes
+    path('exercise/list/', ExerciseView.list, name = 'exercise_list_view'),
+    path('exercise/create/', ExerciseView.create, name = 'exercise_create_view'),
+    path('exercise/update/', ExerciseView.update, name = 'exercise_update_view'),
+    path('exercise/delete/<int:id>/', ExerciseView.delete, name = 'exercise_delete_view'),
 
-    # ---------- Practice Reviews Routes
-    path('practice_review/list/', PracticeReviewView.list, name = 'practice_review_list_view'),
-    path('practice_review/create/', PracticeReviewView.create, name = 'practice_review_create_view'),
-    path('practice_review/update/', PracticeReviewView.update, name = 'practice_review_update_view'),
-    path('practice_review/delete/<int:id>/', PracticeReviewView.delete, name = 'practice_review_delete_view'),
+    # ---------- Exercise Reviews Routes
+    path('exercise_review/list/', ExerciseReviewView.list, name = 'exercise_review_list_view'),
+    path('exercise_review/create/', ExerciseReviewView.create, name = 'exercise_review_create_view'),
+    path('exercise_review/update/', ExerciseReviewView.update, name = 'exercise_review_update_view'),
+    path('exercise_review/delete/<int:id>/', ExerciseReviewView.delete, name = 'exercise_review_delete_view'),
 
     # ---------- Exercise Resource Routes
     path('exercise_resource/list/', ExerciseResourceView.list, name = 'exercise_resource_list_view'),
