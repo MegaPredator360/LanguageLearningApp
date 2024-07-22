@@ -9,7 +9,7 @@ class Reading(models.Model):
     publish_date = models.DateTimeField(auto_now_add = True)
     user = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'reading_users')
     language = models.ForeignKey(Language, on_delete = models.CASCADE, related_name = 'reading_languages')
-    category = models.ForeignKey(Category, related_name = 'reading_topics')
+    category = models.ForeignKey(Category, on_delete = models.CASCADE, related_name = 'reading_categories')
 
     def __str__(self):
         return self.title
