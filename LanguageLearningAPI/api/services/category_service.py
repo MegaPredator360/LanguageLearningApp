@@ -1,18 +1,18 @@
-from api.models.topic import Topic
-from api.serializers.topic_serializer import TopicSerializer
+from LanguageLearningAPI.api.models.category import Category
+from LanguageLearningAPI.api.serializers.category_serializer import CategorySerializer
 
-class TopicService:
+class CategoryService:
 
-    # Obtain the list of all topics
+    # Obtain the list of all categories
     def list(self):
 
         try:
 
-            # Obtain all topics
-            topics = Topic.objects.all()
+            # Obtain all categories
+            categories = Category.objects.all()
 
             # We serialize the objects
-            serializer = TopicSerializer(topics, many = True)
+            serializer = CategorySerializer(categories, many = True)
 
             return serializer.data
 
@@ -22,12 +22,12 @@ class TopicService:
             raise e
 
     # Create a new item
-    def create(self, topic: dict):
+    def create(self, category: dict):
 
         try:
 
             # Serialize the data
-            serializer = TopicSerializer(data = topic)
+            serializer = CategorySerializer(data = category)
 
             # If the data is valid
             if serializer.is_valid():
@@ -40,7 +40,7 @@ class TopicService:
                 errors = serializer.errors
 
                 # Raise an exception with detailed error information
-                raise ValueError(f'Errors occurred while saving the topic: {errors}')
+                raise ValueError(f'Errors occurred while saving the category: {errors}')
 
             # Return a response
             return serializer.data

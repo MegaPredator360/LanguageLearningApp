@@ -1,8 +1,8 @@
-from api.models.practice_review import PracticeReview
-from api.serializers.practice_review_serializer import PracticeReviewSerializer
+from LanguageLearningAPI.api.models.exercise_review import ExerciseReview
+from LanguageLearningAPI.api.serializers.exercise_review_serializer import ExerciseReviewSerializer
 
 
-class PracticeReviewService:
+class ExerciseReviewService:
 
     # Obtain the list of all the reviews
     def list(self):
@@ -10,10 +10,10 @@ class PracticeReviewService:
         try:
 
             # Obtain all the reviews
-            practiceReviews = PracticeReview.objects.all()
+            exerciseReviews = ExerciseReview.objects.all()
 
             # We serialize the objects
-            serializer = PracticeReviewSerializer(practiceReviews, many = True)
+            serializer = ExerciseReviewSerializer(exerciseReviews, many = True)
 
             return serializer.data
 
@@ -23,12 +23,12 @@ class PracticeReviewService:
             raise e
 
     # Create a new review
-    def create(self, practiceReview: dict):
+    def create(self, exerciseReview: dict):
 
         try:
 
             # Serialize the data
-            serializer = PracticeReviewSerializer(data = practiceReview)
+            serializer = ExerciseReviewSerializer(data = exerciseReview)
 
             # If the data is valid
             if serializer.is_valid():
@@ -52,15 +52,15 @@ class PracticeReviewService:
             raise e
 
     # Update a review
-    def update(self, practiceReview: dict):
+    def update(self, exerciseReview: dict):
 
         try:
 
             # Retrieve the specific review
-            practiceReviewFound = PracticeReview.objects.get(id = practiceReview['id'])
+            exerciseReviewFound = ExerciseReview.objects.get(id = exerciseReview['id'])
 
             # Update de data
-            serializer = PracticeReviewSerializer(instance = practiceReviewFound, data = practiceReview)
+            serializer = ExerciseReviewSerializer(instance = exerciseReviewFound, data = exerciseReview)
 
             # If the data is valid
             if serializer.is_valid():
@@ -78,7 +78,7 @@ class PracticeReviewService:
             return serializer.data
 
         # If the review to update doesn't exist
-        except PracticeReview.DoesNotExist:
+        except ExerciseReview.DoesNotExist:
 
                 # Send an excepction
                 raise ValueError('The review to update does not exist')
@@ -90,20 +90,20 @@ class PracticeReviewService:
             raise e
 
     # Delete a review
-    def delete(self, practiceReviewId: int) -> bool:
+    def delete(self, exerciseReviewId: int) -> bool:
 
         try:
 
             # Retrieve the specific review
-            practiceReviewFound = PracticeReview.objects.get(id = practiceReviewId)
+            exerciseReviewFound = ExerciseReview.objects.get(id = exerciseReviewId)
 
             # Delete the review
-            practiceReviewFound.delete()
+            exerciseReviewFound.delete()
 
             return True
 
         # If the review to delete doesn't exist
-        except PracticeReview.DoesNotExist:
+        except ExerciseReview.DoesNotExist:
                 
                 # Send an excepction
                 raise ValueError('The review to delete does not exist')
