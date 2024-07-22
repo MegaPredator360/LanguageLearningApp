@@ -1,5 +1,5 @@
 from django.db import models
-from LanguageLearningAPI.api.models.exercise import Exercise
+from api.models.exercise import Exercise
 from api.models.user import User
 
 class ExerciseReview(models.Model):

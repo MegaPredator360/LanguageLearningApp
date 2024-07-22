@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from api.dtos.responseAPI import ResponseAPI
-from LanguageLearningAPI.api.services.exercise_review_service import ExerciseReviewService
+from api.services.exercise_review_service import ExerciseReviewService
 
 class ExerciseReviewView:
 

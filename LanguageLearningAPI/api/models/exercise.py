@@ -1,6 +1,6 @@
 from django.db import models
 from api.models.language import Language
-from LanguageLearningAPI.api.models.category import Category
+from api.models.category import Category
 from api.models.user import User
 
 class Exercise(models.Model):

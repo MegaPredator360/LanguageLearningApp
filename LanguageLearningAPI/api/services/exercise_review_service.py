@@ -1,5 +1,5 @@
-from LanguageLearningAPI.api.models.exercise_review import ExerciseReview
-from LanguageLearningAPI.api.serializers.exercise_review_serializer import ExerciseReviewSerializer
+from api.models.exercise_review import ExerciseReview
+from api.serializers.exercise_review_serializer import ExerciseReviewSerializer
 
 
 class ExerciseReviewService:

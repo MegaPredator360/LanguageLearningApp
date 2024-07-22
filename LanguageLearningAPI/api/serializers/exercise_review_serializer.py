@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from LanguageLearningAPI.api.models.exercise_review import ExerciseReview
+from api.models.exercise_review import ExerciseReview
 
 class ExerciseReviewSerializer(serializers.ModelSerializer):
     class Meta:

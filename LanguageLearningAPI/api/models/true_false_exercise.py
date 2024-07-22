@@ -1,5 +1,5 @@
 from django.db import models
-from LanguageLearningAPI.api.models.exercise import Exercise
+from api.models.exercise import Exercise
 
 class TrueFalseExercise(models.Model):
     exercise = models.ForeignKey(Exercise, on_delete = models.CASCADE, related_name = 'tf_exercises')

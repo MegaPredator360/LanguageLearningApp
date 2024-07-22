@@ -1,5 +1,5 @@
-from LanguageLearningAPI.api.models.category import Category
-from LanguageLearningAPI.api.serializers.category_serializer import CategorySerializer
+from api.models.category import Category
+from api.serializers.category_serializer import CategorySerializer
 
 class CategoryService:
 

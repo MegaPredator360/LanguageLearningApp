@@ -1,5 +1,5 @@
-from LanguageLearningAPI.api.models.exercise import Exercise
-from LanguageLearningAPI.api.serializers.exercise_serializer import ExerciseSerializer
+from api.models.exercise import Exercise
+from api.serializers.exercise_serializer import ExerciseSerializer
 
 class ExerciseService:
 

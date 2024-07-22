@@ -1,5 +1,5 @@
 from django.db import models
-from LanguageLearningAPI.api.models.category import Category
+from api.models.category import Category
 from api.models.user import User
 from api.models.language import Language
 
