@@ -52,19 +52,18 @@ def createInitialData(apps, schema_editor):
 
             # Create Topics
             Topic.objects.bulk_create([
+                Topic(name='Action'),
+                Topic(name='Adventure'),
                 Topic(name='Science Fiction'),
-                Topic(name='Biographies and Memoirs'),
-                Topic(name='History'),
-                Topic(name='Self-Help and Personal Development'),
                 Topic(name='Fantasy'),
-                Topic(name='Business and Economics'),
-                Topic(name='Psychology'),
-                Topic(name='Travel and Adventure'),
-                Topic(name='Cooking and Food'),
-                Topic(name='Health and Wellness'),
-                Topic(name='Art and Photography'),
+                Topic(name='General Fiction'),
+                Topic(name='Historical Fiction'),
+                Topic(name='Short Story'),
+                Topic(name='Comedy'),
+                Topic(name='Suspense'),
+                Topic(name='Non-fiction'),
                 Topic(name='Philosophy'),
-                Topic(name='Politics and Current Affairs'),
+                Topic(name='Current Affairs'),
             ])
             print("Topics created successfully.")
 
