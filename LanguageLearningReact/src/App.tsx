@@ -7,6 +7,8 @@ import LayoutView from './views/layout/layout';
 import HomeView from './views/home/home'
 import ReadingView from './views/reading/view';
 import ReadingFormView from './views/reading/form';
+import ExerciseView from './views/exercise/view';
+import ExerciseFormView from './views/exercise/form';
 
 function App() {
 
@@ -18,6 +20,8 @@ function App() {
         { path: "home", element: <HomeView /> },
         { path: "reading", element: <ReadingView /> },
         { path: "reading/form", element: <ReadingFormView /> },
+        { path: "exercise", element: <ExerciseView /> },
+        { path: "exercise/form", element: <ExerciseFormView /> },
         { path: "", element: <Navigate to = "home" /> }
       ]
     },

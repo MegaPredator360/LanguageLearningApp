@@ -14,7 +14,7 @@ function LayoutView() {
             key: '1',
             label: (
                 <a className="text-decoration-none">
-                    Perfil
+                    Profile
                 </a>
             ),
         },
@@ -22,23 +22,29 @@ function LayoutView() {
             key: '2',
             label: (
                 <a className="text-decoration-none">
-                    Ajustes de Cuenta
+                    Account Settings
                 </a>
             ),
         },
         {
             key: '3',
             label: (
-                <a onClick={() => navigate('/reading/form')} className="text-decoration-none">
-                    Crear Lectura
+                <a
+                    onClick={() => navigate('/reading/form')}
+                    className="text-decoration-none"
+                >
+                    Create Reading
                 </a>
             ),
         },
         {
             key: '4',
             label: (
-                <a className="text-decoration-none">
-                    Crear Ejercicio
+                <a 
+                onClick={() => navigate('/exercise/form')}
+                className="text-decoration-none"
+                >
+                    Create Exercise
                 </a>
             ),
         },
@@ -58,7 +64,7 @@ function LayoutView() {
                         <Button type='text' onClick={() => navigate('/login')}>Log In</Button>
                         <Button type='text' onClick={() => navigate('/register')}>Sign Up</Button>
                         <Dropdown menu={{ items }} placement="topRight">
-                            <Button type="text">Usuario</Button>
+                            <Button type="text">User</Button>
                         </Dropdown>
                     </div>
                 </div>
