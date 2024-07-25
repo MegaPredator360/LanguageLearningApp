@@ -4,6 +4,7 @@ def createInitialData(apps, schema_editor):
     Role = apps.get_model('api', 'Role')
     User = apps.get_model('api', 'User')
     Category = apps.get_model('api', 'Category')
+    Language = apps.get_model('api', 'Language')
 
     try:
         with transaction.atomic():
@@ -66,6 +67,23 @@ def createInitialData(apps, schema_editor):
                 Category(name='Current Affairs'),
             ])
             print("Categories created successfully.")
+
+            # Create Languages
+            Language.objects.bulk_create([
+                Language(name='Spanish'),
+                Language(name='English'),
+                Language(name='French'),
+                Language(name='Portuguese'),
+                Language(name='German'),
+                Language(name='Japanese'),
+                Language(name='Chinese'),
+                Language(name='Korean'),
+                Language(name='Swedish'),
+                Language(name='Hindi'),
+                Language(name='Russian'),
+                Language(name='Italian'),
+            ])
+            print("Languages created successfully.")
 
     except Exception as e:
         print(f"Error occurred while creating initial data: {e}")
