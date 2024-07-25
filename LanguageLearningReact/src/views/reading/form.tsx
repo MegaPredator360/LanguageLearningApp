@@ -1,8 +1,10 @@
 import { Button, Card, Col, Input, notification, Row, Select, Space, Tag, Tooltip } from "antd"
 import { InfoCircleOutlined } from '@ant-design/icons';
-import CategoryService from "../../services/category-service";
 import { useEffect, useState } from "react";
+import CategoryService from "../../services/category-service";
 import { Category } from "../../interfaces/category-interface";
+import LanguageService from "../../services/language-service";
+import { Language } from "../../interfaces/language-interface";
 
 // Importacion de Imagen
 import imagePlaceholder from "../../assets/images/image-placeholder.jpg"
@@ -11,6 +13,7 @@ function ReadingFormView() {
 
     // Select List
     const [listCategory, setListCategory] = useState([])
+    const [listLanguage, setListLanguage] = useState([])
 
     // Notificacion
     const [api, contextHolder] = notification.useNotification();
@@ -31,16 +34,16 @@ function ReadingFormView() {
             .then(data => {
                 if (data.status) {
                     // Aquí se procesan los datos recibidos
-                    setListCategory(data.value.map((category: Category) => ({
-                        value: category.id,
-                        label: category.name,
+                    setListCategory(data.value.map((item: Category) => ({
+                        value: item.id,
+                        label: item.name,
                     })));
                 }
                 else {
                     // Notificacion
                     api['error']({
                         message: 'Error',
-                        description: "An error ocurred when obtaining the topics",
+                        description: "An error ocurred when obtaining the categories",
                     });
                     console.error(data.msg);
                 }
@@ -49,7 +52,39 @@ function ReadingFormView() {
                 // Notificacion
                 api['error']({
                     message: 'Error',
-                    description: "An error ocurred when obtaining the topics",
+                    description: "An error ocurred when obtaining the categories",
+                });
+                console.error(error);
+            })
+    }
+
+    // Lista de opciones de los idiomas
+    const obtainLanguages = async () => {
+
+        // Llamamos al metodo de lista del servicio de temas
+        await LanguageService.List()
+            .then(data => {
+                if (data.status) {
+                    // Aquí se procesan los datos recibidos
+                    setListLanguage(data.value.map((item: Language) => ({
+                        value: item.id,
+                        label: item.name,
+                    })));
+                }
+                else {
+                    // Notificacion
+                    api['error']({
+                        message: 'Error',
+                        description: "An error ocurred when obtaining the languages",
+                    });
+                    console.error(data.msg);
+                }
+            })
+            .catch(error => {
+                // Notificacion
+                api['error']({
+                    message: 'Error',
+                    description: "An error ocurred when obtaining the languages",
                 });
                 console.error(error);
             })
@@ -88,6 +123,7 @@ function ReadingFormView() {
     // Inicializamos metodos de carga de datos
     useEffect(() => {
         obtainCategories()
+        obtainLanguages()
     }, [tags])
 
     return (
@@ -168,7 +204,7 @@ function ReadingFormView() {
                                 placeholder="Select a language"
                                 optionFilterProp="label"
                                 //onChange={handleCountryChange}
-                                options={listCategory}
+                                options={listLanguage}
                                 className='w-100'
                             //status={countryError ? 'error' : ''}
                             />
@@ -180,7 +216,7 @@ function ReadingFormView() {
                             cover={<img src={imagePlaceholder} />}
                         >
                             <div className="d-flex justify-content-center">
-                                <Button>
+                                <Button disabled>
                                     Add Image
                                 </Button>
                             </div>
