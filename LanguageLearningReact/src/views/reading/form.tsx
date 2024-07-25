@@ -9,7 +9,8 @@ import imagePlaceholder from "../../assets/images/image-placeholder.jpg"
 
 function ReadingFormView() {
 
-    const [listTopic, setListTopic] = useState([])
+    // Select List
+    const [listCategory, setListCategory] = useState([])
 
     // Notificacion
     const [api, contextHolder] = notification.useNotification();
@@ -30,7 +31,7 @@ function ReadingFormView() {
             .then(data => {
                 if (data.status) {
                     // Aquí se procesan los datos recibidos
-                    setListTopic(data.value.map((category: Category) => ({
+                    setListCategory(data.value.map((category: Category) => ({
                         value: category.id,
                         label: category.name,
                     })));
@@ -87,7 +88,6 @@ function ReadingFormView() {
     // Inicializamos metodos de carga de datos
     useEffect(() => {
         obtainCategories()
-        console.log('Tags updated:', tags);
     }, [tags])
 
     return (
@@ -127,7 +127,7 @@ function ReadingFormView() {
                                 placeholder="Select a category"
                                 optionFilterProp="label"
                                 //onChange={handleCountryChange}
-                                options={listTopic}
+                                options={listCategory}
                                 className='w-100'
                             //status={countryError ? 'error' : ''}
                             />
@@ -168,7 +168,7 @@ function ReadingFormView() {
                                 placeholder="Select a language"
                                 optionFilterProp="label"
                                 //onChange={handleCountryChange}
-                                options={listTopic}
+                                options={listCategory}
                                 className='w-100'
                             //status={countryError ? 'error' : ''}
                             />
