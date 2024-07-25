@@ -28,6 +28,10 @@ function LayoutView() {
             onClick: (() => navigate('/exercise/form')),
             label: "Create Exercise"
         },
+        {
+            key: '5',
+            label: "Log Out"
+        }
     ];
 
     return (
