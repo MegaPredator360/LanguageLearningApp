@@ -12,41 +12,21 @@ function LayoutView() {
     const items: MenuProps['items'] = [
         {
             key: '1',
-            label: (
-                <a className="text-decoration-none">
-                    Profile
-                </a>
-            ),
+            label: "Create Profile"
         },
         {
             key: '2',
-            label: (
-                <a className="text-decoration-none">
-                    Account Settings
-                </a>
-            ),
+            label: "Account Settings"
         },
         {
             key: '3',
-            label: (
-                <a
-                    onClick={() => navigate('/reading/form')}
-                    className="text-decoration-none"
-                >
-                    Create Reading
-                </a>
-            ),
+            onClick: (() => navigate('/reading/form')),
+            label: "Create Reading"
         },
         {
             key: '4',
-            label: (
-                <a 
-                onClick={() => navigate('/exercise/form')}
-                className="text-decoration-none"
-                >
-                    Create Exercise
-                </a>
-            ),
+            onClick: (() => navigate('/exercise/form')),
+            label: "Create Exercise"
         },
     ];
 
