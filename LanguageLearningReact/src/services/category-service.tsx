@@ -6,7 +6,7 @@ class CategoryService {
     // Enlace principal
     urlApi = Environment.endpoint + "category/";
 
-    // Lista de Temas
+    // Lista de Categorias
     async List(): Promise<ResponseAPI> {
 
         // Se realiza la solicitud a la API
