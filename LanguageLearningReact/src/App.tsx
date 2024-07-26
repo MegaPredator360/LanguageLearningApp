@@ -5,6 +5,7 @@ import LoginView from './views/auth/login';
 import RegisterView from './views/auth/register';
 import LayoutView from './views/layout/layout';
 import HomeView from './views/home/home'
+import SearchView from './views/search/view';
 import ReadingView from './views/reading/view';
 import ReadingFormView from './views/reading/form';
 import ExerciseView from './views/exercise/view';
@@ -18,6 +19,7 @@ function App() {
       element: <LayoutView />,
       children: [
         { path: "home", element: <HomeView /> },
+        { path: "search", element: <SearchView /> },
         { path: "reading", element: <ReadingView /> },
         { path: "reading/form", element: <ReadingFormView /> },
         { path: "exercise", element: <ExerciseView /> },

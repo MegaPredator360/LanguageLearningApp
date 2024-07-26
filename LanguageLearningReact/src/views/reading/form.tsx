@@ -355,6 +355,7 @@ function ReadingFormView() {
                                     placeholder="Add a tag to your reading"
                                     value={tagValue}
                                     onChange={handleTagChanges}
+                                    onPressEnter={handleAddTag}
                                 />
                                 <Button
                                     type="primary"

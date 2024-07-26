@@ -43,7 +43,7 @@ function LayoutView() {
                     <div className="d-flex container">
                         <button onClick={() => navigate('/home')} className="logo-text blank-button">LinguaLearn</button>
                         <span className="flex-grow-1 flex-shrink-1 flex-basis-auto"></span>
-                        <Button type='text'>Search</Button>
+                        <Button type='text' onClick={() => navigate('/search')}>Search</Button>
                         <Divider type='vertical' className="h-auto" />
                         <Button type='text' onClick={() => navigate('/login')}>Log In</Button>
                         <Button type='text' onClick={() => navigate('/register')}>Sign Up</Button>
