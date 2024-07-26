@@ -5,5 +5,8 @@ class ReadingTag(models.Model):
     reading = models.ForeignKey(Reading, on_delete = models.CASCADE, related_name = 'reading_tags')
     name = models.CharField(max_length = 20)
 
+    class Meta:
+        unique_together = ('reading', 'name')
+
     def __str__(self):
         return self.name
