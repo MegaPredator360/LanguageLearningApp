@@ -155,14 +155,10 @@ const RegisterView: React.FC = () => {
             role_name: ""
         }
 
-        console.log(user)
-
         // Se envia peticion
-        await userService.Register(user).then(data => {
+        await userService.Register(user)
+        .then(data => {
             if (data.status) {
-
-                // Procesamiento de datos
-                console.log(data.value);
 
                 // Se desactiva el icono de carga
                 setLoading(false)
@@ -186,11 +182,19 @@ const RegisterView: React.FC = () => {
                 console.error(data.msg)
 
             }
-        });
+        })
+        .catch(error => {
+            // Notificacion
+            api['error']({
+                message: 'Error',
+                description: "An error ocurred when registering the user",
+            });
+            console.error(error);
+        })
     }
 
     // Se valida si los campos están con texto
-    const validateForm = () => {
+    const validateForm = (): Boolean => {
 
         let emptyInput: Boolean = false
 
