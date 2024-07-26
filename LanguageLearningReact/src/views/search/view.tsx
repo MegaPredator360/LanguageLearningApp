@@ -130,7 +130,7 @@ function SearchView() {
                                     <td className="align-middle">
                                         {reading.user_username}
                                         <br />
-                                        {moment(reading.publish_date).format('DD/MM/YYYY HH:mm:ss')}
+                                        {moment(reading.publish_date).format('DD/MM/YYYY hh:mm A')}
                                     </td>
                                 </tr>
                             ))}
