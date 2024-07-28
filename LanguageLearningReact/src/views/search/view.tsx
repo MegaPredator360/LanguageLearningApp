@@ -3,8 +3,12 @@ import ReadingService from "../../services/reading-service";
 import moment from 'moment';
 import { Reading } from "../../interfaces/reading-interface";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SearchView() {
+
+    // Navegacion entre componentes
+    const navigate = useNavigate();
 
     // Filtracion de datos
     const [filterText, setFilterText] = useState('')
@@ -116,17 +120,21 @@ function SearchView() {
                                 <th scope="col">Type</th>
                                 <th scope="col">Category</th>
                                 <th scope="col">Language</th>
+                                <th scope="col">Views</th>
+                                <th scope="col">Likes</th>
                                 <th scope="col">Uploaded by</th>
                             </tr>
                         </thead>
                         <tbody>
                             {paginatedReadings.map((reading: Reading, index) => (
                                 <tr key={index}>
-                                    <td className="align-middle">{reading.title}</td>
+                                    <td className="align-middle"><a className="text-primary" onClick={() => navigate( '/reading', { state: reading })}>{reading.title}</a></td>
                                     <td className="align-middle">{reading.description}</td>
                                     <td className="text-center align-middle">{'Reading'}</td>
                                     <td className="text-center align-middle">{reading.category_name}</td>
                                     <td className="text-center align-middle">{reading.language_name}</td>
+                                    <td className="text-center align-middle">{reading.views}</td>
+                                    <td className="text-center align-middle">{reading.likes}</td>
                                     <td className="align-middle">
                                         {reading.user_username}
                                         <br />
