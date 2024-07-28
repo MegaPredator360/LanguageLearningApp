@@ -1,9 +1,10 @@
-import { Card, Input, notification, Pagination, Select } from "antd"
+import { Button, Card, Input, notification, Pagination, Select, Space, Tooltip } from "antd"
 import ReadingService from "../../services/reading-service";
 import moment from 'moment';
 import { Reading } from "../../interfaces/reading-interface";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { DeleteOutlined } from '@ant-design/icons';
 
 function SearchView() {
 
@@ -25,10 +26,6 @@ function SearchView() {
     // Lista
     const [listReading, setListReading] = useState([])
 
-    // Modificadores de Ant Design
-    const { Option } = Select;
-    const { Search } = Input;
-
     // Función para manejar el cambio del input de filtro
     const handleFilterTextChange = (event: any) => {
         setFilterText(event.target.value);
@@ -38,6 +35,12 @@ function SearchView() {
     const handleFilterTypeChanges = (value: string) => {
         setFilterType(value);
         setCurrentPage(1)
+    }
+
+    // Limpiar campo de busqueda
+    const clearFilterText = () => {
+        setFilterText("");
+        setCurrentPage(1);
     }
 
     // Filtrar lecturas basado en el valor del filtro
@@ -108,22 +111,6 @@ function SearchView() {
             })
     }
 
-    const filterSearch = (
-        <Select
-            defaultValue="title"
-            style={{ width: 110 }}
-            onChange={handleFilterTypeChanges}
-            value={filterType}
-        >
-            <Option value="title">Title</Option>
-            <Option value="type">Type</Option>
-            <Option value="category">Category</Option>
-            <Option value="tags">Tags</Option>
-            <Option value="language">Language</Option>
-            <Option value="username">Username</Option>
-        </Select>
-    );
-
     // Inicializamos metodos de carga de datos
     useEffect(() => {
         obtainReading()
@@ -134,12 +121,36 @@ function SearchView() {
             {contextHolder}
             <div className="container mt-5">
                 <Card className="min-vh-100">
-                    <Search
-                        addonBefore={filterSearch}
-                        placeholder="Search Content"
-                        onChange={handleFilterTextChange}
-                        onSearch={handleFilterTextChange}
-                    />
+                    <Space.Compact className="w-100">
+                        <Select
+                            defaultValue="title"
+                            style={{ width: '150px' }}
+                            onChange={handleFilterTypeChanges}
+                            options={[
+                                { value: 'title', label: 'Title' },
+                                { value: 'type', label: 'Type' },
+                                { value: 'category', label: 'Category' },
+                                { value: 'tags', label: 'Tags' },
+                                { value: 'language', label: 'Language' },
+                                { value: 'username', label: 'Username' },
+                            ]}
+                            value={filterType}
+                        />
+                        <Input
+                            className="w-100"
+                            placeholder="Search Content"
+                            onChange={handleFilterTextChange}
+                            value={filterText}
+                        />
+                        <Tooltip title='Clear search text'>
+                            <Button
+                            disabled={ filterText == "" ? true : false }
+                            onClick={clearFilterText}
+                            >
+                                <DeleteOutlined />
+                            </Button>
+                        </Tooltip>
+                    </Space.Compact>
 
                     {/* Tabla de contenido */}
                     <table className="table mt-4">
