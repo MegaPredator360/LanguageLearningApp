@@ -12,6 +12,7 @@ function SearchView() {
 
     // Filtracion de datos
     const [filterText, setFilterText] = useState('')
+    const [filterType, setFilterType] = useState('title')
 
     // Paginacion
     const [currentPage, setCurrentPage] = useState(1)
@@ -34,11 +35,35 @@ function SearchView() {
         setCurrentPage(1);
     };
 
-    // Filtrar lecturas basado en el valor del filtro
-    const filteredReadings = listReading.filter((reading: Reading) =>
-        reading.title.toLowerCase().includes(filterText.toLowerCase()) // Cambia 'name' por el campo que quieras filtrar
-    );
+    const handleFilterTypeChanges = (value: string) => {
+        setFilterType(value);
+        setCurrentPage(1)
+    }
 
+    // Filtrar lecturas basado en el valor del filtro
+    const filteredReadings = listReading.filter((reading: Reading) => {
+        const lowerCaseFilterText = filterText.toLowerCase();
+
+        switch (filterType) {
+            case 'title':
+                return reading.title.toLowerCase().includes(lowerCaseFilterText);
+            case 'type':
+                return reading.category_name.toLowerCase().includes(lowerCaseFilterText);
+            case 'category':
+                return reading.category_name.toLowerCase().includes(lowerCaseFilterText);
+            case "tags":
+                return reading.reading_tags.some((tag) =>
+                    tag.name.toLowerCase().includes(lowerCaseFilterText)
+                );
+            case 'language':
+                return reading.language_name.toLowerCase().includes(lowerCaseFilterText);
+            case 'username':
+                return reading.user_username.toLowerCase().includes(lowerCaseFilterText);
+            // Agrega más casos si tienes más criterios
+            default:
+                return false;
+        }
+    });
     // Calcular el total de páginas
     const totalItems = filteredReadings.length;
 
@@ -84,8 +109,13 @@ function SearchView() {
     }
 
     const filterSearch = (
-        <Select defaultValue="name" style={{ width: 110 }}>
-            <Option value="name">Title</Option>
+        <Select
+            defaultValue="title"
+            style={{ width: 110 }}
+            onChange={handleFilterTypeChanges}
+            value={filterType}
+        >
+            <Option value="title">Title</Option>
             <Option value="type">Type</Option>
             <Option value="category">Category</Option>
             <Option value="tags">Tags</Option>
@@ -128,7 +158,7 @@ function SearchView() {
                         <tbody>
                             {paginatedReadings.map((reading: Reading, index) => (
                                 <tr key={index}>
-                                    <td className="align-middle"><a className="text-primary" onClick={() => navigate( '/reading', { state: reading })}>{reading.title}</a></td>
+                                    <td className="align-middle"><a className="text-primary" onClick={() => navigate('/reading', { state: reading })}>{reading.title}</a></td>
                                     <td className="align-middle">{reading.description}</td>
                                     <td className="text-center align-middle">{'Reading'}</td>
                                     <td className="text-center align-middle">{reading.category_name}</td>
