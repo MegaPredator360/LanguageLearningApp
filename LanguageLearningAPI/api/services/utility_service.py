@@ -1,24 +1,78 @@
 import hashlib
+import jwt
+from datetime import datetime as dt, timedelta as td, timezone as tz
+from api.models.user import User
 
 class UtilityService:
 
     # It encrypts the password
     def encryptPassword(self, password: str) -> str:
 
-        # Create a SHA256 hash object
-        hash_obj = hashlib.sha256()
+        try:
 
-        # Convert the password to bytes
-        password_bytes = password.encode()
+            # Create a SHA256 hash object
+            hash_obj = hashlib.sha256()
 
-        # Update the hash object with the password bytes
-        hash_obj.update(password_bytes)
+            # Convert the password to bytes
+            password_bytes = password.encode()
 
-        # Get the hashed password in bytes
-        hashed_bytes = hash_obj.digest()
+            # Update the hash object with the password bytes
+            hash_obj.update(password_bytes)
 
-        # Convert the hashed bytes to a hexadecimal string
-        hashed_hex_string = hashed_bytes.hex()
+            # Get the hashed password in bytes
+            hashed_bytes = hash_obj.digest()
 
-        # Return the hexadecimal string representation of the hashed password
-        return hashed_hex_string
+            # Convert the hashed bytes to a hexadecimal string
+            hashed_hex_string = hashed_bytes.hex()
+
+            # Return the hexadecimal string representation of the hashed password
+            return hashed_hex_string
+
+        except ValueError as e:
+
+            # Send the exception
+            raise e
+
+
+    # It creates the JWT
+    def createToken(self, userFound: User):
+
+        try:
+
+            # Create a diccionary which it will hold the data
+            payload = {
+                'id': userFound.id,
+                'exp': dt.now(tz.utc) + td(minutes=60),
+                'iat': dt.now(tz.utc)
+            }
+
+            # Create the token
+            token = jwt.encode(payload, 'secret', algorithm = 'HS256')
+
+            return token
+
+        except ValueError as e:
+
+            # Send the exception
+            raise e
+
+    # It gets the user Id from the token
+    def getUserToken(self, token: any):
+
+        try:
+
+            payload = jwt.decode(token, 'secret', algorithm = ['HS256'])
+
+            return payload['id']
+
+        # In case that the token has expired
+        except jwt.ExpiredSignatureError:
+
+            # Send the exception
+            raise ValueError("User with an expired session")
+
+        # Any other exception
+        except ValueError as e:
+
+            # Send the exception
+            raise e
