@@ -117,6 +117,7 @@ class UserView:
         # Declare the service to use
         userService = UserService()
         response = ResponseAPI()
+        responseJWT = Response()
 
         try:
 
@@ -136,5 +137,9 @@ class UserView:
             # Send the message of why it failed
             response.msg = str(e)
 
+        responseJWT.set_cookie(key = 'jwt', value = response.value['jwt'], httponly = True)
+        responseJWT.data = response.__dict__
+        responseJWT.status_code = 200
+
         # Return the response
-        return Response(status = 200, data = response.__dict__)
+        return responseJWT

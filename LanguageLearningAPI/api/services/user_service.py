@@ -1,6 +1,8 @@
 from api.models.user import User
 from api.serializers.user_serializer import UserSerializer
 from api.services.utility_service import UtilityService
+from datetime import datetime as dt, timedelta as td, timezone as tz
+import jwt
 
 class UserService:
 
@@ -147,15 +149,22 @@ class UserService:
 
         try:
             # Encrypt password
-            encriptedPassword=utilityService.encryptPassword(login['password'])
+            encriptedPassword = utilityService.encryptPassword(login['password'])
 
             # Retrieve the specific user
-            userFound = User.objects.get(email= login['email'], password = encriptedPassword )
+            userFound = User.objects.get(email = login['email'], password = encriptedPassword )
 
-            # Send user
-            serializer = UserSerializer(userFound, many = False)
+            payload = {
+                'id': userFound.id,
+                'exp': dt.now(tz.utc) + td(minutes=60),
+                'iat': dt.now(tz.utc)
+            }
 
-            return serializer.data
+            # Create the token
+            token = jwt.encode(payload, 'secret', algorithm = 'HS256')
+
+            # Return the token as a diccionary
+            return {'jwt': token}
 
         # If the user to update doesn't exist
         except User.DoesNotExist:
