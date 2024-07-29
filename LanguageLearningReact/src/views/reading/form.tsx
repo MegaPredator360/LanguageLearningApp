@@ -236,7 +236,7 @@ function ReadingFormView() {
             likes: 0,
             dislikes: 0,
             views: 0,
-            user: 1,
+            user: 0,
             user_username: '',
             language: language,
             language_name: '',
