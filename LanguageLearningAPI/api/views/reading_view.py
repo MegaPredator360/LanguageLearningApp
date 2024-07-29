@@ -43,8 +43,15 @@ class ReadingView:
             # Set the status of the request a success
             response.status = True
 
+            # Get the cookie of the user who is logged in
+            token = request.COOKIES.get('jwt')
+
+            # Check if the user is logged in
+            if not token:
+                raise ValueError("The user is not logged in")
+
             # Return the data
-            response.value = readingService.create(request.data)
+            response.value = readingService.create(request.data, token)
 
         except ValueError as e:
 
