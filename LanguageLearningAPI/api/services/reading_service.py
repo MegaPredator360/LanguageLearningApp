@@ -1,5 +1,6 @@
 from api.models.reading import Reading
 from api.serializers.reading_serializer import ReadingSerializer
+from api.services.utility_service import UtilityService
 
 class ReadingService:
 
@@ -22,9 +23,17 @@ class ReadingService:
             raise e
 
     # Create a new reading
-    def create(self, reading: dict):
+    def create(self, reading: dict, token: any):
+
+        utilityService = UtilityService()
 
         try:
+
+            # Verify the user that is creating the reading
+            userId = utilityService.getUserToken(token)
+
+            # Assign the user Id to the foreign key
+            reading['user'] = userId
 
             # Serialize the data
             serializer = ReadingSerializer(data = reading)
