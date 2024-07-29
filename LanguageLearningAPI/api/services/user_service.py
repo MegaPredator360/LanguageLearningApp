@@ -1,8 +1,6 @@
 from api.models.user import User
 from api.serializers.user_serializer import UserSerializer
 from api.services.utility_service import UtilityService
-from datetime import datetime as dt, timedelta as td, timezone as tz
-import jwt
 
 class UserService:
 
@@ -142,7 +140,7 @@ class UserService:
             raise e
 
     # Validar el login
-    def verifyLogin(self, login: dict):
+    def login(self, login: dict):
 
         # Create the utility service object
         utilityService = UtilityService()
@@ -154,14 +152,8 @@ class UserService:
             # Retrieve the specific user
             userFound = User.objects.get(email = login['email'], password = encriptedPassword )
 
-            payload = {
-                'id': userFound.id,
-                'exp': dt.now(tz.utc) + td(minutes=60),
-                'iat': dt.now(tz.utc)
-            }
-
-            # Create the token
-            token = jwt.encode(payload, 'secret', algorithm = 'HS256')
+            # Create the JWT Token
+            token = utilityService.createToken(userFound)
 
             # Return the token as a diccionary
             return {'jwt': token}
