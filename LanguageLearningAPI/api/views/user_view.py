@@ -128,11 +128,18 @@ class UserView:
             token = request.COOKIES.get('jwt')
 
             # Check if the user is logged in
-            if not token:
-                raise ValueError("The user is not logged in")
+            if token:
+                raise ValueError("The user is already logged in")
 
             # Return the data
             response.value = userService.login(request.data)
+
+            responseJWT.set_cookie(key = 'jwt', value = response.value['jwt'], httponly = True)
+            responseJWT.data = response.__dict__
+            responseJWT.status_code = 200
+
+            # Return the response
+            return responseJWT
 
         except ValueError as e:
 
@@ -142,12 +149,7 @@ class UserView:
             # Send the message of why it failed
             response.msg = str(e)
 
-        responseJWT.set_cookie(key = 'jwt', value = response.value['jwt'], httponly = True)
-        responseJWT.data = response.__dict__
-        responseJWT.status_code = 200
-
-        # Return the response
-        return responseJWT
+            return Response(status = 200, data = response.__dict__)
 
     @api_view(['POST'])
     def logout(request):
