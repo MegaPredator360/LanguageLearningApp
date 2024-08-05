@@ -1,8 +1,9 @@
-import { Button, Card, Input, notification, Pagination, Select, Space, Tooltip } from "antd"
+import { Button, Card, Input, Pagination, Select, Space, Tooltip } from "antd"
 import ReadingService from "../../services/reading-service";
 import moment from 'moment';
 import { Reading } from "../../interfaces/reading-interface";
 import { useEffect, useState } from "react";
+import { useNotification } from '../../components/notification-component';
 import { useNavigate } from "react-router-dom";
 import { DeleteOutlined } from '@ant-design/icons';
 
@@ -20,7 +21,7 @@ function SearchView() {
     const [pageSize, setPageSize] = useState(10)
 
     // Notificacion
-    const [api, contextHolder] = notification.useNotification();
+    const { showNotification } = useNotification();
     //const [loading, setLoading] = useState(false)
 
     // Lista
@@ -94,19 +95,13 @@ function SearchView() {
                 }
                 else {
                     // Notificacion
-                    api['error']({
-                        message: 'Error',
-                        description: "An error ocurred when obtaining the languages",
-                    });
+                    showNotification('error', 'Error', "An error ocurred when obtaining the readings and exercises");
                     console.error(data.msg);
                 }
             })
             .catch(error => {
                 // Notificacion
-                api['error']({
-                    message: 'Error',
-                    description: "An error ocurred when obtaining the languages",
-                });
+                showNotification('error', 'Error', "An error ocurred when obtaining the readings and exercises");
                 console.error(error);
             })
     }
@@ -118,7 +113,6 @@ function SearchView() {
 
     return (
         <>
-            {contextHolder}
             <div className="container mt-5">
                 <Card className="min-vh-100">
                     <Space.Compact className="w-100">

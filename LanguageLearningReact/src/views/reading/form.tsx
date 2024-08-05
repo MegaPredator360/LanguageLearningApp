@@ -1,6 +1,7 @@
-import { Button, Card, Col, Input, notification, Row, Select, Space, Tag, Tooltip } from "antd"
+import { Button, Card, Col, Input, Row, Select, Space, Tag, Tooltip } from "antd"
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { useEffect, useState } from "react";
+import { useNotification } from '../../components/notification-component';
 import CategoryService from "../../services/category-service";
 import { Category } from "../../interfaces/category-interface";
 import LanguageService from "../../services/language-service";
@@ -19,7 +20,7 @@ function ReadingFormView() {
     const [listLanguage, setListLanguage] = useState([])
 
     // Notificacion
-    const [api, contextHolder] = notification.useNotification();
+    const { showNotification } = useNotification();
     const [loading, setLoading] = useState(false)
 
     // Estado para manejar los Tags
@@ -88,19 +89,13 @@ function ReadingFormView() {
                 }
                 else {
                     // Notificacion
-                    api['error']({
-                        message: 'Error',
-                        description: "An error ocurred when obtaining the categories",
-                    });
+                    showNotification('error', 'Error', 'An error ocurred when obtaining the categories');
                     console.error(data.msg);
                 }
             })
             .catch(error => {
                 // Notificacion
-                api['error']({
-                    message: 'Error',
-                    description: "An error ocurred when obtaining the categories",
-                });
+                showNotification('error', 'Error', 'An error ocurred when obtaining the categories');
                 console.error(error);
             })
     }
@@ -120,19 +115,13 @@ function ReadingFormView() {
                 }
                 else {
                     // Notificacion
-                    api['error']({
-                        message: 'Error',
-                        description: "An error ocurred when obtaining the languages",
-                    });
+                    showNotification('error', 'Error', 'An error ocurred when obtaining the languages');
                     console.error(data.msg);
                 }
             })
             .catch(error => {
                 // Notificacion
-                api['error']({
-                    message: 'Error',
-                    description: "An error ocurred when obtaining the languages",
-                });
+                showNotification('error', 'Error', 'An error ocurred when obtaining the languages');
                 console.error(error);
             })
     }
@@ -214,11 +203,7 @@ function ReadingFormView() {
         if (validateForm()) {
 
             // Notificacion
-            api['error']({
-                message: 'Error',
-                description:
-                    'There is one or more fields empty.',
-            });
+            showNotification('error', 'Error', 'There is one or more fields empty');
 
             return
         }
@@ -254,34 +239,22 @@ function ReadingFormView() {
                     setLoading(false)
 
                     // Notificacion
-                    api['success']({
-                        message: 'Success',
-                        description: "The reading has been published successfully!",
-                    });
+                    showNotification('success', 'Success', "The reading has been published successfully!");
                 }
                 else {
                     // Se desactiva el icono de carga
                     setLoading(false)
 
                     // Notificacion
-                    api['error']({
-                        message: 'Error',
-                        description: data.msg,
-                    });
-
-                    console.error(data.msg)
+                    showNotification('error', 'Error', data.msg);
                 }
             })
             .catch(error => {
-
                 // Se desactiva el icono de carga
                 setLoading(false)
 
                 // Notificacion
-                api['error']({
-                    message: 'Error',
-                    description: "An error ocurred when publishing the reading",
-                });
+                showNotification('error', 'Error', 'An error ocurred when publishing the reading');
                 console.error(error);
             })
     }
@@ -294,8 +267,6 @@ function ReadingFormView() {
 
     return (
         <>
-            {contextHolder}
-
             <div className="container mt-5">
                 <Row>
                     <Col span={18} push={6}>

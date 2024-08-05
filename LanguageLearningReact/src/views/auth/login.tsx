@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Card, Divider, Button, Input, Space, notification } from 'antd';
+import { Card, Divider, Button, Input, Space } from 'antd';
+import { useNotification } from '../../components/notification-component';
 import { MailOutlined } from '@ant-design/icons';
 import userService from '../../services/user-service';
 import { Login } from '../../interfaces/login-interface';
@@ -19,7 +20,7 @@ const LoginView: React.FC = () => {
   const [passwordError, setPasswordError] = useState(false);
 
   // Notificacion
-  const [api, contextHolder] = notification.useNotification();
+  const { showNotification } = useNotification();
   const [loading, setLoading] = useState(false)
 
   // Controlar el cambio de texto
@@ -58,11 +59,7 @@ const LoginView: React.FC = () => {
     if (validateForm()) {
 
       // Notificacion
-      api['error']({
-        message: 'Error',
-        description:
-          'There is one or more fields empty.',
-      });
+      showNotification('error', 'Error', "There is one or more fields empty");
 
       return
     }
@@ -87,28 +84,23 @@ const LoginView: React.FC = () => {
         setLoading(false)
 
         // Notificacion
-        api['success']({
-          message: 'Success',
-          description: "You've logged in successfully!",
-        });
+        showNotification('success', 'Success', "You've logged in successfully!");
+
+        // Redirigir a la pagina principal
+        navigate('/')
       }
       else {
         // Se desactiva el icono de carga
         setLoading(false)
 
         // Notificacion
-        api['error']({
-          message: 'Error',
-          description: data.msg,
-        });
-
+        showNotification('error', 'Error', data.msg);
       }
     });
   }
 
   return (
     <>
-      {contextHolder}
       <div className="topnav fixed-top">
         <div className="d-flex container">
           <button onClick={() => navigate('/home')} className="logo-text blank-button">LinguaLearn</button>
@@ -140,6 +132,7 @@ const LoginView: React.FC = () => {
               block
               onClick={loginSubmit}
               style={{ marginTop: 16 }}
+              loading={loading}
             >
               Login
             </Button>
@@ -149,7 +142,6 @@ const LoginView: React.FC = () => {
               type="default"
               block
               onClick={() => navigate('/register')}
-              loading={loading}
             >
               Create an account
             </Button>
