@@ -139,4 +139,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Base model to store the user info
 AUTH_USER_MODEL = 'api.User'
+
+# Allow credentials to be received
+CORS_ALLOW_CREDENTIALS = True
