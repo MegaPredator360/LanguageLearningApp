@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Card, Divider, Button, Input, Space, notification, Row, Col, DatePicker, Select, Tooltip } from 'antd';
+import { Card, Divider, Button, Input, Space, Row, Col, DatePicker, Select, Tooltip } from 'antd';
 import { UserOutlined, MailOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import userService from '../../services/user-service';
 import { User } from '../../interfaces/user-interface';
 import { useNavigate } from 'react-router-dom';
+import { useNotification } from '../../components/notification-component';
 import utilityService from '../../services/utility-service';
 
 // Importacion de lista de paises
@@ -36,7 +37,7 @@ const RegisterView: React.FC = () => {
     const [countryError, setCountryError] = useState(false);
 
     // Notificacion
-    const [api, contextHolder] = notification.useNotification();
+    const { showNotification } = useNotification();
     const [loading, setLoading] = useState(false)
 
     // Controlar el cambio de texto
@@ -81,11 +82,7 @@ const RegisterView: React.FC = () => {
         if (validateForm()) {
 
             // Notificacion
-            api['error']({
-                message: 'Error',
-                description:
-                    'There is one or more fields empty.',
-            });
+            showNotification('error', 'Error', "There is one or more fields empty");
 
             return
         }
@@ -97,11 +94,7 @@ const RegisterView: React.FC = () => {
             setEmailError(true)
 
             // Notificacion
-            api['error']({
-                message: 'Error',
-                description:
-                    'The entered email is not valid.',
-            });
+            showNotification('error', 'Error', "The entered email is not valid");
 
             return
         }
@@ -113,11 +106,7 @@ const RegisterView: React.FC = () => {
             setPasswordError(true)
 
             // Notificacion
-            api['error']({
-                message: 'Error',
-                description:
-                    'The entered password does not meet the requirements.',
-            });
+            showNotification('error', 'Error', "The entered password does not meet the requirements");
 
             return
         }
@@ -129,11 +118,7 @@ const RegisterView: React.FC = () => {
             setConfirmPasswordError(true)
 
             // Notificacion
-            api['error']({
-                message: 'Error',
-                description:
-                    'The confirmation password does not match with the original.',
-            });
+            showNotification('error', 'Error', "The confirmation password does not match with the original");
 
             return
         }
@@ -164,31 +149,24 @@ const RegisterView: React.FC = () => {
                 setLoading(false)
 
                 // Notificacion
-                api['success']({
-                    message: 'Success',
-                    description: "Your account has been created successfully!",
-                });
+                showNotification('success', 'Success', 'Your account has been created successfully!');
+
+                // Se redirige a la pagina de inicio de sesion
+                navigate('/login')
             }
             else {
                 // Se desactiva el icono de carga
                 setLoading(false)
 
                 // Notificacion
-                api['error']({
-                    message: 'Error',
-                    description: data.msg,
-                });
+                showNotification('error', 'Error', data.msg);
 
                 console.error(data.msg)
-
             }
         })
         .catch(error => {
             // Notificacion
-            api['error']({
-                message: 'Error',
-                description: "An error ocurred when registering the user",
-            });
+            showNotification('error', 'Error', "An error ocurred when registering the user");
             console.error(error);
         })
     }
@@ -238,8 +216,6 @@ const RegisterView: React.FC = () => {
 
     return (
         <>
-            {contextHolder}
-
             <div className="topnav fixed-top">
 
                 {/* Barra de navegacion superior */}
