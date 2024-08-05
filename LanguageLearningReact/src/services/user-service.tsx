@@ -9,6 +9,7 @@ class UserService {
     async Login(req: Login): Promise<ResponseAPI> {
         const response = await fetch(`${this.urlApi}login/`, {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify(req),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
