@@ -1,4 +1,4 @@
-# Proyecto de Analisis y Diseño de Sistemas 2
+# Language Learning Application
 
 Para instalar el proyecto de React abres la terminal en la carpeta ```LanguageLearningReact```, y escribes el comando ```npm install``` para instalar las dependencias de Node JS, y para inicializar el proyecto escribes ```npm run dev```, y con eso ejecutas la aplicacion web / Front End
 
