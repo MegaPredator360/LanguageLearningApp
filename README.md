@@ -6,5 +6,6 @@ Para ejecutar la API, debes de tener Python 3.12 o superior, y tener instalados 
 - django
 - djangorestframework
 - environs
+- django-cors-headers
 
-Una vez instalados esos paquetes, para inicializar al API, abres la terminal en la carpeta de ```LanguageLearningAPI``` y ejecutas el siguiente comando ```python manage.py runserver```, y se inicializará la API
+Una vez instalados esos paquetes, para inicializar al API, abres la terminal en la carpeta de ```LanguageLearningAPI``` y ejecutas el siguiente comando ```python manage.py migrate```, para migrar los datos a la base de datos, y despues ingresa el comando ```python manage.py runserver``` para inicializar la API
