@@ -14,6 +14,8 @@ class User(AbstractUser):
     first_name = None
     last_name = None
     is_active = None
+    groups = None
+    user_permissions = None
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
