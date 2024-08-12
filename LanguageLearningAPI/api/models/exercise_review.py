@@ -7,7 +7,7 @@ class ExerciseReview(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'er_users')
     comment = models.TextField()
     publish_date = models.DateTimeField(auto_now_add = True)
-    user_rate = models.FloatField()
+    user_rate = models.IntegerField()
 
     def __str__(self):
         return self.comment
