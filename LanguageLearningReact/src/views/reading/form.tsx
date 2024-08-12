@@ -12,8 +12,13 @@ import { Tags } from "../../interfaces/tags-interface";
 
 // Importacion de Imagen
 import imagePlaceholder from "../../assets/images/image-placeholder.jpg"
+import utilityService from "../../services/utility-service";
+import { useNavigate } from "react-router-dom";
 
 function ReadingFormView() {
+
+    // Navegador de paginas
+    const navigate = useNavigate()
 
     // Select List
     const [listCategory, setListCategory] = useState([])
@@ -199,6 +204,19 @@ function ReadingFormView() {
     // Guardar lectura
     const submitReading = async () => {
 
+        const token = utilityService.obtenerSesion()
+
+        // Se valida que exista un usuario con la sesion iniciada
+        if (token == "") {
+            // Notificacion
+            showNotification('error', 'Error', 'There is no logged in user');
+
+            // Redirigir a la pagina de inicio de sesion
+            navigate('/login')
+
+            return
+        }
+
         // Se valida formulario
         if (validateForm()) {
 
@@ -227,7 +245,8 @@ function ReadingFormView() {
             language_name: '',
             category: category,
             category_name: '',
-            reading_tags: tags
+            reading_tags: tags,
+            jwt: token 
         }
 
         // Se envia peticion de crear
