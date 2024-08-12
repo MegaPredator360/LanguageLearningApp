@@ -23,6 +23,28 @@ class UtilityService {
             return false
         }
     }
+
+    // Se usa para guardar la sesion
+    guardarSesion(token: string) {
+        localStorage.setItem("jwt", token)
+    }
+
+    // Se usa para obtener la llave de la sesion
+    obtenerSesion(): string {
+        const token = localStorage.getItem("jwt")
+
+        if (token == null) {
+            return ""
+        }
+        else {
+            return token;
+        }
+    }
+
+    // Se usa para eliminar la sesion
+    eliminarSesion() {
+        localStorage.removeItem("jwt")
+    }
 }
 
 export default new UtilityService
