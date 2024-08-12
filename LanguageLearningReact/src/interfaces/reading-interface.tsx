@@ -16,4 +16,5 @@ export interface Reading {
     category: number,
     category_name: string,
     reading_tags: Tags[]
+    jwt?: string
 }
