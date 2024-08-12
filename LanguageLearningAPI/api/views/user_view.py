@@ -108,39 +108,22 @@ class UserView:
 
         # Return the response
         return Response(status = 200, data = response.__dict__)
-    
 
-    
     @api_view(['POST'])
     def login(request):
 
         # Declare the service to use
         userService = UserService()
         response = ResponseAPI()
-        responseJWT = Response()
 
         try:
 
             # Set the status of the request a success
             response.status = True
-
-            # Verify if the user is logged in
-            token = request.COOKIES.get('jwt')
-
-            # Check if the user is logged in
-            if token:
-                raise ValueError("The user is already logged in")
 
             # Return the data
             response.value = userService.login(request.data)
 
-            responseJWT.set_cookie(key = 'jwt', value = response.value['jwt'], httponly = True)
-            responseJWT.data = response.__dict__
-            responseJWT.status_code = 200
-
-            # Return the response
-            return responseJWT
-
         except ValueError as e:
 
             # Set the status of the request as failed
@@ -149,25 +132,23 @@ class UserView:
             # Send the message of why it failed
             response.msg = str(e)
 
-            return Response(status = 200, data = response.__dict__)
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
 
     @api_view(['POST'])
-    def logout(request):
+    def logged(request):
 
         # Declare the service to use
+        userService = UserService()
         response = ResponseAPI()
-        responseJWT = Response()
 
         try:
 
             # Set the status of the request a success
             response.status = True
 
-            # Delete the cookie
-            responseJWT.delete_cookie('jwt')
-
-            # Message of the user login out
-            response.msg = "User Logged out succesfully"
+            # Get the user that is logged in
+            response.value = userService.loggedUser(request.data)
 
         except ValueError as e:
 
@@ -177,8 +158,5 @@ class UserView:
             # Send the message of why it failed
             response.msg = str(e)
 
-        responseJWT.data = response.__dict__
-        responseJWT.status_code = 200
-
         # Return the response
-        return responseJWT
+        return Response(status = 200, data = response.__dict__)
