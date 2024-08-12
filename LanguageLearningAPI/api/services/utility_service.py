@@ -57,11 +57,12 @@ class UtilityService:
             raise e
 
     # It gets the user Id from the token
-    def getUserToken(self, token: any):
+    def getUserToken(self, token: str):
 
         try:
 
-            payload = jwt.decode(token, 'secret', algorithm = ['HS256'])
+            # Decode the token
+            payload = jwt.decode(token, 'secret', algorithms = ['HS256'])
 
             return payload['id']
 
