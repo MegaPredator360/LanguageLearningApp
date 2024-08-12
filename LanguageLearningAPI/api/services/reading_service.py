@@ -23,14 +23,14 @@ class ReadingService:
             raise e
 
     # Create a new reading
-    def create(self, reading: dict, token: any):
+    def create(self, reading: dict):
 
         utilityService = UtilityService()
 
         try:
 
             # Verify the user that is creating the reading
-            userId = utilityService.getUserToken(token)
+            userId = utilityService.getUserToken(reading['jwt'])
 
             # Assign the user Id to the foreign key
             reading['user'] = userId
