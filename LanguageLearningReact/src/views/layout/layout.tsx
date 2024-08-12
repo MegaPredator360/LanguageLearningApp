@@ -2,11 +2,62 @@ import { useNavigate, Outlet } from "react-router-dom"
 import './layout.css'
 import { Button, ConfigProvider, Divider, Dropdown, MenuProps } from "antd"
 import { FacebookOutlined, TwitterOutlined, InstagramOutlined, YoutubeOutlined } from "@ant-design/icons"
+import userService from '../../services/user-service';
+import { useNotification } from '../../components/notification-component';
+import { useEffect, useState } from "react";
+import { User } from "../../interfaces/user-interface";
+import utilityService from "../../services/utility-service";
 
 function LayoutView() {
 
+    // Estado para la sesion
+    const [sesion, setSesion] = useState<Boolean>(false)
+    const [logged, setLogged] = useState<User>()
+
+    // Notificacion
+    const { showNotification } = useNotification();
+
     // Navegacion atraves del layout
     const navigate = useNavigate()
+
+    // Verificar si hay una sesion iniciada
+    const verifyLoggedUser = async () => {
+
+        // Se obtiene el token de sesion
+        const token = utilityService.obtenerSesion()
+
+        // Se realiza peticion a la API
+        await userService.Logged(token)
+            .then(data => {
+                if (data.status) {
+
+                    // Se verifica si hay sesion
+                    if (data.value == null) {
+                        setSesion(false);
+                    }
+                    else {
+                        setSesion(true)
+                        setLogged(data.value)
+                    }
+                }
+                else {
+                    // Notificacion
+                    showNotification('error', 'Error', data.msg);
+                }
+            })
+            .catch(error => {
+                // Notificacion
+                showNotification('error', 'Error', "An error ocurred when getting the logged user");
+                console.error(error);
+            })
+    }
+
+    // Cerrar Sesion
+    const logout = () => {
+        utilityService.eliminarSesion()
+        setLogged(undefined)
+        setSesion(false)
+    }
 
     // Opciones del menu
     const items: MenuProps['items'] = [
@@ -30,9 +81,15 @@ function LayoutView() {
         },
         {
             key: '5',
+            onClick: (() => logout()),
             label: "Log Out"
         }
     ];
+
+    // Inicializamos metodos de carga de datos
+    useEffect(() => {
+        verifyLoggedUser()
+    }, [])
 
     return (
         <>
@@ -45,11 +102,27 @@ function LayoutView() {
                         <span className="flex-grow-1 flex-shrink-1 flex-basis-auto"></span>
                         <Button type='text' onClick={() => navigate('/search')}>Search</Button>
                         <Divider type='vertical' className="h-auto" />
+                        {sesion ?
+                            (
+                                <Dropdown menu={{ items }} placement="topRight">
+                                    <Button type="text">{logged?.username}</Button>
+                                </Dropdown>
+                            )
+                            :
+                            (
+                                <div>
+                                    <Button type='text' onClick={() => navigate('/login')}>Log In</Button>
+                                    <Button type='text' onClick={() => navigate('/register')}>Sign Up</Button>
+                                </div>
+                            )
+                        }
+                        { /*
                         <Button type='text' onClick={() => navigate('/login')}>Log In</Button>
                         <Button type='text' onClick={() => navigate('/register')}>Sign Up</Button>
                         <Dropdown menu={{ items }} placement="topRight">
                             <Button type="text">User</Button>
                         </Dropdown>
+                        */ }
                     </div>
                 </div>
 
