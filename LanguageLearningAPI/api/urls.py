@@ -23,7 +23,7 @@ urlpatterns = [
     path('user/update/', UserView.update, name = 'user_update_view'),
     path('user/delete/<int:id>/', UserView.delete, name = 'user_delete_view'),
     path('user/login/', UserView.login, name = 'user_login_view'),
-    path('user/logout/', UserView.logout, name = 'user_logout_view'),
+    path('user/logged/', UserView.logged, name = 'user_logged_view'),
 
     # ---------- Role Routes
     path('role/list/', RoleView.list, name = 'role_list_view'),
