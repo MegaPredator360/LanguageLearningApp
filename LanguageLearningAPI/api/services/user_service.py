@@ -169,3 +169,41 @@ class UserService:
 
             # Send the exception
             raise e
+
+    # Validar el login
+    def loggedUser(self, data: dict):
+
+        # Create the utility service object
+        utilityService = UtilityService()
+
+        try:
+
+            # Validate if there is data on the request
+            if data['jwt'] == '':
+
+                # Return a null response
+                return None
+
+            # Get the user Id
+            userId = utilityService.getUserToken(data['jwt'])
+
+            # Retrieve the specific user
+            userFound = User.objects.get(id = userId)
+
+            # We serialize the userFound
+            serializer = UserSerializer(userFound, many = False)
+
+            # Return the user info
+            return serializer.data
+
+        # If the user to update doesn't exist
+        except User.DoesNotExist:
+
+                # Send an excepction
+                raise ValueError('The user logged does not exist')
+
+        # Any other posible exception
+        except ValueError as e:
+
+            # Send the exception
+            raise e
