@@ -2,6 +2,7 @@ from rest_framework import serializers
 from api.models.reading import Reading
 from api.models.reading_tag import ReadingTag
 from api.serializers.reading_tag_serializer import ReadingTagSerializer
+from api.serializers.reading_review_serializer import ReadingReviewSerializer
 
 class ReadingSerializer(serializers.ModelSerializer):
 
@@ -10,6 +11,7 @@ class ReadingSerializer(serializers.ModelSerializer):
     language_name = serializers.CharField(source = 'language.name', read_only = True)
     category_name = serializers.CharField(source = 'category.name', read_only = True)
     reading_tags = ReadingTagSerializer(many = True)
+    rr_readings = ReadingReviewSerializer(many = True, read_only = True)
 
     class Meta:
         model = Reading
@@ -28,7 +30,8 @@ class ReadingSerializer(serializers.ModelSerializer):
             'language_name', 
             'category', 
             'category_name',
-            'reading_tags'
+            'reading_tags',
+            'rr_readings'
             ]
 
     def create(self, validated_data):
