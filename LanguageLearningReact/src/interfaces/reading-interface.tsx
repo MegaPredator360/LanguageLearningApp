@@ -15,6 +15,6 @@ export interface Reading {
     language_name: string,
     category: number,
     category_name: string,
-    reading_tags: Tags[]
+    reading_tags: Tags[],
     jwt?: string
 }
