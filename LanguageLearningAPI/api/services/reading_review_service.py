@@ -5,12 +5,12 @@ from api.serializers.reading_review_serializer import ReadingReviewSerializer
 class ReadingReviewService:
 
     # Obtain the list of all the reviews
-    def list(self):
+    def list(self, readingId: int):
 
         try:
 
-            # Obtain all the reviews
-            readingReviews = ReadingReview.objects.all()
+            # Obtain all the reviews of the specific reading
+            readingReviews = ReadingReview.objects.filter(reading = readingId)
 
             # We serialize the objects
             serializer = ReadingReviewSerializer(readingReviews, many = True)

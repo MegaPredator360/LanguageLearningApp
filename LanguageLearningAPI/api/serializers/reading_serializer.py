@@ -11,7 +11,6 @@ class ReadingSerializer(serializers.ModelSerializer):
     language_name = serializers.CharField(source = 'language.name', read_only = True)
     category_name = serializers.CharField(source = 'category.name', read_only = True)
     reading_tags = ReadingTagSerializer(many = True)
-    rr_readings = ReadingReviewSerializer(many = True, read_only = True)
 
     class Meta:
         model = Reading
@@ -31,7 +30,6 @@ class ReadingSerializer(serializers.ModelSerializer):
             'category', 
             'category_name',
             'reading_tags',
-            'rr_readings'
             ]
 
     def create(self, validated_data):

@@ -6,7 +6,7 @@ from api.services.reading_review_service import ReadingReviewService
 class ReadingReviewView:
 
     @api_view(['GET'])
-    def list(request):
+    def list(request, id: int):
 
         # Declare the service to use
         readingReviewService = ReadingReviewService()
@@ -18,7 +18,7 @@ class ReadingReviewView:
             response.status = True
 
             # Return the data
-            response.value = readingReviewService.list()
+            response.value = readingReviewService.list(id)
 
         except ValueError as e:
 

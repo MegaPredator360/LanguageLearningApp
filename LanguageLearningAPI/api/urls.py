@@ -42,7 +42,7 @@ urlpatterns = [
     path('reading/delete/<int:id>/', ReadingView.delete, name = 'reading_delete_view'),
 
     # ---------- Reading Reviews Routes
-    path('reading_review/list/', ReadingReviewView.list, name = 'reading_review_list_view'),
+    path('reading_review/list/<int:id>/', ReadingReviewView.list, name = 'reading_review_list_view'),
     path('reading_review/create/', ReadingReviewView.create, name = 'reading_review_create_view'),
     path('reading_review/update/', ReadingReviewView.update, name = 'reading_review_update_view'),
     path('reading_review/delete/<int:id>/', ReadingReviewView.delete, name = 'reading_review_delete_view'),
