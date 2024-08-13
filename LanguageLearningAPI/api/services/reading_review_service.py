@@ -1,3 +1,4 @@
+from api.services.utility_service import UtilityService
 from api.models.reading_review import ReadingReview
 from api.serializers.reading_review_serializer import ReadingReviewSerializer
 
@@ -24,7 +25,15 @@ class ReadingReviewService:
     # Create a new review
     def create(self, readingReview: dict):
 
+        utilityService = UtilityService()
+
         try:
+
+            # Verify the user that is creating the reading
+            userId = utilityService.getUserToken(readingReview['jwt'])
+
+            # Assign the user Id to the foreign key
+            readingReview['user'] = userId
 
             # Serialize the data
             serializer = ReadingReviewSerializer(data = readingReview)
