@@ -116,13 +116,6 @@ function LayoutView() {
                                 </div>
                             )
                         }
-                        { /*
-                        <Button type='text' onClick={() => navigate('/login')}>Log In</Button>
-                        <Button type='text' onClick={() => navigate('/register')}>Sign Up</Button>
-                        <Dropdown menu={{ items }} placement="topRight">
-                            <Button type="text">User</Button>
-                        </Dropdown>
-                        */ }
                     </div>
                 </div>
 
