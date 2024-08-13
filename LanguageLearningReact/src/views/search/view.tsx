@@ -22,7 +22,6 @@ function SearchView() {
 
     // Notificacion
     const { showNotification } = useNotification();
-    //const [loading, setLoading] = useState(false)
 
     // Lista
     const [listReading, setListReading] = useState([])
