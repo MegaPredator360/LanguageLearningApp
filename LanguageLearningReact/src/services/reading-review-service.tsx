@@ -8,10 +8,10 @@ class ReadingReviewService {
     urlApi = Environment.endpoint + "reading_review/";
 
     // Lista de Comentarios
-    async List(): Promise<ResponseAPI> {
+    async List(id: number): Promise<ResponseAPI> {
 
         // Se realiza la solicitud a la API
-        const response = await fetch(`${this.urlApi}list/`, {
+        const response = await fetch(`${this.urlApi}list/${id}/`, {
             method: 'GET'
         })
 

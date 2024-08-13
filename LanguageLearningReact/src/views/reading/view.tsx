@@ -1,9 +1,6 @@
 import { Button, Card, Divider, Input, Select, Space, Tag } from "antd"
 import { LikeOutlined, DislikeOutlined, StarOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
-
-// Importar imagen
-import defaultUser from '../../assets/images/default-user.jpg'
 import { Reading } from "../../interfaces/reading-interface";
 import { useEffect, useState } from "react";
 import { Tags } from "../../interfaces/tags-interface";
@@ -11,6 +8,10 @@ import utilityService from "../../services/utility-service";
 import { useNotification } from "../../components/notification-component";
 import { ReadingReview } from "../../interfaces/reading-review-interface";
 import readingReviewService from "../../services/reading-review-service";
+import moment from 'moment';
+
+// Importar imagen
+import defaultUser from '../../assets/images/default-user.jpg'
 
 function ReadingView() {
 
@@ -28,6 +29,7 @@ function ReadingView() {
 
   // Listas de Etiquetas y Comentario
   const [tags, setTags] = useState<Tags[]>([]);
+  const [commentList, setCommentList] = useState<ReadingReview[]>([])
 
   // Obtener datos de state
   const location = useLocation();
@@ -78,13 +80,59 @@ function ReadingView() {
   }
 
   // Se utiliza para mapear las etiquetas
-  const forMap = (tag: Tags) => (
+  const mapTags = (tag: Tags) => (
     <span key={tag.name} style={{ display: 'inline-block' }}>
       <Tag>
         {tag.name}
       </Tag>
     </span>
   );
+
+  // Se utiliza para mapear las etiquetas
+  const mapComments = (review: ReadingReview) => (
+    <span key={review.id}>
+      <Card className="shadow-sm mb-3">
+        <div className="d-flex">
+          <img src={defaultUser} className="rounded-circle" style={{ width: '50px', height: '50px' }} />
+          <div className=" ps-3">
+            <div className="d-flex">
+              <b>{review.user_username}</b>
+              <div className="text-muted ps-3"><StarOutlined /> {review.user_rate}</div>
+            </div>
+            <div className="text-muted">{moment(review.publish_date).format('DD/MM/YYYY hh:mm A')}</div>
+            <p>{review.comment}</p>
+            <Space.Compact>
+              <Button><LikeOutlined /> 20</Button>
+              <Button><DislikeOutlined /> 2</Button>
+            </Space.Compact>
+          </div>
+        </div>
+      </Card>
+    </span>
+  );
+
+  const updateCommentList = async () => {
+
+    // Se realiza la peticion
+    await readingReviewService.List(reading.id)
+      .then(data => {
+        if (data.status) {
+          // Actualizar lista de comentarios
+          setCommentList(data.value)
+
+        }
+        else {
+          // Notificacion
+          showNotification('error', 'Error', 'An error ocurred when obtaining the updated list of comments');
+          console.error(data.msg);
+        }
+      })
+      .catch(error => {
+        // Notificacion
+        showNotification('error', 'Error', 'An error ocurred when obtaining the updated list of comments');
+        console.error(error);
+      })
+  }
 
   const makeComment = async () => {
 
@@ -129,6 +177,7 @@ function ReadingView() {
         if (data.status) {
           // Notificacion
           showNotification('success', 'Success', 'The comment has been posted successfully');
+          updateCommentList()
           setLoading(false)
 
         }
@@ -147,7 +196,8 @@ function ReadingView() {
       })
   }
 
-  const tagChild = tags.map(forMap);
+  const tagChild = tags.map(mapTags);
+  const commentChild = commentList.map(mapComments);
 
   // Textarea de un input
   const { TextArea } = Input;
@@ -155,6 +205,7 @@ function ReadingView() {
   // Inicializamos metodos de carga de datos
   useEffect(() => {
     obtainTags()
+    updateCommentList()
     checkLogged()
   }, [tags])
 
@@ -244,30 +295,21 @@ function ReadingView() {
               )
           }
 
-          <Card className="shadow-sm mb-3">
-            <div style={{ paddingLeft: '50px' }}>
-              <div className=" ps-3">
-                <p>This reading has no comments!</p>
-              </div>
-            </div>
-          </Card>
+          { // Lista de Comentarios
+            commentList.length == 0 ?
+              (
+                <Card className="shadow-sm mb-3">
+                  <div style={{ paddingLeft: '50px' }}>
+                    <div className=" ps-3">
+                      <p>This reading has no comments!</p>
+                    </div>
+                  </div>
+                </Card>
+              )
+              :
+              commentChild
+          }
 
-          {/* Lista de comentarios */}
-          <Card className="shadow-sm mb-3">
-            <div className="d-flex">
-              <img src={defaultUser} className="rounded-circle" style={{ width: '50px', height: '50px' }} />
-              <div className=" ps-3">
-                <b>Nombre de Usuario</b>
-                <div className="text-muted"><StarOutlined /> Calificacion de Usuario</div>
-                <div className="text-muted">Fecha de Calificacion</div>
-                <p>Comentario</p>
-                <Space.Compact>
-                  <Button><LikeOutlined /> 20</Button>
-                  <Button><DislikeOutlined /> 2</Button>
-                </Space.Compact>
-              </div>
-            </div>
-          </Card>
         </Card>
       </div>
     </>
