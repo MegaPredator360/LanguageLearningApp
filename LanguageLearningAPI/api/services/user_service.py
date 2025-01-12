@@ -140,7 +140,7 @@ class UserService:
             raise e
 
     # Validar el login
-    def login(self, login: dict):
+    def login(self, login: dict) -> str:
 
         # Create the utility service object
         utilityService = UtilityService()
@@ -156,7 +156,7 @@ class UserService:
             token = utilityService.createToken(userFound)
 
             # Return the token as a diccionary
-            return {'jwt': token}
+            return token
 
         # If the user to update doesn't exist
         except User.DoesNotExist:
@@ -171,7 +171,7 @@ class UserService:
             raise e
 
     # Validar el login
-    def loggedUser(self, data: dict):
+    def loggedUser(self, token: str):
 
         # Create the utility service object
         utilityService = UtilityService()
@@ -179,13 +179,13 @@ class UserService:
         try:
 
             # Validate if there is data on the request
-            if data['jwt'] == '':
+            if token == '':
 
                 # Return a null response
                 return None
 
             # Get the user Id
-            userId = utilityService.getUserToken(data['jwt'])
+            userId = utilityService.getUserToken(token)
 
             # Retrieve the specific user
             userFound = User.objects.get(id = userId)

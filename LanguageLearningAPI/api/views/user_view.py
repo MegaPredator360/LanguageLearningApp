@@ -114,6 +114,42 @@ class UserView:
 
         # Declare the service to use
         userService = UserService()
+        responseAPI = ResponseAPI()
+        response = Response()
+
+        try:
+
+            # Set the status of the request a success
+            responseAPI.status = True
+
+            # Return the token
+            token = userService.login(request.data)
+
+            # Save the token in the cookies of the browser
+            response.set_cookie(key = 'jwt', value = token, httponly = True)
+
+            # Send the token as part of the response
+            responseAPI.value = { 'jwt': token }
+
+        except ValueError as e:
+
+            # Set the status of the request as failed
+            responseAPI.status = False
+
+            # Send the message of why it failed
+            responseAPI.msg = str(e)
+
+        # Assign the data of the response
+        response.data = responseAPI.__dict__
+
+        # Return the response
+        return response
+
+    @api_view(['GET'])
+    def logged(request):
+
+        # Declare the service to use
+        userService = UserService()
         response = ResponseAPI()
 
         try:
@@ -121,8 +157,11 @@ class UserView:
             # Set the status of the request a success
             response.status = True
 
-            # Return the data
-            response.value = userService.login(request.data)
+            # Get the token from the cookies
+            token = request.COOKIES.get('jwt')
+
+            # Get the user that is logged in
+            response.value = userService.loggedUser(token)
 
         except ValueError as e:
 
@@ -136,27 +175,32 @@ class UserView:
         return Response(status = 200, data = response.__dict__)
 
     @api_view(['POST'])
-    def logged(request):
+    def logout(request):
 
         # Declare the service to use
-        userService = UserService()
-        response = ResponseAPI()
+        responseAPI = ResponseAPI()
+        response = Response()
 
         try:
 
             # Set the status of the request a success
-            response.status = True
+            responseAPI.status = True
 
-            # Get the user that is logged in
-            response.value = userService.loggedUser(request.data)
+            # Delete the cookies that contains the token
+            response.delete_cookie('jwt')
+
+            responseAPI.msg = "Logged out successfully"
 
         except ValueError as e:
 
             # Set the status of the request as failed
-            response.status = False
+            responseAPI.status = False
 
             # Send the message of why it failed
-            response.msg = str(e)
+            responseAPI.msg = str(e)
+
+        # Assign the data of the response
+        response.data = responseAPI.__dict__
 
         # Return the response
-        return Response(status = 200, data = response.__dict__)
+        return response
