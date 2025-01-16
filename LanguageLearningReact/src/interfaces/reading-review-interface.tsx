@@ -5,6 +5,5 @@ export interface ReadingReview {
     user_username: string,
     comment: string,
     publish_date: string,
-    user_rate: number,
-    jwt?: string
+    user_rate: number
 }
