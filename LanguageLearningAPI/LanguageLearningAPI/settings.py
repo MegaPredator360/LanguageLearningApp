@@ -57,11 +57,6 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-# Enlaces que solo pueden realizar la peticiones a la API
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
-
 ROOT_URLCONF = 'LanguageLearningAPI.urls'
 
 TEMPLATES = [
@@ -141,6 +136,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Base model to store the user info
 AUTH_USER_MODEL = 'api.User'
+
+# Links that are only allowed to be processed by the API
+
+#CORS_ALLOWED_ORIGINS = [
+#    "http://localhost:5173",
+#]
+
+# Allow all links to make requests to the API
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Allow credentials to be received
 CORS_ALLOW_CREDENTIALS = True
