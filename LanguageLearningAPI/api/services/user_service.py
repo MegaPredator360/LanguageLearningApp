@@ -179,7 +179,7 @@ class UserService:
         try:
 
             # Validate if there is data on the request
-            if token == '':
+            if token == None:
 
                 # Return a null response
                 return None
