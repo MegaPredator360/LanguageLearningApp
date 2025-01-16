@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Reading } from "../../interfaces/reading-interface";
 import { useEffect, useState } from "react";
 import { Tags } from "../../interfaces/tags-interface";
-import utilityService from "../../services/utility-service";
+import userService from "../../services/user-service";
 import { useNotification } from "../../components/notification-component";
 import { ReadingReview } from "../../interfaces/reading-review-interface";
 import readingReviewService from "../../services/reading-review-service";
@@ -24,9 +24,6 @@ function ReadingView() {
   // Navegador de paginas
   const navigate = useNavigate()
 
-  // Obtener usuario
-  const [token, setToken] = useState<string>("")
-
   // Listas de Etiquetas y Comentario
   const [tags, setTags] = useState<Tags[]>([]);
   const [commentList, setCommentList] = useState<ReadingReview[]>([])
@@ -34,6 +31,9 @@ function ReadingView() {
   // Obtener datos de state
   const location = useLocation();
   const reading: Reading = location.state || {};
+
+  // Verificar si hay un usuario con la sesion iniciada
+  const [loggedUser, setLoggedUser] = useState<boolean>(false);
 
   // Cargar etiquetas
   const obtainTags = () => {
@@ -59,8 +59,32 @@ function ReadingView() {
     setRateError(false)
   }
 
-  const checkLogged = async () => {
-    setToken(utilityService.obtenerSesion())
+  // Verificar si hay una sesion iniciada
+  const verifyLoggedUser = async () => {
+
+    // Se realiza peticion a la API para verificar la sesion
+    await userService.Logged()
+      .then(data => {
+        if (data.status) {
+
+          // Se verifica si hay sesion
+          if (data.value == null) {
+            setLoggedUser(false)
+          }
+          else {
+            setLoggedUser(true)
+          }
+        }
+        else {
+          // Notificacion
+          showNotification('error', 'Error', data.msg);
+        }
+      })
+      .catch(error => {
+        // Notificacion
+        showNotification('error', 'Error', "An error ocurred when getting the logged user");
+        console.error(error);
+      })
   }
 
   const verifyFields = (): boolean => {
@@ -136,18 +160,6 @@ function ReadingView() {
 
   const makeComment = async () => {
 
-    // Se revisa si el usuario tiene la sesion iniciada
-    setToken(utilityService.obtenerSesion())
-
-    // Si la sesion está iniciada
-    if (token == "") {
-
-      // Mensaje de notificacion
-      showNotification('error', 'Error', "You are not logged in, you must log in to make a comment!");
-
-      return;
-    }
-
     // Se verifica que no existan campos vacios
     if (verifyFields()) {
 
@@ -167,8 +179,7 @@ function ReadingView() {
       user_username: "",
       comment: comment,
       publish_date: "",
-      user_rate: rate,
-      jwt: token
+      user_rate: rate
     }
 
     // Se realiza peticion
@@ -183,9 +194,8 @@ function ReadingView() {
         }
         else {
           // Notificacion
-          showNotification('error', 'Error', 'An error ocurred when posting the comment');
+          showNotification('error', 'Error', data.msg);
           setLoading(false)
-          console.error(data.msg);
         }
       })
       .catch(error => {
@@ -206,7 +216,7 @@ function ReadingView() {
   useEffect(() => {
     obtainTags()
     updateCommentList()
-    checkLogged()
+    verifyLoggedUser()
   }, [tags])
 
   return (
@@ -233,7 +243,7 @@ function ReadingView() {
           <h4>Comments</h4>
 
           { // Escribir comentario
-            token == "" ?
+            loggedUser == false ?
               (
                 <Card className="shadow-sm mb-3">
                   <div className="d-flex">
