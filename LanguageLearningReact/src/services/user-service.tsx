@@ -45,6 +45,7 @@ class UserService {
         return response.json()
     }
 
+    // Registrar usuarios
     async Register(req: User): Promise<ResponseAPI> {
         const response = await fetch(`${this.urlApi}create/`, {
             method: 'POST',

@@ -99,7 +99,7 @@ function LayoutView() {
         }
     ];
 
-    // Inicializamos metodos de carga de datos
+    // Metodos que se inicalizan al cargar la pagina
     useEffect(() => {
         verifyLoggedUser()
     }, [])

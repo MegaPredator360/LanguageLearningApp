@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Divider, Button, Input, Space, Row, Col, DatePicker, Select, Tooltip } from 'antd';
 import { UserOutlined, MailOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import userService from '../../services/user-service';
@@ -76,6 +76,37 @@ const RegisterView: React.FC = () => {
         setCountryError(false)
     };
 
+    // Verificar si hay una sesion iniciada
+    const verifyLoggedUser = async () => {
+
+        // Se realiza peticion a la API para verificar la sesion
+        await userService.Logged()
+            .then(data => {
+                if (data.status) {
+                    // Se verifica si hay sesion
+                    if (data.value == null) {
+                        return;
+                    }
+                    else {
+                        // Redirigir a la pagina principal
+                        navigate('/')
+
+                        // Notificacion
+                        showNotification('error', 'Error', "An user is already logged in. You must logout first before creating a new account");
+                    }
+                }
+                else {
+                    // Notificacion
+                    showNotification('error', 'Error', data.msg);
+                }
+            })
+            .catch(error => {
+                // Notificacion
+                showNotification('error', 'Error', "An error ocurred when getting the logged user");
+                console.error(error);
+            })
+    }
+
     const registerSubmit = async () => {
 
         // Se valida formulario
@@ -142,33 +173,33 @@ const RegisterView: React.FC = () => {
 
         // Se envia peticion
         await userService.Register(user)
-        .then(data => {
-            if (data.status) {
+            .then(data => {
+                if (data.status) {
 
-                // Se desactiva el icono de carga
-                setLoading(false)
+                    // Se desactiva el icono de carga
+                    setLoading(false)
 
+                    // Notificacion
+                    showNotification('success', 'Success', 'Your account has been created successfully!');
+
+                    // Se redirige a la pagina de inicio de sesion
+                    navigate('/login')
+                }
+                else {
+                    // Se desactiva el icono de carga
+                    setLoading(false)
+
+                    // Notificacion
+                    showNotification('error', 'Error', data.msg);
+
+                    console.error(data.msg)
+                }
+            })
+            .catch(error => {
                 // Notificacion
-                showNotification('success', 'Success', 'Your account has been created successfully!');
-
-                // Se redirige a la pagina de inicio de sesion
-                navigate('/login')
-            }
-            else {
-                // Se desactiva el icono de carga
-                setLoading(false)
-
-                // Notificacion
-                showNotification('error', 'Error', data.msg);
-
-                console.error(data.msg)
-            }
-        })
-        .catch(error => {
-            // Notificacion
-            showNotification('error', 'Error', "An error ocurred when registering the user");
-            console.error(error);
-        })
+                showNotification('error', 'Error', "An error ocurred when registering the user");
+                console.error(error);
+            })
     }
 
     // Se valida si los campos están con texto
@@ -213,6 +244,11 @@ const RegisterView: React.FC = () => {
 
         return emptyInput
     }
+
+    // Metodos que se inicalizan al cargar la pagina
+    useEffect(() => {
+        verifyLoggedUser()
+    }, [])
 
     return (
         <>

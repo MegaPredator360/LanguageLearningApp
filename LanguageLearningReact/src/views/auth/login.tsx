@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Divider, Button, Input, Space } from 'antd';
 import { useNotification } from '../../components/notification-component';
 import { MailOutlined } from '@ant-design/icons';
@@ -32,6 +32,37 @@ const LoginView: React.FC = () => {
   const handlePasswordChanges = (e: any) => {
     setPasswordValue(e.target.value);
     setPasswordError(false)
+  }
+
+  // Verificar si hay una sesion iniciada
+  const verifyLoggedUser = async () => {
+
+    // Se realiza peticion a la API para verificar la sesion
+    await userService.Logged()
+      .then(data => {
+        if (data.status) {
+          // Se verifica si hay sesion
+          if (data.value == null) {
+            return;
+          }
+          else {
+            // Redirigir a la pagina principal
+            navigate('/')
+
+            // Notificacion
+            showNotification('error', 'Error', "An user is already logged in. You must logout first");
+          }
+        }
+        else {
+          // Notificacion
+          showNotification('error', 'Error', data.msg);
+        }
+      })
+      .catch(error => {
+        // Notificacion
+        showNotification('error', 'Error', "An error ocurred when getting the logged user");
+        console.error(error);
+      })
   }
 
   // Se valida si los campos están con texto
@@ -103,8 +134,13 @@ const LoginView: React.FC = () => {
         // Notificacion
         showNotification('error', 'Error', "An error ocurred when login in");
         console.error(error);
-    })
+      })
   }
+
+  // Metodos que se inicalizan al cargar la pagina
+  useEffect(() => {
+    verifyLoggedUser()
+  }, [])
 
   return (
     <>
