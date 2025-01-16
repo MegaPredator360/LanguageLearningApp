@@ -43,8 +43,11 @@ class ReadingReviewView:
             # Set the status of the request a success
             response.status = True
 
+            # Get the token from the cookies of the logged user
+            token = request.COOKIES.get('jwt')
+
             # Return the data
-            response.value = readingReviewService.create(request.data)
+            response.value = readingReviewService.create(request.data, token)
 
         except ValueError as e:
 

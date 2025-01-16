@@ -23,14 +23,20 @@ class ReadingService:
             raise e
 
     # Create a new reading
-    def create(self, reading: dict):
+    def create(self, reading: dict, token: str):
 
         utilityService = UtilityService()
 
         try:
 
+            # Validate if there is data on the token
+            if token == None:
+
+                # Return a null response
+                raise ValueError('You must be logged in to make a comment')
+
             # Verify the user that is creating the reading
-            userId = utilityService.getUserToken(reading['jwt'])
+            userId = utilityService.getUserToken(token)
 
             # Assign the user Id to the foreign key
             reading['user'] = userId
