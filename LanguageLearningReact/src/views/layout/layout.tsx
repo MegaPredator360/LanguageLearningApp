@@ -6,7 +6,6 @@ import userService from '../../services/user-service';
 import { useNotification } from '../../components/notification-component';
 import { useEffect, useState } from "react";
 import { User } from "../../interfaces/user-interface";
-import utilityService from "../../services/utility-service";
 
 function LayoutView() {
 
@@ -23,14 +22,10 @@ function LayoutView() {
     // Verificar si hay una sesion iniciada
     const verifyLoggedUser = async () => {
 
-        // Se obtiene el token de sesion
-        const token = utilityService.obtenerSesion()
-
-        // Se realiza peticion a la API
-        await userService.Logged(token)
+        // Se realiza peticion a la API para verificar la sesion
+        await userService.Logged()
             .then(data => {
                 if (data.status) {
-
                     // Se verifica si hay sesion
                     if (data.value == null) {
                         setSesion(false);
@@ -53,10 +48,28 @@ function LayoutView() {
     }
 
     // Cerrar Sesion
-    const logout = () => {
-        utilityService.eliminarSesion()
-        setLogged(undefined)
-        setSesion(false)
+    const logout = async () => {
+
+        // Se realiza peticion a la API para eliminar la sesion
+        await userService.Logout()
+            .then(data => {
+                if (data.status) {
+
+                    // Se elimina la sesion
+                    setLogged(undefined)
+                    setSesion(false)
+                }
+                else {
+                    // Notificacion
+                    showNotification('error', 'Error', data.msg);
+                }
+            })
+            .catch(error => {
+                // Notificacion
+                showNotification('error', 'Error', "An error ocurred when logging out");
+                console.error(error);
+            })
+
     }
 
     // Opciones del menu

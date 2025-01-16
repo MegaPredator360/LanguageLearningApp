@@ -5,7 +5,6 @@ import { MailOutlined } from '@ant-design/icons';
 import userService from '../../services/user-service';
 import { Login } from '../../interfaces/login-interface';
 import { useNavigate } from 'react-router-dom';
-import utilityService from '../../services/utility-service';
 
 const LoginView: React.FC = () => {
 
@@ -81,9 +80,6 @@ const LoginView: React.FC = () => {
 
           // Se desactiva el icono de carga
           setLoading(false)
-
-          // Se guarda la sesion
-          utilityService.guardarSesion(data.value['jwt'])
 
           // Notificacion
           showNotification('success', 'Success', "You've logged in successfully!");
