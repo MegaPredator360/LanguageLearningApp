@@ -26,6 +26,7 @@ class ReadingReviewService {
         const response = await fetch(`${this.urlApi}create/`, {
             method: 'POST',
             body: JSON.stringify(req),
+            credentials: 'include',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
             }
