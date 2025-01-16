@@ -58,6 +58,9 @@ function LayoutView() {
                     // Se elimina la sesion
                     setLogged(undefined)
                     setSesion(false)
+
+                    // Redirigir a la pagina principal
+                    navigate('/')
                 }
                 else {
                     // Notificacion
