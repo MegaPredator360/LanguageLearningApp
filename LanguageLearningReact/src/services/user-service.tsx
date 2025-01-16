@@ -6,27 +6,42 @@ import { Environment } from "../environment/environment";
 class UserService {
     urlApi = Environment.endpoint + "user/";
 
+    // Solicitud para iniciar sesion
     async Login(req: Login): Promise<ResponseAPI> {
+
+        // Se realizar la peticion
         const response = await fetch(`${this.urlApi}login/`, {
             method: 'POST',
             body: JSON.stringify(req),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8'
-            }
+            credentials: 'include',
+            headers: { 'Content-type': 'application/json; charset=UTF-8' }
         })
         return response.json()
     }
 
-    async Logged(token: string): Promise<ResponseAPI> {
+    // Solicitud para verificar la sesion
+    async Logged(): Promise<ResponseAPI> {
+
+        // Se realiza la peticion
         const response = await fetch(`${this.urlApi}logged/`, {
-            method: 'POST',
-            body: JSON.stringify({
-                "jwt": token
-            }),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8'
-            }
+            method: 'GET',
+            credentials: 'include',
+            headers: { 'Content-type': 'application/json; charset=UTF-8' }
         })
+
+        return response.json()
+    }
+
+    // Solicitud para eliminar / cerrar la sesion
+    async Logout(): Promise<ResponseAPI> {
+
+        // Se realiza la peticion
+        const response = await fetch(`${this.urlApi}logout/`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-type': 'application/json; charset=UTF-8' }
+        })
+
         return response.json()
     }
 
