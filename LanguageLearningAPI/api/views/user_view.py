@@ -126,7 +126,7 @@ class UserView:
             token = userService.login(request.data)
 
             # Save the token in the cookies of the browser
-            response.set_cookie(key = 'jwt', value = token, httponly = True)
+            response.set_cookie(key = 'jwt', value = token, httponly = True, samesite = 'None', secure = True)
 
             # Send the token as part of the response
             responseAPI.value = { 'jwt': token }
