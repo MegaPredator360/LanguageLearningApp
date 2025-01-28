@@ -12,6 +12,7 @@ import moment from 'moment';
 
 // Importar imagen
 import defaultUser from '../../assets/images/default-user.jpg'
+import readingService from "../../services/reading-service";
 
 function ReadingView() {
 
@@ -57,6 +58,31 @@ function ReadingView() {
   const handleRateChanges = (value: number) => {
     setRate(value);
     setRateError(false)
+  }
+
+  // Agregar vista al total
+  const addView = async () => {
+
+    // Se agrega vista al reading
+    reading.views = reading.views + 1;
+
+    // Se realiza peticion a la API para agregar una vista mas a la lectura
+    await readingService.UpdateViews(reading)
+      .then(data => {
+        if (data.status) {
+          // Si la peticion fue exitosa, se termina el metodo
+          return;
+        }
+        else {
+          // Notificacion
+          showNotification('error', 'Error', data.msg);
+        }
+      })
+      .catch(error => {
+        // Notificacion
+        showNotification('error', 'Error', "An error ocurred when getting the logged user");
+        console.error(error);
+      })
   }
 
   // Verificar si hay una sesion iniciada
@@ -214,9 +240,22 @@ function ReadingView() {
 
   // Inicializamos metodos de carga de datos
   useEffect(() => {
-    obtainTags()
+
+    // Añade vista a la lectura
+    addView()
+
+    // Obtiene los comentarios de la lectura
     updateCommentList()
+
+    // Verifica que haya una sesion iniciada
     verifyLoggedUser()
+  }, [])
+
+  // Usado para cargar las etiquetas
+  useEffect(() => {
+
+    // Obtiene las etiquetas de la lectura
+    obtainTags()
   }, [tags])
 
   return (
