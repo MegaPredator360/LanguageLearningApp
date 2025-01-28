@@ -85,3 +85,29 @@ class ReadingView:
 
         # Return the response
         return Response(status = 200, data = response.__dict__)
+
+    @api_view(['PUT'])
+    def updateViews(request):
+
+        # Declare the service to use
+        readingService = ReadingService()
+        response = ResponseAPI()
+
+        try:
+
+            # Set the status of the request a success
+            response.status = True
+
+            # Return the data
+            response.value = readingService.updateViews(request.data)
+
+        except ValueError as e:
+
+            # Set the status of the request as failed
+            response.status = False
+
+            # Send the message of why it failed
+            response.msg = str(e)
+
+        # Return the response
+        return Response(status = 200, data = response.__dict__)
