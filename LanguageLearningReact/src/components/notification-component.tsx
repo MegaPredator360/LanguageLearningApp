@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, ReactNode } from 'react';
 import { notification } from 'antd';
 
 // Define types for notification context
@@ -8,9 +8,14 @@ interface NotificationContextProps {
     showNotification: (type: NotificationType, message: string, description: string) => void;
 }
 
+// Define the context
 const NotificationContext = createContext<NotificationContextProps | undefined>(undefined);
 
-export const NotificationProvider: React.FC<Element> = ({ children }: any) => {
+interface NotificationProviderProps {
+    children: ReactNode; // Accept any valid React children (single or multiple)
+}
+
+export const NotificationProvider: React.FC<NotificationProviderProps> = ({ children }) => {
     const [api, contextHolder] = notification.useNotification();
 
     const showNotification = (type: NotificationType, message: string, description: string) => {
@@ -28,6 +33,7 @@ export const NotificationProvider: React.FC<Element> = ({ children }: any) => {
     );
 };
 
+// Hook for consuming the notification context
 export const useNotification = (): NotificationContextProps => {
     const context = useContext(NotificationContext);
     if (!context) {
