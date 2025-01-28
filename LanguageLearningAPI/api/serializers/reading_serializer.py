@@ -32,6 +32,7 @@ class ReadingSerializer(serializers.ModelSerializer):
             'reading_tags',
             ]
 
+    # Runs when creating a new reading
     def create(self, validated_data):
 
         # Obtain data of tags
@@ -46,16 +47,48 @@ class ReadingSerializer(serializers.ModelSerializer):
 
         return reading
 
+    # Runs when updating a reading
     def update(self, instance, validated_data):
-        etiquetas_data = validated_data.pop('etiquetas')
-        etiquetas = (instance.etiquetas).all()
-        etiquetas = list(etiquetas)
-        instance.titulo = validated_data.get('titulo', instance.titulo)
-        instance.contenido = validated_data.get('contenido', instance.contenido)
+
+        # Extracts the tags from the request
+        tags_data = validated_data.pop('reading_tags', [])
+
+        # Update the data from the reading
+        instance.title = validated_data.get('title', instance.title)
+        instance.description = validated_data.get('description', instance.description)
+        instance.body = validated_data.get('body', instance.body)
+        instance.views = validated_data.get('views', instance.views)
+        instance.language = validated_data.get('language', instance.language)
+        instance.category = validated_data.get('category', instance.category)
+
+        # The changes are saved
         instance.save()
 
-        for etiqueta_data in etiquetas_data:
-            etiqueta = etiquetas.pop(0)
-            etiqueta.nombre = etiqueta_data.get('nombre', etiqueta.nombre)
-            etiqueta.save()
+        # Obtaint the tags associated to the reading from the database
+        db_tags = {tag.name for tag in instance.reading_tags.all()}
+
+        # Obtain the tags from the request
+        request_tags = {tag_data['name'] for tag_data in tags_data}
+
+        # Identifies the tags to eliminate and create
+        tags_delete = db_tags - request_tags
+        tags_create = request_tags - db_tags
+
+        # It deletes the tags that are not present
+        instance.reading_tags.filter(name__in = tags_delete).delete()
+
+        # Creates and associates the new tags
+        for tag_name in tags_create:
+            new_tag, created = ReadingTag.objects.get_or_create(name = tag_name)
+            instance.reading_tags.add(new_tag)
+
+        '''
+        # Maintain existing tags and update them if necessary
+        for tag_data in tags_data:
+            existing_tag = instance.reading_tags.filter(name = tag_data['name']).first()
+            if existing_tag:
+                existing_tag.name = tag_data.get('name', existing_tag.name)
+                existing_tag.save()
+        '''
+
         return instance
