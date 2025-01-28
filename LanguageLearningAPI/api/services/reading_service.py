@@ -89,3 +89,41 @@ class ReadingService:
 
             # Send the exception
             raise e
+
+    # Update views of a reading
+    def updateViews(self, reading: dict) -> bool:
+
+        try:
+
+            # Retrieve the specific reading
+            readingFound = Reading.objects.get(id = reading['id'])
+
+            # Update de data
+            serializer = ReadingSerializer(instance = readingFound, data = reading)
+
+            # If the data is valid
+            if serializer.is_valid():
+
+                # Save the new data into the database
+                serializer.save()
+
+            else:
+                # Get the serializer errors
+                errors = serializer.errors
+
+                # Raise an exception with detailed error information
+                raise ValueError(f'Errors occurred while updating the views of the reading: {errors}')
+
+            return True
+
+        # If the reading to update doesn't exist
+        except Reading.DoesNotExist:
+
+                # Send an excepction
+                raise ValueError('The reading to update does not exist')
+
+        # Any other posible exception
+        except ValueError as e:
+
+            # Send the exception
+            raise e
