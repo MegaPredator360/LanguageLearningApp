@@ -12,7 +12,6 @@ import { Tags } from "../../interfaces/tags-interface";
 
 // Importacion de Imagen
 import imagePlaceholder from "../../assets/images/image-placeholder.jpg"
-import utilityService from "../../services/utility-service";
 import { useNavigate } from "react-router-dom";
 
 function ReadingFormView() {
@@ -204,19 +203,6 @@ function ReadingFormView() {
     // Guardar lectura
     const submitReading = async () => {
 
-        const token = utilityService.obtenerSesion()
-
-        // Se valida que exista un usuario con la sesion iniciada
-        if (token == "") {
-            // Notificacion
-            showNotification('error', 'Error', 'There is no logged in user');
-
-            // Redirigir a la pagina de inicio de sesion
-            navigate('/login')
-
-            return
-        }
-
         // Se valida formulario
         if (validateForm()) {
 
@@ -245,8 +231,7 @@ function ReadingFormView() {
             language_name: '',
             category: category,
             category_name: '',
-            reading_tags: tags,
-            jwt: token 
+            reading_tags: tags
         }
 
         // Se envia peticion de crear
@@ -259,6 +244,9 @@ function ReadingFormView() {
 
                     // Notificacion
                     showNotification('success', 'Success', "The reading has been published successfully!");
+
+                    // Se redigire a la pagina de vista con el reading creado y obtenido de la respuesta
+                    navigate('/reading', { state: data.value })
                 }
                 else {
                     // Se desactiva el icono de carga
