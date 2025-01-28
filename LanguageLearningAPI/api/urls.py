@@ -40,6 +40,7 @@ urlpatterns = [
     # ---------- Reading Routes
     path('reading/list/', ReadingView.list, name = 'reading_list_view'),
     path('reading/create/', ReadingView.create, name = 'reading_create_view'),
+    path('reading/update_views/', ReadingView.updateViews, name = 'reading_updateViews_view'),
     path('reading/delete/<int:id>/', ReadingView.delete, name = 'reading_delete_view'),
 
     # ---------- Reading Reviews Routes
