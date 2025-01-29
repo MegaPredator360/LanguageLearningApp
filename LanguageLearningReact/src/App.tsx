@@ -10,6 +10,8 @@ import ReadingView from './views/reading/view';
 import ReadingFormView from './views/reading/form';
 import ExerciseView from './views/exercise/view';
 import ExerciseFormView from './views/exercise/form';
+import ProfileView from './views/user/profile';
+import AccountSettingsView from './views/user/account_settings';
 
 function App() {
 
@@ -24,6 +26,8 @@ function App() {
         { path: "reading/form", element: <ReadingFormView /> },
         { path: "exercise", element: <ExerciseView /> },
         { path: "exercise/form", element: <ExerciseFormView /> },
+        { path: "user/settings", element: <AccountSettingsView /> },
+        { path: "user/profile", element: <ProfileView /> },
         { path: "", element: <Navigate to = "home" /> }
       ]
     },
