@@ -6,6 +6,7 @@ import { User } from '../../interfaces/user-interface';
 import { useNavigate } from 'react-router-dom';
 import { useNotification } from '../../components/notification-component';
 import utilityService from '../../services/utility-service';
+import dayjs from 'dayjs';
 
 // Importacion de lista de paises
 import countryList from '../../assets/json/data/country-list.json'
@@ -24,8 +25,8 @@ const RegisterView: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [birthDate, setBirthDate] = useState(null)
-    const [country, setCountry] = useState("")
+    const [birthDate, setBirthDate] = useState<dayjs.Dayjs | null>(null)
+    const [country, setCountry] = useState<string | null>(null)
 
     // Controlar boardeado de errores de inputs
     const [fullNameError, setFullNameError] = useState(false);
@@ -164,8 +165,10 @@ const RegisterView: React.FC = () => {
             username: username,
             email: email,
             password: password,
-            birth_date: birthDate?.format('YYYY-MM-DD'),
-            country: country,
+
+            // Con ayuda de ?? puedo asignar un valor por defecto
+            birth_date: birthDate?.format('YYYY-MM-DD') ?? '',
+            country: country ?? '',
             active: true,
             role: 0,
             role_name: ""
@@ -222,7 +225,7 @@ const RegisterView: React.FC = () => {
             emptyInput = true
         }
 
-        if (birthDate == '') {
+        if (birthDate == null) {
             setBirthDateError(true)
             emptyInput = true
         }
