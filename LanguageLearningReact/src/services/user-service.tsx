@@ -56,6 +56,19 @@ class UserService {
         })
         return response.json()
     }
+
+    // Actualizar usuarios
+    async Update(req: User): Promise<ResponseAPI> {
+        const response = await fetch(`${this.urlApi}update/`, {
+            method: 'PUT',
+            body: JSON.stringify(req),
+            credentials: 'include',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+        })
+        return response.json()
+    }
 }
 
 export default new UserService
