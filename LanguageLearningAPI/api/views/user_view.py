@@ -69,8 +69,11 @@ class UserView:
             # Set the status of the request a success
             response.status = True
 
+            # Get the token from the cookies
+            token = request.COOKIES.get('jwt')
+
             # Return the data
-            response.value = userService.update(request.data)
+            response.value = userService.update(request.data, token)
 
         except ValueError as e:
 

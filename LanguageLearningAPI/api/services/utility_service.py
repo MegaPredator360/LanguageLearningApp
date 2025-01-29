@@ -70,7 +70,7 @@ class UtilityService:
         except jwt.ExpiredSignatureError:
 
             # Send the exception
-            raise ValueError("User with an expired session")
+            raise ValueError("User with an expired session. You must log in once again!")
 
         # Any other exception
         except ValueError as e:

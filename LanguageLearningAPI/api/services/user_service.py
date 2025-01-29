@@ -77,12 +77,29 @@ class UserService:
             raise e
 
     # Update an user
-    def update(self, user: dict):
+    def update(self, user: dict, token: str):
+
+        # Create the utility service object
+        utilityService = UtilityService()
 
         try:
+            # Validate if there is data on the request
+            if token == None:
+
+                # Return a null response
+                return None
+
+            # Get the user Id
+            userId = utilityService.getUserToken(token)
 
             # Retrieve the specific user
-            userFound = User.objects.get(id = user['id'])
+            userFound = User.objects.get(id = userId)
+
+            # Checks if the password is empty
+            if user['password'] != "":
+            
+                # Encrypt the password
+                user['password'] = utilityService.encryptPassword(user['password'])
 
             # Update de data
             serializer = UserSerializer(instance = userFound, data = user)
@@ -98,7 +115,7 @@ class UserService:
                 errors = serializer.errors
 
                 # Raise an exception with detailed error information
-                raise ValueError(f'Errors occurred while saving the user: {errors}')
+                raise ValueError(f'Errors occurred while updating the user: {errors}')
 
             return serializer.data
 
