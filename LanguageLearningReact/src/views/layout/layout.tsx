@@ -79,10 +79,12 @@ function LayoutView() {
     const items: MenuProps['items'] = [
         {
             key: '1',
-            label: "Create Profile"
+            onClick: (() => navigate('/user/profile')),
+            label: "Profile"
         },
         {
             key: '2',
+            onClick: (() => navigate('/user/settings')),
             label: "Account Settings"
         },
         {

@@ -6,7 +6,6 @@ import Slider from "react-slick";
 import { Card } from 'antd';
 import { StarOutlined, EyeOutlined, LikeOutlined, DislikeOutlined } from "@ant-design/icons"
 
-
 // Importacion de Imagenes
 import microsoftLogo from "../../assets/images/sponsors/microsoft-logo.png"
 import spacexLogo from "../../assets/images/sponsors/spacex_logo.png"
