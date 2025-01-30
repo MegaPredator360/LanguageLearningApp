@@ -134,7 +134,19 @@ class UserService:
     # Delete an user
     def delete(self, token: str) -> bool:
 
+        # Create the utility service object
+        utilityService = UtilityService()
+
         try:
+
+            # Validate if there is data on the request
+            if token == None:
+
+                # Raises an exception
+                raise ValueError('You need to be logged in to delete the account')
+
+            # Get the user Id
+            userId = utilityService.getUserToken(token)
 
             # Retrieve the specific user
             userFound = User.objects.get(id = userId)

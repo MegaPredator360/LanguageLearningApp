@@ -87,30 +87,46 @@ class UserView:
         return Response(status = 200, data = response.__dict__)
 
     @api_view(['DELETE'])
-    def delete(request, id: int):
+    def delete(request):
 
         # Declare the service to use
         userService = UserService()
-        response = ResponseAPI()
+        responseAPI = ResponseAPI()
+        response = Response()
 
         try:
 
             # Set the status of the request a success
-            response.status = True
+            responseAPI.status = True
+
+            # Get the token from the cookies
+            token = request.COOKIES.get('jwt')
 
             # Return the data
-            response.value = userService.delete(id)
+            responseAPI.value = userService.delete(token)
+
+            # Delete the cookies that contains the token
+            response.delete_cookie('jwt')
+
+            # Message of the response
+            responseAPI.msg = "Account delete successfully"
 
         except ValueError as e:
 
             # Set the status of the request as failed
-            response.status = False
+            responseAPI.status = False
 
             # Send the message of why it failed
-            response.msg = str(e)
+            responseAPI.msg = str(e)
+
+        # Assign the data of the response
+        response.data = responseAPI.__dict__
+
+        # Status of the response
+        response.status_code = 200
 
         # Return the response
-        return Response(status = 200, data = response.__dict__)
+        return response
 
     @api_view(['POST'])
     def login(request):
@@ -144,6 +160,9 @@ class UserView:
 
         # Assign the data of the response
         response.data = responseAPI.__dict__
+
+        # Status of the response
+        response.status_code = 200
 
         # Return the response
         return response
@@ -204,6 +223,9 @@ class UserView:
 
         # Assign the data of the response
         response.data = responseAPI.__dict__
+
+        # Status of the response
+        response.status_code = 200
 
         # Return the response
         return response

@@ -69,6 +69,18 @@ class UserService {
         })
         return response.json()
     }
+
+    // Eliminar usuarios
+    async Delete(): Promise<ResponseAPI> {
+        const response = await fetch(`${this.urlApi}delete/`, {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+        })
+        return response.json()
+    }
 }
 
 export default new UserService
