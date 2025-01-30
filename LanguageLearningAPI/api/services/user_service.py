@@ -86,8 +86,8 @@ class UserService:
             # Validate if there is data on the request
             if token == None:
 
-                # Return a null response
-                return None
+                # Raises an exception
+                raise ValueError('You need to be logged in to update the information of the account')
 
             # Get the user Id
             userId = utilityService.getUserToken(token)
@@ -132,7 +132,7 @@ class UserService:
             raise e
 
     # Delete an user
-    def delete(self, userId: int) -> bool:
+    def delete(self, token: str) -> bool:
 
         try:
 
