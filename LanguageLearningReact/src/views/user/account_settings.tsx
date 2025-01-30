@@ -1,4 +1,4 @@
-import { Button, Card, Col, DatePicker, Divider, Input, Row, Select, Tooltip } from "antd";
+import { Button, Card, Col, DatePicker, Divider, Input, Row, Select, Tooltip, Popconfirm } from "antd";
 import {
     UserOutlined,
     MailOutlined,
@@ -119,6 +119,33 @@ function AccountSettingsView() {
         }
 
         return emptyInput
+    }
+
+    const deleteAccount = async () => {
+
+        await userService.Delete()
+            .then(data => {
+                if (data.status) {
+                    showNotification('success', 'Success', 'The account has been deleted successfully!');
+
+                    window.location.reload();
+                }
+                else {
+                    // Notificacion
+                    showNotification('error', 'Error', data.msg);
+
+                    // Desactivar animacion
+                    setLoading(false)
+                }
+            })
+            .catch(error => {
+                // Notificacion
+                showNotification('error', 'Error', "An error ocurred when deleting the user");
+                console.error(error);
+
+                // Desactivar animacion
+                setLoading(false)
+            })
     }
 
     const updateAccount = async () => {
@@ -274,10 +301,18 @@ function AccountSettingsView() {
                 title="Account Settings"
                 className="w-100 mt-5"
                 actions={[
-                    <Button
-                        danger type="primary"
-                        icon={<DeleteOutlined />}
-                    >Delete Account</Button>,
+                    <Popconfirm
+                        title="Delete the account"
+                        description="Are you sure you want to delete the account?"
+                        onConfirm={deleteAccount}
+                        okText="Yes"
+                        cancelText="No"
+                    >
+                        <Button
+                            danger type="primary"
+                            icon={<DeleteOutlined />}
+                        >Delete Account</Button>
+                    </Popconfirm>,
                     <Button
                         type='primary'
                         icon={<SendOutlined />}
